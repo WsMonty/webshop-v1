@@ -1,0 +1,25 @@
+{
+  "name": "webshop-1st-try",
+  "version": "1.0.0",
+  "private": true,
+  "description": "webshop-1st-try",
+  "author": "WsMonty",
+  "keywords": [
+    "gatsby"
+  ],
+  "scripts": {
+    "develop": "gatsby develop",
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean"
+  },
+  "dependencies": {
+    "gatsby": "^4.10.3",
+    "gatsby-plugin-sass": "^5.10.2",
+    "gatsby-source-datocms": "^3.0.17",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "sass": "^1.49.9"
+  }
+}
