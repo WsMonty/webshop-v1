@@ -17,6 +17,8 @@
   "dependencies": {
     "gatsby": "^4.10.3",
     "gatsby-image": "^3.11.0",
+    "gatsby-plugin-gatsby-cloud": "^4.10.1",
+    "gatsby-plugin-google-fonts": "^1.0.1",
     "gatsby-plugin-image": "^2.10.1",
     "gatsby-plugin-sass": "^5.10.2",
     "gatsby-plugin-sharp": "^4.10.2",

@@ -21,5 +21,6 @@ module.exports = {
         display: 'swap',
       },
     },
+    `gatsby-plugin-gatsby-cloud`,
   ],
 };
