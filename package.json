@@ -17,15 +17,18 @@
   "dependencies": {
     "gatsby": "^4.10.3",
     "gatsby-image": "^3.11.0",
+    "gatsby-link": "^4.10.1",
     "gatsby-plugin-gatsby-cloud": "^4.10.1",
     "gatsby-plugin-google-fonts": "^1.0.1",
+    "gatsby-plugin-i18n": "^1.0.1",
     "gatsby-plugin-image": "^2.10.1",
     "gatsby-plugin-sass": "^5.10.2",
     "gatsby-plugin-sharp": "^4.10.2",
+    "gatsby-react-router-scroll": "^5.10.0",
     "gatsby-source-datocms": "^3.0.17",
     "gatsby-transformer-sharp": "^4.10.0",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0",
     "sass": "^1.49.9"
   }
 }

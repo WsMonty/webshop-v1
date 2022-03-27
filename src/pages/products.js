@@ -13,17 +13,22 @@ const Products = () => {
             previewImage {
               url
             }
+            locale
           }
         }
       }
     }
   `);
   const data = query.allDatoCmsPost.edges;
-  console.log(data);
+
+  const locale = document.querySelector('.locale_link')
+    ? document.querySelector('.locale_link').id
+    : 'en';
 
   return (
     <div className="products">
       {data.map((prod, i) => {
+        if (prod.node.locale !== locale) return '';
         return (
           <div className="product" key={`product_nr${i + 1}`}>
             <div className="product_image_container">
