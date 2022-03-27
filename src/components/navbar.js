@@ -8,10 +8,10 @@ const links = [
 ];
 
 const locales = [
-  { text: 'EN 🇬🇧', loc: 'en' },
-  { text: 'DE 🇩🇪', loc: 'de' },
-  { text: 'LU 🇱🇺', loc: 'de-LU' },
-  { text: 'FR 🇫🇷', loc: 'fr' },
+  { text: '🇬🇧', loc: 'en' },
+  { text: '🇩🇪', loc: 'de' },
+  { text: '🇱🇺', loc: 'de-LU' },
+  { text: '🇫🇷', loc: 'fr' },
 ];
 
 const Navbar = () => {

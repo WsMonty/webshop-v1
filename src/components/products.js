@@ -1,5 +1,5 @@
-import React from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
+import React, { useEffect, useState } from 'react';
+import { useStaticQuery, graphql, Link } from 'gatsby';
 
 const Products = () => {
   const query = useStaticQuery(graphql`
@@ -21,16 +21,35 @@ const Products = () => {
   `);
   const data = query.allDatoCmsPost.edges;
 
-  const locale = document.querySelector('.locale_link')
-    ? document.querySelector('.locale_link').id
-    : 'en';
+  const [locale, setLocale] = useState('en');
+
+  const getLocale = () => {
+    setLocale(document.querySelector('.locale_link').id);
+  };
+
+  useEffect(() => {
+    getLocale();
+  });
+
+  // const clickHandlerProduct = (e) => {
+  //   document
+  //     .querySelectorAll('.product')
+  //     .forEach((el) => el.classList.remove('product_active'));
+  //   e.target.closest('.product').classList.add('product_active');
+  // };
 
   return (
     <div className="products">
       {data.map((prod, i) => {
         if (prod.node.locale !== locale) return '';
         return (
-          <div className="product" key={`product_nr${i + 1}`}>
+          <Link
+            className="product"
+            key={`product_nr${i + 1}`}
+            to={`/products/${prod.node.title
+              .replaceAll(' ', '-')
+              .toLowerCase()}`}
+          >
             <div className="product_image_container">
               <img
                 className="product_image"
@@ -41,11 +60,11 @@ const Products = () => {
             <div className="product_content_container">
               <h2 className="product_title">{prod.node.title}</h2>
               <p className="product_composer">
-                by <span>{prod.node.composer}</span>
+                <span>{prod.node.composer}</span>
               </p>
               <p className="product_description">{prod.node.descriptionText}</p>
             </div>
-          </div>
+          </Link>
         );
       })}
     </div>
