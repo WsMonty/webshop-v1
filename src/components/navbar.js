@@ -16,15 +16,15 @@ const locales = [
 
 const Navbar = () => {
   const [current, setCurrent] = useState('en');
-  const [page, setPage] = useState('/');
+  // const [page, setPage] = useState('/');
 
   const clickHandlerLocale = (locale) => {
     setCurrent(locale);
   };
 
-  const clickHandlerPage = (url) => {
-    setPage(url);
-  };
+  // const clickHandlerPage = (url) => {
+  //   setPage(url);
+  // };
 
   return (
     <div className="navbar">
@@ -35,7 +35,7 @@ const Navbar = () => {
               <Link
                 className="link"
                 to={`/${link.url}`}
-                onClick={() => clickHandlerPage(`/${link.url}`)}
+                // onClick={() => clickHandlerPage(`/${link.url}`)}
               >
                 {link.title}
               </Link>
@@ -51,7 +51,7 @@ const Navbar = () => {
                 className="locale_link"
                 onClick={() => clickHandlerLocale(`${l.loc}`)}
                 id={current}
-                to={page}
+                to={''}
               >
                 {l.text}
               </Link>
