@@ -15,10 +15,7 @@ const ProductPage = (props) => {
   const rightProduct = () => {
     const result = [];
     props.data.allDatoCmsPost.edges.forEach((entry) => {
-      if (
-        props.path.includes(entry.node.title.replaceAll(' ', '-').toLowerCase())
-      )
-        result.push(entry.node);
+      if (props.pageContext.title === entry.node.title) result.push(entry.node);
     });
     return result.filter((entry) => {
       if (entry.locale === locale) {
@@ -29,6 +26,7 @@ const ProductPage = (props) => {
   };
 
   const [data] = rightProduct();
+  console.log(data);
 
   // console.log(props);
 
