@@ -3,6 +3,7 @@ import { Link } from 'gatsby';
 
 const links = [
   { title: 'Shop', url: 'shop' },
+  { title: 'Composers', url: 'composers' },
   { title: 'About', url: 'about' },
   { title: 'Contact', url: 'contact' },
 ];
@@ -16,15 +17,10 @@ const locales = [
 
 const Navbar = () => {
   const [current, setCurrent] = useState('en');
-  // const [page, setPage] = useState('/');
 
   const clickHandlerLocale = (locale) => {
     setCurrent(locale);
   };
-
-  // const clickHandlerPage = (url) => {
-  //   setPage(url);
-  // };
 
   return (
     <div className="navbar">
@@ -32,11 +28,7 @@ const Navbar = () => {
         {links.map((link, i) => {
           return (
             <li className="link_list" key={`link_${i + 1}`}>
-              <Link
-                className="link"
-                to={`/${link.url}`}
-                // onClick={() => clickHandlerPage(`/${link.url}`)}
-              >
+              <Link className="link" to={`/${link.url}`}>
                 {link.title}
               </Link>
             </li>

@@ -4,21 +4,29 @@
   display: flex;
 }
 
+.product_container {
+  padding: 1em;
+  margin: 1em;
+  width: 20rem;
+  height: 20rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .product {
   width: 20rem * $product-size;
-  height: 30rem * $product-size;
-  border-radius: 0.5em;
+  height: 20rem * $product-size;
+
   display: flex;
   flex-direction: column;
-  margin: 2em;
-  box-shadow: 2em 2em 2em rgba(43, 42, 42, 0.527);
-  border: none;
+
   text-decoration: none;
   color: black;
 
   &_image_container {
     width: 100%;
-    height: 40%;
+    height: 60%;
     overflow: hidden;
   }
 
@@ -28,19 +36,25 @@
 
   &_content_container {
     width: 100%;
-    height: 60%;
+    height: 40%;
     padding: 2em;
   }
 
   &_title {
     margin-bottom: 0.25em;
+    font-size: 1rem;
   }
   &_composer {
     margin-bottom: 1.5em;
+    font-size: 0.75em;
 
     span {
       font-size: 1.2em;
     }
+  }
+
+  &_description_short {
+    font-size: 0.5em;
   }
 }
 

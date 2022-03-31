@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `new`,
+    title: `Webshop`,
     siteUrl: `https://www.yourdomain.tld`,
   },
   plugins: [
@@ -10,17 +10,18 @@ module.exports = {
         apiToken: '9c970d6f32037d5c733071318563cb',
       },
     },
+    {
+      resolve: 'gatsby-plugin-google-fonts',
+      options: {
+        fonts: ['Asap'],
+        display: 'swap',
+      },
+    },
     'gatsby-plugin-sass',
     'gatsby-plugin-image',
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
-    {
-      resolve: `gatsby-plugin-google-fonts`,
-      options: {
-        fonts: [`Asap`],
-        display: 'swap',
-      },
-    },
-    `gatsby-plugin-gatsby-cloud`,
+    'gatsby-plugin-gatsby-cloud',
+    'gatsby-plugin-react-helmet',
   ],
 };
