@@ -1,9 +1,9 @@
 import * as React from 'react';
-import '../sass/main.scss';
-import Shop from './shop.js';
+import '../styles/main.scss';
+import News from './news.js';
 
 const IndexPage = () => {
-  return <Shop />;
+  return <News />;
 };
 
 export default IndexPage;

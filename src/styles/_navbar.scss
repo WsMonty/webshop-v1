@@ -14,12 +14,10 @@
 .link {
   text-decoration: none;
   font-size: 1.5em;
-  color: black;
-  margin: 0.5em 1.5em;
-  padding: 0.5em 0.5em;
+  color: $main-text-color;
 
   &:hover {
-    color: red;
+    color: $accent-text-color;
   }
 }
 
@@ -39,7 +37,7 @@
   cursor: pointer;
 
   &:hover {
-    color: red;
+    color: $accent-text-color;
   }
 }
 

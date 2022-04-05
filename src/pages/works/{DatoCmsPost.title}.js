@@ -1,18 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { graphql } from 'gatsby';
+import { useSelector } from 'react-redux';
 
-const ProductPage = (props) => {
-  const [locale, setLocale] = useState('en');
+const WorkPage = (props) => {
+  const locale = useSelector((state) => state.locale);
 
-  const getLocale = () => {
-    setLocale(document.querySelector('.locale_link').id);
-  };
-
-  useEffect(() => {
-    getLocale();
-  });
-
-  const rightProduct = () => {
+  const rightWork = () => {
     const result = [];
     props.data.allDatoCmsPost.edges.forEach((entry) => {
       if (props.pageContext.title === entry.node.title) result.push(entry.node);
@@ -25,22 +18,19 @@ const ProductPage = (props) => {
     });
   };
 
-  const [data] = rightProduct();
-  console.log(data);
-
-  // console.log(props);
+  const [data] = rightWork();
 
   return (
-    <div className="product_page">
-      <div className="product_page_content_container">
-        <h2 className="product_page_title">{data.title}</h2>
-        <p className="product_page_composer">
+    <div className="work_page">
+      <div className="work_page_content_container">
+        <h2 className="work_page_title">{data.title}</h2>
+        <p className="work_page_composer">
           <span>{data.composer}</span>
         </p>
-        <p className="product_page_description">{data.descriptionText}</p>
+        <p className="work_page_description">{data.descriptionText}</p>
       </div>
       <img
-        className="product_page_image"
+        className="work_page_image"
         src={data.previewImage.url}
         alt={`Preview for ${data.title}`}
       />
@@ -48,7 +38,7 @@ const ProductPage = (props) => {
   );
 };
 
-export default ProductPage;
+export default WorkPage;
 
 export const query = graphql`
   query {

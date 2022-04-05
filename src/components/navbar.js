@@ -1,11 +1,37 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'gatsby';
+import { useDispatch, useSelector } from 'react-redux';
+import { setLocale } from '../actions/index.js';
 
 const links = [
-  { title: 'Shop', url: 'shop' },
-  { title: 'Composers', url: 'composers' },
-  { title: 'About', url: 'about' },
-  { title: 'Contact', url: 'contact' },
+  {
+    'title-en': 'Works',
+    'title-de': 'Werke',
+    'title-de-LU': 'Wierker',
+    'title-fr': 'Oeuvres',
+    url: 'works',
+  },
+  {
+    'title-en': 'Composers',
+    'title-de': 'Komponisten',
+    'title-de-LU': 'Komponisten',
+    'title-fr': 'Componistes',
+    url: 'composers',
+  },
+  {
+    'title-en': 'About',
+    'title-de': 'Über',
+    'title-de-LU': 'Iwwer',
+    'title-fr': 'Infos',
+    url: 'about',
+  },
+  {
+    'title-en': 'Contact',
+    'title-de': 'Kontakt',
+    'title-de-LU': 'Kontakt',
+    'title-fr': 'Contact',
+    url: 'contact',
+  },
 ];
 
 const locales = [
@@ -16,11 +42,9 @@ const locales = [
 ];
 
 const Navbar = () => {
-  const [current, setCurrent] = useState('en');
+  const dispatch = useDispatch();
 
-  const clickHandlerLocale = (locale) => {
-    setCurrent(locale);
-  };
+  const locale = useSelector((state) => state.locale);
 
   return (
     <div className="navbar">
@@ -29,7 +53,7 @@ const Navbar = () => {
           return (
             <li className="link_list" key={`link_${i + 1}`}>
               <Link className="link" to={`/${link.url}`}>
-                {link.title}
+                {link[`title-${locale}`]}
               </Link>
             </li>
           );
@@ -41,8 +65,7 @@ const Navbar = () => {
             <li key={l.loc} className="link_list locale_link_list">
               <Link
                 className="locale_link"
-                onClick={() => clickHandlerLocale(`${l.loc}`)}
-                id={current}
+                onClick={() => dispatch(setLocale(`${l.loc}`))}
                 to={''}
               >
                 {l.text}

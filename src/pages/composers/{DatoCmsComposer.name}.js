@@ -31,7 +31,11 @@ const ComposerPage = (props) => {
       <h1 className="composer_page_name">{data.name}</h1>
       <p className="composer_page_website">
         Website:{' '}
-        <a href={data.website} className="composer_page_website_link">
+        <a
+          href={data.website}
+          target="_blank"
+          className="composer_page_website_link"
+        >
           {data.website}
         </a>
       </p>

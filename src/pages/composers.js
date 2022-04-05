@@ -1,32 +1,51 @@
 import { useStaticQuery, graphql, Link } from 'gatsby';
 import React from 'react';
+import { GatsbyImage } from 'gatsby-plugin-image';
 
 const Composers = () => {
   const query = useStaticQuery(graphql`
     {
-      allDatoCmsPost {
+      allDatoCmsComposer {
         nodes {
-          composer
+          name
+          photo {
+            gatsbyImageData(width: 400, placeholder: BLURRED)
+          }
         }
       }
     }
   `);
 
-  const data = query.allDatoCmsPost.nodes;
+  const data = query.allDatoCmsComposer.nodes;
 
-  const set = new Set([...data.map((entry) => entry.composer)]);
-  const composers = Array.from(set);
+  const makeUnique = (data) => {
+    const result = [];
+    data.forEach((entry) => {
+      if (result.some((el) => el.name === entry.name)) return;
+      result.push(entry);
+    });
+    return result;
+  };
+
+  const uniqueData = makeUnique(data);
 
   return (
     <div className="composers">
-      {composers.map((comp, i) => {
+      {uniqueData.map((comp, i) => {
         return (
-          <Link
-            key={`composer-${i + 1}`}
-            to={`/composers/${comp.replaceAll(' ', '-').toLowerCase()}`}
-          >
-            {comp}
-          </Link>
+          <div key={`composer-${i + 1}`} className="composer_list">
+            <Link
+              className="composer_name"
+              to={`/composers/${comp.name.replaceAll(' ', '-').toLowerCase()}`}
+            >
+              {comp.name}
+            </Link>
+            <GatsbyImage
+              className="composer_image"
+              image={comp.photo.gatsbyImageData}
+              alt={comp.name}
+            />
+          </div>
         );
       })}
     </div>

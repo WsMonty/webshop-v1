@@ -1,10 +1,10 @@
-.products {
+.work_works {
   width: 100%;
   height: 90vh;
   display: flex;
 }
 
-.product_container {
+.work_container {
   padding: 1em;
   margin: 1em;
   width: 20rem;
@@ -12,9 +12,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
-.product {
+.work {
   width: 20rem * $product-size;
   height: 20rem * $product-size;
 
@@ -22,7 +23,6 @@
   flex-direction: column;
 
   text-decoration: none;
-  color: black;
 
   &_image_container {
     width: 100%;
@@ -38,6 +38,15 @@
     width: 100%;
     height: 40%;
     padding: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  &_content_container > button {
+    background: none;
+    border: none;
+    cursor: pointer;
   }
 
   &_title {
@@ -50,15 +59,16 @@
 
     span {
       font-size: 1.2em;
+      color: $accent-text-color;
     }
   }
 
   &_description_short {
-    font-size: 0.5em;
+    font-size: 0.75em;
   }
 }
 
-.product_page {
+.work_page {
   display: flex;
   overflow: auto;
 

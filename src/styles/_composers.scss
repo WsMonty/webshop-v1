@@ -1,0 +1,25 @@
+.composers {
+  display: flex;
+}
+
+.composer {
+  &_list {
+    padding: 1em;
+  }
+
+  &_name {
+    color: $accent-text-color;
+    text-decoration: none;
+    padding: 1em;
+    font-size: 2em;
+  }
+
+  &_image {
+    width: 10em;
+    height: 10em;
+  }
+}
+
+.composer_page {
+  display: flex;
+}
