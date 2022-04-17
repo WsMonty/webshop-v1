@@ -66,6 +66,10 @@
   &_description_short {
     font-size: 0.75em;
   }
+
+  &_price {
+    align-self: flex-end;
+  }
 }
 
 .work_page {
@@ -98,4 +102,21 @@
 
 .locale_link {
   font-size: 2em;
+}
+
+.addToCart-btn {
+  width: 50%;
+  align-self: center;
+  background-color: $accent-text-color;
+  color: $main-text-color;
+  border-radius: 2em;
+  border: none;
+  padding: 0.5em;
+
+  cursor: pointer;
+
+  &:hover {
+    background-color: $main-text-color;
+    color: $accent-text-color;
+  }
 }

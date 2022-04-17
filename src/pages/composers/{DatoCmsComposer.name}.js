@@ -34,6 +34,7 @@ const ComposerPage = (props) => {
         <a
           href={data.website}
           target="_blank"
+          rel="noreferrer"
           className="composer_page_website_link"
         >
           {data.website}

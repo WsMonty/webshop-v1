@@ -38,4 +38,11 @@
   padding: 1em;
   border-top: 2px solid $accent-text-color;
   border-top: 2px solid $accent-text-color;
+
+  &-total {
+    text-align: right;
+  }
+  &-upper-title {
+    margin-bottom: 1em;
+  }
 }

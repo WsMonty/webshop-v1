@@ -1,14 +1,28 @@
-const cartReducer = (state = [], action) => {
+const cartReducer = (state = {}, action) => {
+  const payload = action.payload;
   switch (action.type) {
     case 'addToCart':
-      state.push(action.payload);
-      return state;
+      if (!state[payload]) {
+        state[payload] = { title: payload, counter: 1 };
+        return { ...state };
+      }
+      if (state[payload]) {
+        state[payload].counter += 1;
+        return { ...state };
+      }
+      break;
     case 'deleteFromCart':
-      const index = state.indexOf(action.payload);
-      state.splice(index, 1);
-      return state;
+      if (state[payload].counter > 1) {
+        state[payload].counter -= 1;
+        return { ...state };
+      }
+      if (state[payload].counter === 1) {
+        delete state[payload];
+        return { ...state };
+      }
+      break;
     default:
-      return [...state];
+      return state;
   }
 };
 

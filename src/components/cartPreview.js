@@ -1,9 +1,9 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { useSelector, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { deleteFromCart } from '../actions';
 
-const CartPreview = () => {
+const CartPreview = (props) => {
   const query = useStaticQuery(graphql`
     query {
       allDatoCmsPost {
@@ -11,38 +11,78 @@ const CartPreview = () => {
           composer
           title
           locale
+          price
         }
       }
     }
   `);
-
   const data = query.allDatoCmsPost.nodes;
 
-  const dispatch = useDispatch();
-  const worksInCart = useSelector((state) => state.cart);
+  const findPrice = (work) => {
+    const price = data.find((entry) => entry.title === work);
+    return price.price;
+  };
+
+  const getTotalPrice = () => {
+    let total = 0;
+    Object.keys(props.cart).map((work) => {
+      if (work !== 0) {
+        total += findPrice(work) * props.cart[work].counter;
+      }
+      return '';
+    });
+
+    return total;
+  };
 
   return (
     <div className="cart-preview-container">
-      {worksInCart.map((work, i) => {
-        return (
-          <div key={i} className="cart-preview">
-            <h1 key={i}>{work}</h1>
-            <button
-              onClick={(e) =>
-                dispatch(
-                  deleteFromCart(
-                    e.target.closest('.cart-preview').firstChild.textContent
+      <h2 className="cart-preview-upper-title">Shopping Cart</h2>
+      {Object.keys(props.cart).map((work, i) => {
+        if (work !== 0)
+          return (
+            <div key={i} className="cart-preview">
+              <h1 className="cart-preview-title" key={i}>
+                {work}
+              </h1>
+
+              <button
+                onClick={(e) =>
+                  props.deleteFromCart(
+                    e.target.previousElementSibling.textContent
                   )
-                )
-              }
-            >
-              X
-            </button>
-          </div>
-        );
+                }
+              >
+                X
+              </button>
+              <p>{props.cart[work].counter}</p>
+              <p>{findPrice(work) * props.cart[work].counter + '€'}</p>
+            </div>
+          );
+        return '';
       })}
+      <div className="cart-preview-total">
+        <h4>
+          {Object.keys(props.cart).length > 0
+            ? 'Total ' + getTotalPrice() + '€'
+            : 'No items yet.'}
+        </h4>
+      </div>
     </div>
   );
 };
 
-export default CartPreview;
+const mapStateToProps = (state) => {
+  return {
+    cart: state.cart,
+    locale: state.locale,
+  };
+};
+
+const mapDispatchtoProps = (dispatch) => {
+  return {
+    deleteFromCart: (work) => dispatch(deleteFromCart(work)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchtoProps)(CartPreview);
