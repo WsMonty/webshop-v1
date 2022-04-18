@@ -1,4 +1,6 @@
 .cart {
+  position: relative;
+
   &-icon {
     font-size: 2em;
     color: $main-text-color;
@@ -32,17 +34,61 @@
   &-active {
     display: block;
   }
+
+  &-number {
+    position: absolute;
+    top: -10px;
+    right: -12px;
+    font-size: 1.5em;
+    z-index: 2;
+    color: red;
+  }
 }
 
 .cart-preview {
   padding: 1em;
   border-top: 2px solid $accent-text-color;
-  border-top: 2px solid $accent-text-color;
+  display: flex;
+  justify-content: space-between;
 
-  &-total {
+  &-content {
+    line-height: 1.5em;
+  }
+
+  &-title {
+    text-decoration: none;
+    color: $main-text-color;
+    font-size: 2em;
+
+    &:hover {
+      color: $accent-text-color;
+    }
+  }
+
+  &-footer {
     text-align: right;
+    border-top: 2px solid $accent-text-color;
+
+    h3 {
+      margin-top: 1em;
+    }
   }
   &-upper-title {
     margin-bottom: 1em;
+  }
+
+  &-close-work-btn {
+    height: 2.5em;
+    background-color: $accent-text-color;
+    color: $main-text-color;
+    cursor: pointer;
+    border: none;
+    padding: 0 1em;
+    border-radius: 2em;
+
+    &:hover {
+      background-color: $main-text-color;
+      color: $accent-text-color;
+    }
   }
 }

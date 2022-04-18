@@ -1,5 +1,5 @@
 import React from 'react';
-import { graphql, useStaticQuery } from 'gatsby';
+import { graphql, useStaticQuery, Link } from 'gatsby';
 import { connect } from 'react-redux';
 import { deleteFromCart } from '../actions';
 
@@ -18,8 +18,13 @@ const CartPreview = (props) => {
   `);
   const data = query.allDatoCmsPost.nodes;
 
-  const findPrice = (work) => {
-    const price = data.find((entry) => entry.title === work);
+  // const findWork = (workTitle) => {
+  //   const work = data.find((entry) => entry.title === workTitle);
+  //   return work;
+  // };
+
+  const findPrice = (workTitle) => {
+    const price = data.find((entry) => entry.title === workTitle);
     return price.price;
   };
 
@@ -42,31 +47,43 @@ const CartPreview = (props) => {
         if (work !== 0)
           return (
             <div key={i} className="cart-preview">
-              <h1 className="cart-preview-title" key={i}>
-                {work}
-              </h1>
-
+              <div className="cart-preview-content">
+                <Link
+                  className="cart-preview-title"
+                  to={`/works/${work
+                    .replaceAll(' ', '-')
+                    .replaceAll('.', '')
+                    .toLowerCase()}`}
+                >
+                  {work}
+                </Link>
+                <p>{props.cart[work].counter + 'x in Cart'}</p>
+                <p>
+                  {'Price: ' + findPrice(work) * props.cart[work].counter + '€'}
+                </p>
+              </div>
               <button
+                className="cart-preview-close-work-btn"
                 onClick={(e) =>
                   props.deleteFromCart(
-                    e.target.previousElementSibling.textContent
+                    e.target.closest('.cart-preview').childNodes[0].firstChild
+                      .textContent
                   )
                 }
               >
-                X
+                Delete from cart
               </button>
-              <p>{props.cart[work].counter}</p>
-              <p>{findPrice(work) * props.cart[work].counter + '€'}</p>
             </div>
           );
         return '';
       })}
-      <div className="cart-preview-total">
-        <h4>
+      <div className="cart-preview-footer">
+        <h3 className="cart-preview-footer-total">
           {Object.keys(props.cart).length > 0
             ? 'Total ' + getTotalPrice() + '€'
             : 'No items yet.'}
-        </h4>
+        </h3>
+        <Link to="/payment">Proceed to Payment</Link>
       </div>
     </div>
   );
