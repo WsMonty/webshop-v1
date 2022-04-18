@@ -7,6 +7,9 @@
   &_work {
     padding: 2em;
     border-bottom: 1px solid $accent-text-color;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
     &-title {
       display: flex;

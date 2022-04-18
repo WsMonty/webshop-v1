@@ -1,0 +1,14 @@
+.pill-btn-accent {
+  height: 2.5em;
+  background-color: $accent-text-color;
+  color: $main-text-color;
+  cursor: pointer;
+  border: none;
+  padding: 0 1em;
+  border-radius: 2em;
+
+  &:hover {
+    background-color: $main-text-color;
+    color: $accent-text-color;
+  }
+}

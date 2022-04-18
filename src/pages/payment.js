@@ -44,6 +44,13 @@ const Payment = (props) => {
     return total;
   };
 
+  const deleteFromCartHandler = (e) => {
+    props.deleteFromCart(
+      e.target.closest('.payment_work').firstChild.firstChild.childNodes[1]
+        .textContent
+    );
+  };
+
   return (
     <div className="payment">
       <h1 className="payment_title">Shopping Cart</h1>
@@ -52,23 +59,31 @@ const Payment = (props) => {
           const workData = findWork(work);
           if (work !== 0)
             return (
-              <div className="payment_work">
-                <div className="payment_work-title">
-                  <p className="payment_work-number">
-                    {props.cart[work].counter + 'x'}
-                  </p>
-                  <Link
-                    className="cart-preview-title"
-                    to={`/works/${work
-                      .replaceAll(' ', '-')
-                      .replaceAll('.', '')
-                      .toLowerCase()}`}
-                  >
-                    {work}
-                  </Link>
+              <div key={'work-nr' + i + 1} className="payment_work">
+                <div className="payment_work-content">
+                  <div className="payment_work-title">
+                    <p className="payment_work-number">
+                      {props.cart[work].counter + 'x'}
+                    </p>
+                    <Link
+                      className="cart-preview-title"
+                      to={`/works/${work
+                        .replaceAll(' ', '-')
+                        .replaceAll('.', '')
+                        .toLowerCase()}`}
+                    >
+                      {work}
+                    </Link>
+                  </div>
+                  <p>{workData.composer}</p>
+                  <p>{workData.price * props.cart[work].counter + '€'}</p>
                 </div>
-                <p>{workData.composer}</p>
-                <p>{workData.price * props.cart[work].counter + '€'}</p>
+                <button
+                  className="payment_work-delete-btn pill-btn-accent"
+                  onClick={(e) => deleteFromCartHandler(e)}
+                >
+                  Delete from Cart
+                </button>
               </div>
             );
           return '';
@@ -89,7 +104,7 @@ const Payment = (props) => {
       >
         <PayPalButtons
           style={{ color: 'black' }}
-          createOrder={(data, actions) => {
+          createOrder={(_, actions) => {
             return actions.order.create({
               purchase_units: [
                 {
@@ -100,7 +115,7 @@ const Payment = (props) => {
               ],
             });
           }}
-          onApprove={(data, actions) => {
+          onApprove={(_, actions) => {
             return actions.order.capture().then((details) => {
               const name = details.payer.name.given_name;
               alert(`Transaction completed by ${name}`);

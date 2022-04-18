@@ -1,7 +1,7 @@
 import React from 'react';
-import { graphql, useStaticQuery, Link } from 'gatsby';
+import { graphql, useStaticQuery, Link, navigate } from 'gatsby';
 import { connect } from 'react-redux';
-import { deleteFromCart } from '../actions';
+import { deleteFromCart, handleCartModal } from '../actions';
 
 const CartPreview = (props) => {
   const query = useStaticQuery(graphql`
@@ -17,11 +17,6 @@ const CartPreview = (props) => {
     }
   `);
   const data = query.allDatoCmsPost.nodes;
-
-  // const findWork = (workTitle) => {
-  //   const work = data.find((entry) => entry.title === workTitle);
-  //   return work;
-  // };
 
   const findPrice = (workTitle) => {
     const price = data.find((entry) => entry.title === workTitle);
@@ -40,9 +35,20 @@ const CartPreview = (props) => {
     return total;
   };
 
+  const toPaymentClickHandler = () => {
+    navigate(`/payment`);
+    props.handleCartModal('close');
+  };
+
   return (
     <div className="cart-preview-container">
       <h2 className="cart-preview-upper-title">Shopping Cart</h2>
+      <button
+        className="cart-preview-close-btn"
+        onClick={() => props.handleCartModal('close')}
+      >
+        Close
+      </button>
       {Object.keys(props.cart).map((work, i) => {
         if (work !== 0)
           return (
@@ -63,7 +69,7 @@ const CartPreview = (props) => {
                 </p>
               </div>
               <button
-                className="cart-preview-close-work-btn"
+                className="cart-preview-close-work-btn pill-btn-accent"
                 onClick={(e) =>
                   props.deleteFromCart(
                     e.target.closest('.cart-preview').childNodes[0].firstChild
@@ -83,7 +89,12 @@ const CartPreview = (props) => {
             ? 'Total ' + getTotalPrice() + '€'
             : 'No items yet.'}
         </h3>
-        <Link to="/payment">Proceed to Payment</Link>
+        <button
+          className="cart-preview-payment-link"
+          onClick={toPaymentClickHandler}
+        >
+          Proceed to Payment
+        </button>
       </div>
     </div>
   );
@@ -99,6 +110,7 @@ const mapStateToProps = (state) => {
 const mapDispatchtoProps = (dispatch) => {
   return {
     deleteFromCart: (work) => dispatch(deleteFromCart(work)),
+    handleCartModal: (bool) => dispatch(handleCartModal(bool)),
   };
 };
 

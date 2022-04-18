@@ -9,7 +9,7 @@ const localeReducer = (state = 'en', action) => {
     case 'fr':
       return (state = 'fr');
     default:
-      return (state = 'en');
+      return state;
   }
 };
 

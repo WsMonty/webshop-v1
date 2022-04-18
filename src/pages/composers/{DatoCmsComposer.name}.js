@@ -3,28 +3,7 @@ import { graphql } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
 
 const ComposerPage = (props) => {
-  //   const [locale, setLocale] = useState('en');
-
-  //   const getLocale = () => {
-  //     setLocale(document.querySelector('.locale_link').id);
-  //   };
-
-  //   useEffect(() => {
-  //     getLocale();
-  //   });
-
   const data = props.data.datoCmsComposer;
-
-  //   rawData.map((entry) =>
-  //     props.pageContext.composer === entry.node.composer
-  //       ? data.push(entry.node)
-  //       : null
-  //   );
-
-  //   const result = data.filter((entry) => {
-  //     if (entry.locale === locale) return entry;
-  //     return '';
-  //   });
 
   return (
     <div className="composer_page">
@@ -32,7 +11,7 @@ const ComposerPage = (props) => {
       <p className="composer_page_website">
         Website:{' '}
         <a
-          href={data.website}
+          href={'https://' + data.website}
           target="_blank"
           rel="noreferrer"
           className="composer_page_website_link"

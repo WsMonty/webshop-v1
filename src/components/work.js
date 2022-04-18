@@ -2,7 +2,7 @@ import React from 'react';
 import { useStaticQuery, graphql, Link, navigate } from 'gatsby';
 import sortByDate from '../helpers/sortByDate.js';
 import { connect } from 'react-redux';
-import { addToCart } from '../actions/index.js';
+import { addToCart, handleCartModal } from '../actions/index.js';
 
 const Work = (props) => {
   const query = useStaticQuery(graphql`
@@ -31,6 +31,13 @@ const Work = (props) => {
     navigate(
       `/composers/${e.target.textContent.toLowerCase().replace(' ', '-')}`
     );
+  };
+
+  const addToCartClickHandler = (e) => {
+    props.addToCart(
+      e.target.closest('.work').childNodes[1].firstChild.textContent
+    );
+    props.handleCartModal('show');
   };
 
   return (
@@ -69,11 +76,7 @@ const Work = (props) => {
             <p className="work_price">{product.node.price}€</p>
             <button
               className="addToCart-btn"
-              onClick={(e) =>
-                props.addToCart(
-                  e.target.closest('.work').childNodes[1].firstChild.textContent
-                )
-              }
+              onClick={(e) => addToCartClickHandler(e)}
             >
               Add to cart
             </button>
@@ -88,12 +91,14 @@ const mapStateToProps = (state) => {
   return {
     cart: state.cart,
     locale: state.locale,
+    cartModal: state.cartModal,
   };
 };
 
 const mapDispatchtoProps = (dispatch) => {
   return {
     addToCart: (work) => dispatch(addToCart(work)),
+    handleCartModal: (bool) => dispatch(handleCartModal(bool)),
   };
 };
 

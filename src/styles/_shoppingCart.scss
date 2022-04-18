@@ -50,6 +50,7 @@
   border-top: 2px solid $accent-text-color;
   display: flex;
   justify-content: space-between;
+  position: relative;
 
   &-content {
     line-height: 1.5em;
@@ -66,8 +67,9 @@
   }
 
   &-footer {
-    text-align: right;
     border-top: 2px solid $accent-text-color;
+    display: flex;
+    flex-direction: column;
 
     h3 {
       margin-top: 1em;
@@ -77,18 +79,37 @@
     margin-bottom: 1em;
   }
 
-  &-close-work-btn {
-    height: 2.5em;
-    background-color: $accent-text-color;
+  &-close-btn {
+    background: transparent;
     color: $main-text-color;
-    cursor: pointer;
-    border: none;
-    padding: 0 1em;
+    padding: 1em 2em;
+    border: 1px solid $main-text-color;
+    position: absolute;
+    top: 10px;
+    right: 10px;
     border-radius: 2em;
+    font-size: 0.75em;
+    cursor: pointer;
 
     &:hover {
-      background-color: $main-text-color;
       color: $accent-text-color;
+      border-color: $accent-text-color;
+    }
+  }
+
+  &-payment-link {
+    width: fit-content;
+    text-decoration: none;
+    align-self: center;
+    background-color: transparent;
+    color: $main-text-color;
+    border: 1px solid $main-text-color;
+    border-radius: 2em;
+    padding: 0.5em 3em;
+
+    &:hover {
+      color: $accent-text-color;
+      border-color: $accent-text-color;
     }
   }
 }

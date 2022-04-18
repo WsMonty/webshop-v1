@@ -17,3 +17,21 @@ export const deleteFromCart = (work) => {
     payload: work,
   };
 };
+
+export const showCartModal = () => {
+  return {
+    type: 'cart-active',
+  };
+};
+
+export const closeCartModal = () => {
+  return {
+    type: 'hidden',
+  };
+};
+
+export const handleCartModal = (bool) => {
+  return {
+    type: bool,
+  };
+};

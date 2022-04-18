@@ -1,25 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FaShoppingCart } from 'react-icons/fa';
 import CartPreview from './cartPreview';
-import { useSelector } from 'react-redux';
+import { connect } from 'react-redux';
+import { handleCartModal } from '../actions';
 
-const ShoppingCart = () => {
-  const [cartActive, setCartActive] = useState('hidden');
-
-  const cart = useSelector((state) => state.cart);
-
+const ShoppingCart = (props) => {
   const cartLength = () => {
     let allWorks = 0;
-    for (const key in cart) {
-      allWorks += cart[key].counter;
+    for (const key in props.cart) {
+      allWorks += props.cart[key].counter;
     }
     return allWorks;
   };
 
-  const cartHandler = () =>
-    cartActive === 'hidden'
-      ? setCartActive('cart-active')
-      : setCartActive('hidden');
+  const cartHandler = () => {
+    props.cartModal === 'hidden'
+      ? props.handleCartModal('show')
+      : props.handleCartModal('close');
+  };
 
   return (
     <div className="cart">
@@ -27,11 +25,25 @@ const ShoppingCart = () => {
         <FaShoppingCart className="cart-icon " />
       </button>
       <p className="cart-number">{cartLength()}</p>
-      <div className={`cart-popup ${cartActive}`}>
+      <div className={`cart-popup ${props.cartModal}`}>
         <CartPreview />
       </div>
     </div>
   );
 };
 
-export default ShoppingCart;
+const mapStateToProps = (state) => {
+  return {
+    cart: state.cart,
+    locale: state.locale,
+    cartModal: state.cartModal,
+  };
+};
+
+const mapDispatchtoProps = (dispatch) => {
+  return {
+    handleCartModal: (bool) => dispatch(handleCartModal(bool)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchtoProps)(ShoppingCart);
