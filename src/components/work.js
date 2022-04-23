@@ -78,13 +78,31 @@ const Work = (props) => {
               className="addToCart-btn"
               onClick={(e) => addToCartClickHandler(e)}
             >
-              Add to cart
+              {languages.addToCart[props.locale]}
             </button>
           </div>
         );
       })}
     </div>
   );
+};
+
+/* 
+addToCart: {
+    'en': '',
+    'de': '',
+    'de-LU': '',
+    'fr': '',
+  }
+*/
+
+const languages = {
+  addToCart: {
+    en: 'Add to cart',
+    de: 'In den Einkaufswagen',
+    'de-LU': 'An de Weenchen',
+    fr: 'Ajouter au panier',
+  },
 };
 
 const mapStateToProps = (state) => {

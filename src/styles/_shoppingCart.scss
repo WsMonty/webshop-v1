@@ -21,7 +21,7 @@
 
   &-popup {
     min-height: 50vh;
-    width: 33vw;
+    width: 40vw;
     background: white;
     border: 2px solid $main-text-color;
     border-radius: 20px;
@@ -64,6 +64,11 @@
     &:hover {
       color: $accent-text-color;
     }
+  }
+
+  &-count-title {
+    display: flex;
+    margin-bottom: 1em;
   }
 
   &-footer {

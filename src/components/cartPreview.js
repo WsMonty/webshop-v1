@@ -1,9 +1,7 @@
 import React from 'react';
 import { graphql, useStaticQuery, Link, navigate } from 'gatsby';
-import { connect } from 'react-redux';
-import { deleteFromCart, handleCartModal } from '../actions';
 
-const CartPreview = (props) => {
+const CartPreview = ({ props }) => {
   const query = useStaticQuery(graphql`
     query {
       allDatoCmsPost {
@@ -42,47 +40,57 @@ const CartPreview = (props) => {
 
   return (
     <div className="cart-preview-container">
-      <h2 className="cart-preview-upper-title">Shopping Cart</h2>
-      <button
-        className="cart-preview-close-btn"
-        onClick={() => props.handleCartModal('close')}
-      >
-        Close
-      </button>
-      {Object.keys(props.cart).map((work, i) => {
-        if (work !== 0)
-          return (
-            <div key={i} className="cart-preview">
-              <div className="cart-preview-content">
-                <Link
-                  className="cart-preview-title"
-                  to={`/works/${work
-                    .replaceAll(' ', '-')
-                    .replaceAll('.', '')
-                    .toLowerCase()}`}
+      <div className="cart-preview-works">
+        <h2 className="cart-preview-upper-title">
+          {languages.shoppingCart[props.locale]}
+        </h2>
+        <button
+          className="cart-preview-close-btn"
+          onClick={() => props.handleCartModal('close')}
+        >
+          {languages.close[props.locale]}
+        </button>
+        {Object.keys(props.cart).map((work, i) => {
+          if (work !== 0)
+            return (
+              <div key={i} className="cart-preview">
+                <div className="cart-preview-content">
+                  <div className="cart-preview-count-title">
+                    <p className="payment_work-number">
+                      {props.cart[work].counter + 'x'}
+                    </p>
+                    <Link
+                      className="cart-preview-title"
+                      to={`/works/${work
+                        .replaceAll(' ', '-')
+                        .replaceAll('.', '')
+                        .toLowerCase()}`}
+                    >
+                      {work}
+                    </Link>
+                  </div>
+                  <p>
+                    {'Price: ' +
+                      findPrice(work) * props.cart[work].counter +
+                      '€'}
+                  </p>
+                </div>
+                <button
+                  className="cart-preview-close-work-btn pill-btn-accent"
+                  onClick={(e) =>
+                    props.deleteFromCart(
+                      e.target.closest('.cart-preview').firstChild.firstChild
+                        .childNodes[1].textContent
+                    )
+                  }
                 >
-                  {work}
-                </Link>
-                <p>{props.cart[work].counter + 'x in Cart'}</p>
-                <p>
-                  {'Price: ' + findPrice(work) * props.cart[work].counter + '€'}
-                </p>
+                  {languages.deleteFromCart[props.locale]}
+                </button>
               </div>
-              <button
-                className="cart-preview-close-work-btn pill-btn-accent"
-                onClick={(e) =>
-                  props.deleteFromCart(
-                    e.target.closest('.cart-preview').childNodes[0].firstChild
-                      .textContent
-                  )
-                }
-              >
-                Delete from cart
-              </button>
-            </div>
-          );
-        return '';
-      })}
+            );
+          return '';
+        })}
+      </div>
       <div className="cart-preview-footer">
         <h3 className="cart-preview-footer-total">
           {Object.keys(props.cart).length > 0
@@ -93,25 +101,54 @@ const CartPreview = (props) => {
           className="cart-preview-payment-link"
           onClick={toPaymentClickHandler}
         >
-          Proceed to Payment
+          {languages.proceedPayment[props.locale]}
         </button>
       </div>
     </div>
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    cart: state.cart,
-    locale: state.locale,
-  };
+const languages = {
+  shoppingCart: {
+    en: 'Shopping Cart',
+    de: 'Einkaufswagen',
+    'de-LU': 'Akaafsweenchen',
+    fr: 'Panier',
+  },
+  close: {
+    en: 'Close',
+    de: 'Schließen',
+    'de-LU': 'Zou maachen',
+    fr: 'Fermer',
+  },
+  deleteFromCart: {
+    en: 'Delete from cart',
+    de: 'Aus dem Einkaufswagen entfernen',
+    'de-LU': 'Aus dem Weenchen huelen',
+    fr: 'Retirer du panier',
+  },
+  proceedPayment: {
+    en: 'Proceed to payment',
+    de: 'Weiter um bezahlen',
+    'de-LU': 'Weider fir ze bezuelen',
+    fr: 'Procéder au paiement',
+  },
 };
 
-const mapDispatchtoProps = (dispatch) => {
-  return {
-    deleteFromCart: (work) => dispatch(deleteFromCart(work)),
-    handleCartModal: (bool) => dispatch(handleCartModal(bool)),
-  };
-};
+// const mapStateToProps = (state) => {
+//   return {
+//     cart: state.cart,
+//     locale: state.locale,
+//   };
+// };
 
-export default connect(mapStateToProps, mapDispatchtoProps)(CartPreview);
+// const mapDispatchtoProps = (dispatch) => {
+//   return {
+//     deleteFromCart: (work) => dispatch(deleteFromCart(work)),
+//     addFromLocaleStorage: (work) => dispatch(addFromLocaleStorage(work)),
+//     handleCartModal: (bool) => dispatch(handleCartModal(bool)),
+//   };
+// };
+
+// export default connect(mapStateToProps, mapDispatchtoProps)(CartPreview);
+export default CartPreview;

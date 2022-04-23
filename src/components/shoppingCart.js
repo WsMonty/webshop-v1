@@ -2,7 +2,11 @@ import React from 'react';
 import { FaShoppingCart } from 'react-icons/fa';
 import CartPreview from './cartPreview';
 import { connect } from 'react-redux';
-import { handleCartModal } from '../actions';
+import {
+  handleCartModal,
+  deleteFromCart,
+  addFromLocaleStorage,
+} from '../actions';
 
 const ShoppingCart = (props) => {
   const cartLength = () => {
@@ -26,7 +30,7 @@ const ShoppingCart = (props) => {
       </button>
       <p className="cart-number">{cartLength()}</p>
       <div className={`cart-popup ${props.cartModal}`}>
-        <CartPreview />
+        <CartPreview props={props} />
       </div>
     </div>
   );
@@ -43,6 +47,8 @@ const mapStateToProps = (state) => {
 const mapDispatchtoProps = (dispatch) => {
   return {
     handleCartModal: (bool) => dispatch(handleCartModal(bool)),
+    deleteFromCart: (work) => dispatch(deleteFromCart(work)),
+    addFromLocaleStorage: (work) => dispatch(addFromLocaleStorage(work)),
   };
 };
 

@@ -10,6 +10,7 @@ const cartReducer = (state = {}, action) => {
         state[payload].counter += 1;
         return { ...state };
       }
+
       break;
     case 'deleteFromCart':
       if (state[payload].counter > 1) {

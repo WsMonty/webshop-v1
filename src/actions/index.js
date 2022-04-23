@@ -11,6 +11,13 @@ export const addToCart = (work) => {
   };
 };
 
+export const addFromLocaleStorage = (localStorage) => {
+  return {
+    type: 'addFromLocaleStorage',
+    payload: localStorage,
+  };
+};
+
 export const deleteFromCart = (work) => {
   return {
     type: 'deleteFromCart',

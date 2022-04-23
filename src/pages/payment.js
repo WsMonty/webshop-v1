@@ -53,7 +53,7 @@ const Payment = (props) => {
 
   return (
     <div className="payment">
-      <h1 className="payment_title">Shopping Cart</h1>
+      <h1 className="payment_title">{languages.shoppingCart[props.locale]}</h1>
       <div className="payment_content">
         {Object.keys(props.cart).map((work, i) => {
           const workData = findWork(work);
@@ -82,7 +82,7 @@ const Payment = (props) => {
                   className="payment_work-delete-btn pill-btn-accent"
                   onClick={(e) => deleteFromCartHandler(e)}
                 >
-                  Delete from Cart
+                  {languages.deleteFromCart[props.locale]}
                 </button>
               </div>
             );
@@ -125,6 +125,22 @@ const Payment = (props) => {
       </PayPalScriptProvider>
     </div>
   );
+};
+
+const languages = {
+  shoppingCart: {
+    en: 'Shopping Cart',
+    de: 'Einkaufswagen',
+    'de-LU': 'Akaafsweenchen',
+    fr: 'Panier',
+  },
+
+  deleteFromCart: {
+    en: 'Delete from cart',
+    de: 'Aus dem Einkaufswagen entfernen',
+    'de-LU': 'Aus dem Weenchen huelen',
+    fr: 'Retirer du panier',
+  },
 };
 
 const mapStateToProps = (state) => {
