@@ -7,7 +7,8 @@ export const setLocale = (locale) => {
 export const addToCart = (work) => {
   return {
     type: 'addToCart',
-    payload: work,
+    title: work.title,
+    options: work.options,
   };
 };
 
@@ -21,7 +22,8 @@ export const addFromLocaleStorage = (localStorage) => {
 export const deleteFromCart = (work) => {
   return {
     type: 'deleteFromCart',
-    payload: work,
+    title: work.title,
+    options: work.buyOption,
   };
 };
 

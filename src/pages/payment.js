@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { deleteFromCart } from '../actions';
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 import languages from '../languages/languages';
+import { SHIPPING_COST } from '../globalVariables';
 
 const Payment = (props) => {
   const query = useStaticQuery(graphql`
@@ -23,61 +24,64 @@ const Payment = (props) => {
   `);
   const data = query.allDatoCmsPost.nodes;
 
-  const findWork = (workTitle) => {
-    const work = data.find((entry) => entry.title === workTitle);
-    return work;
-  };
+  // const findWork = (workTitle) => {
+  //   const work = data.find((entry) => entry.title === workTitle);
+  //   return work;
+  // };
 
   const findPrice = (workTitle) => {
-    const price = data.find((entry) => entry.title === workTitle);
-    return price.price;
+    const workPrice = data.find(
+      (entry) => entry.title === workTitle[1].title
+    ).price;
+    return workPrice;
   };
 
   const getTotalPrice = () => {
     let total = 0;
-    Object.keys(props.cart).map((work) => {
-      if (work !== 0) {
-        total += findPrice(work) * props.cart[work].counter;
-      }
+    let shipping = false;
+    Object.entries(props.cart).map((entry) => {
+      if (entry[1].buyOption === 'Print') shipping = true;
+      total += findPrice(entry) * props.cart[entry[0]].counter;
       return '';
     });
 
-    return total;
+    return shipping ? (total + SHIPPING_COST).toFixed(2) : total.toFixed(2);
   };
 
   const deleteFromCartHandler = (e) => {
-    props.deleteFromCart(
+    const work =
       e.target.closest('.payment_work').firstChild.firstChild.childNodes[1]
-        .textContent
-    );
+        .dataset.title;
+    props.deleteFromCart(JSON.parse(work));
   };
 
   return (
     <div className="payment">
       <h1 className="payment_title">{languages.shoppingCart[props.locale]}</h1>
       <div className="payment_content">
-        {Object.keys(props.cart).map((work, i) => {
-          const workData = findWork(work);
+        {Object.entries(props.cart).map((entry, i) => {
+          const work = entry[1];
           if (work !== 0)
             return (
               <div key={'work-nr' + i + 1} className="payment_work">
                 <div className="payment_work-content">
                   <div className="payment_work-title">
                     <p className="payment_work-number">
-                      {props.cart[work].counter + 'x'}
+                      {props.cart[entry[0]].counter + 'x'}
                     </p>
                     <Link
                       className="cart-preview-title"
-                      to={`/works/${work
+                      data-title={JSON.stringify(work)}
+                      to={`/works/${work.title
                         .replaceAll(' ', '-')
                         .replaceAll('.', '')
                         .toLowerCase()}`}
                     >
-                      {work}
+                      {work.title}
                     </Link>
                   </div>
-                  <p>{workData.composer}</p>
-                  <p>{workData.price * props.cart[work].counter + '€'}</p>
+                  <p>{props.cart[entry[0]].buyOption}</p>
+                  <p>{findPrice(entry) * props.cart[entry[0]].counter + '€'}</p>
                 </div>
                 <button
                   className="payment_work-delete-btn pill-btn-accent"

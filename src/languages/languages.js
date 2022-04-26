@@ -35,6 +35,12 @@ const languages = {
     'de-LU': 'Kontakt',
     fr: 'Contact',
   },
+  addToCart: {
+    en: 'Add to cart',
+    de: 'In den Einkaufswagen',
+    'de-LU': 'An de Weenchen',
+    fr: 'Ajouter au panier',
+  },
 };
 
 export default languages;

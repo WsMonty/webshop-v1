@@ -3,6 +3,7 @@ import { useStaticQuery, graphql, Link, navigate } from 'gatsby';
 import sortByDate from '../helpers/sortByDate.js';
 import { connect } from 'react-redux';
 import { addToCart, handleCartModal } from '../actions/index.js';
+import languages from '../languages/languages';
 
 const Work = (props) => {
   const query = useStaticQuery(graphql`
@@ -34,10 +35,16 @@ const Work = (props) => {
   };
 
   const addToCartClickHandler = (e) => {
-    props.addToCart(
-      e.target.closest('.work').childNodes[1].firstChild.textContent
-    );
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const formValue = Object.fromEntries(formData).options;
+    const work = {
+      title: e.target.closest('.work').childNodes[1].firstChild.textContent,
+      options: formValue,
+    };
+    props.addToCart(work);
     props.handleCartModal('show');
+    e.target.closest('.addToCart_dialog').close();
   };
 
   return (
@@ -74,9 +81,51 @@ const Work = (props) => {
               </button>
             </div>
             <p className="work_price">{product.node.price}€</p>
+            <dialog className="addToCart_dialog">
+              <button
+                className="cart-preview-close-btn"
+                onClick={(e) => e.target.closest('.addToCart_dialog').close()}
+              >
+                Close
+              </button>
+              <div className="addToCart_dialog_text">
+                <h3>{product.node.title}</h3>
+                <p>
+                  Here are the options on how you want to get your scores!
+                  <br />
+                  If you select print, shipping cost will be added to the total.
+                </p>
+              </div>
+
+              <form
+                className="addToCart_dialog_form"
+                onSubmit={(e) => addToCartClickHandler(e)}
+              >
+                <input
+                  type="radio"
+                  id="print"
+                  value="Print"
+                  name="options"
+                  required
+                />
+                <label htmlFor="print">Print</label>
+                <br />
+                <input type="radio" id="pdf" value="PDF" name="options" />
+                <label htmlFor="print">PDF</label>
+                <br />
+                <button
+                  className="addToCart-btn addToCart_dialog_btn"
+                  type="submit"
+                >
+                  {languages.addToCart[props.locale]}
+                </button>
+              </form>
+            </dialog>
             <button
               className="addToCart-btn"
-              onClick={(e) => addToCartClickHandler(e)}
+              onClick={(e) =>
+                e.target.closest('.work').childNodes[3].showModal()
+              }
             >
               {languages.addToCart[props.locale]}
             </button>
@@ -85,24 +134,6 @@ const Work = (props) => {
       })}
     </div>
   );
-};
-
-/* 
-addToCart: {
-    'en': '',
-    'de': '',
-    'de-LU': '',
-    'fr': '',
-  }
-*/
-
-const languages = {
-  addToCart: {
-    en: 'Add to cart',
-    de: 'In den Einkaufswagen',
-    'de-LU': 'An de Weenchen',
-    fr: 'Ajouter au panier',
-  },
 };
 
 const mapStateToProps = (state) => {

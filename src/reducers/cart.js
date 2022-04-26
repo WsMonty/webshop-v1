@@ -1,24 +1,31 @@
 const cartReducer = (state = {}, action) => {
-  const payload = action.payload;
+  const payload = action.title;
+  const buyOptions = action.options;
+  const keyName = `${payload}_${buyOptions}`;
   switch (action.type) {
     case 'addToCart':
-      if (!state[payload]) {
-        state[payload] = { title: payload, counter: 1 };
+      if (!state[keyName]) {
+        state[keyName] = {
+          title: payload,
+          counter: 1,
+          buyOption: buyOptions,
+        };
         return { ...state };
       }
-      if (state[payload]) {
-        state[payload].counter += 1;
+      if (state[keyName]) {
+        state[keyName].counter += 1;
+        state[keyName].buyOption = buyOptions;
         return { ...state };
       }
 
       break;
     case 'deleteFromCart':
-      if (state[payload].counter > 1) {
-        state[payload].counter -= 1;
+      if (state[keyName].counter > 1) {
+        state[keyName].counter -= 1;
         return { ...state };
       }
-      if (state[payload].counter === 1) {
-        delete state[payload];
+      if (state[keyName].counter === 1) {
+        delete state[keyName];
         return { ...state };
       }
       break;
