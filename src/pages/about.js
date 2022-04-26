@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import languages from '../languages/languages';
 
 const About = (props) => {
   return (
@@ -7,15 +8,6 @@ const About = (props) => {
       <h1>{languages.about[props.locale]}</h1>
     </div>
   );
-};
-
-const languages = {
-  about: {
-    en: 'About',
-    de: 'Über',
-    'de-LU': 'Iwwer',
-    fr: 'Infos',
-  },
 };
 
 const mapStateToProps = (state) => {

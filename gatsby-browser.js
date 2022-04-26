@@ -5,7 +5,11 @@ import { Provider } from 'react-redux';
 import store from './src/store.js';
 
 export const wrapPageElement = ({ element, props }) => {
-  return <Layout {...props}>{element}</Layout>;
+  return (
+    <Provider store={store}>
+      <Layout {...props}>{element}</Layout>
+    </Provider>
+  );
 };
 
 export const wrapRootElement = ({ element }) => {

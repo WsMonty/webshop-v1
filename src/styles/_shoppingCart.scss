@@ -111,6 +111,7 @@
     border: 1px solid $main-text-color;
     border-radius: 2em;
     padding: 0.5em 3em;
+    cursor: pointer;
 
     &:hover {
       color: $accent-text-color;

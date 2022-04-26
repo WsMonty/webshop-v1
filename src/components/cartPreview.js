@@ -1,5 +1,6 @@
 import React from 'react';
 import { graphql, useStaticQuery, Link, navigate } from 'gatsby';
+import languages from '../languages/languages';
 
 const CartPreview = ({ props }) => {
   const query = useStaticQuery(graphql`
@@ -108,47 +109,4 @@ const CartPreview = ({ props }) => {
   );
 };
 
-const languages = {
-  shoppingCart: {
-    en: 'Shopping Cart',
-    de: 'Einkaufswagen',
-    'de-LU': 'Akaafsweenchen',
-    fr: 'Panier',
-  },
-  close: {
-    en: 'Close',
-    de: 'Schließen',
-    'de-LU': 'Zou maachen',
-    fr: 'Fermer',
-  },
-  deleteFromCart: {
-    en: 'Delete from cart',
-    de: 'Aus dem Einkaufswagen entfernen',
-    'de-LU': 'Aus dem Weenchen huelen',
-    fr: 'Retirer du panier',
-  },
-  proceedPayment: {
-    en: 'Proceed to payment',
-    de: 'Weiter um bezahlen',
-    'de-LU': 'Weider fir ze bezuelen',
-    fr: 'Procéder au paiement',
-  },
-};
-
-// const mapStateToProps = (state) => {
-//   return {
-//     cart: state.cart,
-//     locale: state.locale,
-//   };
-// };
-
-// const mapDispatchtoProps = (dispatch) => {
-//   return {
-//     deleteFromCart: (work) => dispatch(deleteFromCart(work)),
-//     addFromLocaleStorage: (work) => dispatch(addFromLocaleStorage(work)),
-//     handleCartModal: (bool) => dispatch(handleCartModal(bool)),
-//   };
-// };
-
-// export default connect(mapStateToProps, mapDispatchtoProps)(CartPreview);
 export default CartPreview;

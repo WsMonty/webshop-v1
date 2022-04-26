@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { deleteFromCart } from '../actions';
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
+import languages from '../languages/languages';
 
 const Payment = (props) => {
   const query = useStaticQuery(graphql`
@@ -125,22 +126,6 @@ const Payment = (props) => {
       </PayPalScriptProvider>
     </div>
   );
-};
-
-const languages = {
-  shoppingCart: {
-    en: 'Shopping Cart',
-    de: 'Einkaufswagen',
-    'de-LU': 'Akaafsweenchen',
-    fr: 'Panier',
-  },
-
-  deleteFromCart: {
-    en: 'Delete from cart',
-    de: 'Aus dem Einkaufswagen entfernen',
-    'de-LU': 'Aus dem Weenchen huelen',
-    fr: 'Retirer du panier',
-  },
 };
 
 const mapStateToProps = (state) => {

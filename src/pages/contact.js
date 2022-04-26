@@ -1,17 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import languages from '../languages/languages';
 
 const Contact = (props) => {
   return <h1>{languages.contact[props.locale]}</h1>;
-};
-
-const languages = {
-  contact: {
-    en: 'Contact',
-    de: 'Kontakt',
-    'de-LU': 'Kontakt',
-    fr: 'Contact',
-  },
 };
 
 const mapStateToProps = (state) => {

@@ -3,6 +3,43 @@ import { Link } from 'gatsby';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLocale } from '../actions/index.js';
 
+const Navbar = () => {
+  const dispatch = useDispatch();
+
+  const locale = useSelector((state) => state.locale);
+
+  return (
+    <div className="navbar">
+      <ul className="navbar_list">
+        {links.map((link, i) => {
+          return (
+            <li className="link_list" key={`link_${i + 1}`}>
+              <Link className="link" to={`/${link.url}`}>
+                {link[`title-${locale}`]}
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+      <ul className="locales_list">
+        {locales.map((l) => {
+          return (
+            <li key={l.loc} className="link_list locale_link_list">
+              <Link
+                className="locale_link"
+                onClick={() => dispatch(setLocale(`${l.loc}`))}
+                to={''}
+              >
+                {l.text}
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+};
+
 const links = [
   {
     'title-en': 'Works',
@@ -40,42 +77,5 @@ const locales = [
   { text: '🇱🇺', loc: 'de-LU' },
   { text: '🇫🇷', loc: 'fr' },
 ];
-
-const Navbar = () => {
-  const dispatch = useDispatch();
-
-  const locale = useSelector((state) => state.locale);
-
-  return (
-    <div className="navbar">
-      <ul className="navbar_list">
-        {links.map((link, i) => {
-          return (
-            <li className="link_list" key={`link_${i + 1}`}>
-              <Link className="link" to={`/${link.url}`}>
-                {link[`title-${locale}`]}
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
-      <ul className="locales_list">
-        {locales.map((l) => {
-          return (
-            <li key={l.loc} className="link_list locale_link_list">
-              <Link
-                className="locale_link"
-                onClick={() => dispatch(setLocale(`${l.loc}`))}
-                to={''}
-              >
-                {l.text}
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
-  );
-};
 
 export default Navbar;
