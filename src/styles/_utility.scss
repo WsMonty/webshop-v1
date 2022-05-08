@@ -12,3 +12,22 @@
     color: $accent-text-color;
   }
 }
+
+.pill-btn-inverted {
+  height: 2.5em;
+  background-color: $accent-text-color;
+  color: $main-text-color;
+  cursor: pointer;
+  border: 2px solid $main-text-color;
+  padding: 0 1em;
+  border-radius: 2em;
+
+  &:hover {
+    background-color: $main-text-color;
+    color: $accent-text-color;
+  }
+}
+
+.hidden {
+  display: none;
+}

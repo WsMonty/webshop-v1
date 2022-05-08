@@ -13,7 +13,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-google-fonts',
       options: {
-        fonts: ['Courgette'],
+        fonts: ['Anek_Devanagari'],
         display: 'swap',
       },
     },

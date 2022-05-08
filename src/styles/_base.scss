@@ -1,6 +1,10 @@
 $product-size: 1;
 $main-text-color: rgb(58, 58, 58);
-$accent-text-color: rgb(246, 189, 43);
+// $accent-text-color: rgb(246, 189, 43);
+// $accent-text-color: #ff8d3d;
+$accent-blue-color: #007583;
+$accent-text-color: #51a9b8;
+$accent-blue-very-light-color: #befbff;
 
 * {
   margin: 0;
@@ -19,7 +23,7 @@ $accent-text-color: rgb(246, 189, 43);
 }
 
 body {
-  font-family: 'Courgette', sans-serif;
+  font-family: 'Anek_Devanagari';
   color: $main-text-color;
 }
 

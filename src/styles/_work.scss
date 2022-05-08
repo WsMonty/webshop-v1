@@ -13,6 +13,8 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
+  perspective: 600px;
 }
 
 .work {
@@ -23,6 +25,25 @@
   flex-direction: column;
 
   text-decoration: none;
+
+  &_options {
+    border-radius: 1em;
+    display: none;
+    width: 20rem * $product-size;
+    height: 20rem * $product-size;
+    background-color: $accent-text-color;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+
+    animation: cardFlip 500ms ease-in-out forwards;
+
+    &_leave-btn {
+      float: right;
+      margin: 1em 1em 0 0;
+      align-self: flex-end;
+    }
+  }
 
   &_image_container {
     width: 100%;
@@ -126,11 +147,14 @@
   width: 50em;
 
   &_form {
-    text-align: center;
+    text-align: left;
     line-height: 1.75em;
     padding: 3em;
     label {
       margin-left: 1em;
+    }
+    &_title {
+      margin-bottom: 1em;
     }
   }
 
@@ -148,4 +172,21 @@
   &_btn {
     margin-top: 1em;
   }
+}
+
+@keyframes cardFlip {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(180deg);
+  }
+}
+
+.flipped {
+  transform: rotateY(180deg);
+}
+
+.not_flipped {
+  animation: cardFlip 500ms ease-in-out forwards;
 }
