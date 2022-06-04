@@ -50,16 +50,23 @@ const CartPreview = ({ props }) => {
     props.deleteFromCart(JSON.parse(work));
   };
 
+  const closeCardHandler = () => {
+    props.handleCartModal('close');
+    setTimeout(() => {
+      document.querySelector('.closeTop-animation').classList.add('hidden');
+      document
+        .querySelector('.closeTop-animation')
+        .classList.remove('closeTop-animation');
+    }, 750);
+  };
+
   return (
     <div className="cart-preview-container">
       <div className="cart-preview-works">
         <h2 className="cart-preview-upper-title">
           {languages.shoppingCart[props.locale]}
         </h2>
-        <button
-          className="cart-preview-close-btn"
-          onClick={() => props.handleCartModal('close')}
-        >
+        <button className="cart-preview-close-btn" onClick={closeCardHandler}>
           {languages.close[props.locale]}
         </button>
         {Object.entries(props.cart).map((entry, i) => {

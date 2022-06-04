@@ -48,33 +48,33 @@ const Work = (props) => {
     props.handleCartModal('show');
     // e.target.closest('.addToCart_dialog').close();
     e.target.closest('.work_options').style.display = 'none';
+
     document.querySelector(
       `[data-title="${workTitle.slice(0, workTitle.indexOf('_'))}"]`
     ).style.display = 'flex';
-    const workContainer = e.target.closest('.work_cards-container');
-    workContainer.firstChild.classList.add('not_flipped');
   };
 
   const showOptionsHandler = (e) => {
     const work = e.target.closest('.work');
     work.style.display = 'none';
-    work.classList.remove('not_flipped');
     const options = document.querySelector(
       `[data-title="${e.target.closest('.work').dataset.title}_work"]`
     );
-    options.style.display = 'flex';
-    e.target.closest('.work_cards-container').classList.add('flipped');
+    const expandEl = e.target.closest('.work_cards-container').childNodes[2];
+
+    expandEl.classList.remove('hidden');
+    setTimeout(() => {
+      options.style.display = 'flex';
+      expandEl.classList.add('hidden');
+    }, 500);
   };
 
   const leaveOptionsHandler = (e) => {
     const workOptionsEl = e.target.closest('.work_options');
-    const workContainer = e.target.closest('.work_cards-container');
     workOptionsEl.style.display = 'none';
     document.querySelector(
       `[data-title="${workOptionsEl.dataset.key}"]`
     ).style.display = 'flex';
-
-    workContainer.firstChild.classList.add('not_flipped');
   };
 
   return (
@@ -116,14 +116,16 @@ const Work = (props) => {
                   </p>
                 </button>
               </div>
-              <p className="work_price">{product.node.price}€</p>
+              <div className="work_price_btn_container">
+                <p className="work_price">{product.node.price}€</p>
 
-              <button
-                className="addToCart-btn"
-                onClick={(e) => showOptionsHandler(e)}
-              >
-                {languages.addToCart[props.locale]}
-              </button>
+                <button
+                  className="addToCart-btn"
+                  onClick={(e) => showOptionsHandler(e)}
+                >
+                  {languages.addToCart[props.locale]}
+                </button>
+              </div>
             </div>
 
             <div
@@ -161,6 +163,7 @@ const Work = (props) => {
                 </button>
               </form>
             </div>
+            <div className="work_expand_animation hidden"></div>
           </div>
         );
       })}

@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'gatsby';
-import { useDispatch, useSelector } from 'react-redux';
 import { setLocale } from '../actions/index.js';
+import { connect } from 'react-redux';
 
-const Navbar = () => {
-  const dispatch = useDispatch();
-
-  const locale = useSelector((state) => state.locale);
+const Navbar = (props) => {
+  const localeChanger = (e) => {
+    props.setLocale(document.getElementById('nav_locales_select').value);
+  };
 
   return (
     <div className="navbar">
@@ -15,13 +15,33 @@ const Navbar = () => {
           return (
             <li className="link_list" key={`link_${i + 1}`}>
               <Link className="link" to={`/${link.url}`}>
-                {link[`title-${locale}`]}
+                {link[`title-${props.locale}`]}
               </Link>
             </li>
           );
         })}
       </ul>
-      <ul className="locales_list">
+      <div className="locales_list">
+        <select
+          id="nav_locales_select"
+          onChange={(e) => localeChanger(e)}
+          value={props.locale}
+        >
+          <option id="en" value={locales[0].loc}>
+            {locales[0].text}
+          </option>
+          <option id="de" value={locales[1].loc}>
+            {locales[1].text}
+          </option>
+          <option id="de-LU" value={locales[2].loc}>
+            {locales[2].text}
+          </option>
+          <option id="fr" value={locales[3].loc}>
+            {locales[3].text}
+          </option>
+        </select>
+      </div>
+      {/* <ul className="locales_list">
         {locales.map((l) => {
           return (
             <li key={l.loc} className="link_list locale_link_list">
@@ -35,7 +55,7 @@ const Navbar = () => {
             </li>
           );
         })}
-      </ul>
+      </ul> */}
     </div>
   );
 };
@@ -78,4 +98,18 @@ const locales = [
   { text: '🇫🇷', loc: 'fr' },
 ];
 
-export default Navbar;
+const mapStateToProps = (state) => {
+  return {
+    cart: state.cart,
+    locale: state.locale,
+    cartModal: state.cartModal,
+  };
+};
+
+const mapDispatchtoProps = (dispatch) => {
+  return {
+    setLocale: (locale) => dispatch(setLocale(locale)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchtoProps)(Navbar);

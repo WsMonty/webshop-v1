@@ -18,9 +18,16 @@ const ShoppingCart = (props) => {
   };
 
   const cartHandler = () => {
-    props.cartModal === 'hidden'
-      ? props.handleCartModal('show')
-      : props.handleCartModal('close');
+    if (props.cartModal === 'closeTop-animation') props.handleCartModal('show');
+    else {
+      props.handleCartModal('close');
+      setTimeout(() => {
+        document.querySelector('.closeTop-animation').classList.add('hidden');
+        document
+          .querySelector('.closeTop-animation')
+          .classList.remove('closeTop-animation');
+      }, 750);
+    }
   };
 
   return (
