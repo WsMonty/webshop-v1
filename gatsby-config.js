@@ -13,8 +13,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-google-fonts',
       options: {
-        fonts: ['Anek_Devanagari'],
-        display: 'swap',
+        fonts: ['Roboto'],
       },
     },
     'gatsby-plugin-sass',

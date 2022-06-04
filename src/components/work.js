@@ -82,7 +82,7 @@ const Work = (props) => {
       {sortedData.map((product, i) => {
         if (product.node.locale !== props.locale) return '';
         return (
-          <div className="work_cards-container">
+          <div key={`work-${i}`} className="work_cards-container">
             <div
               key={`work_nr${i + 1}`}
               className="work"
@@ -93,6 +93,7 @@ const Work = (props) => {
                 to={`/works/${product.node.title
                   .replaceAll(' ', '-')
                   .replaceAll('.', '')
+                  .replaceAll("'", '-')
                   .toLowerCase()}`}
               >
                 <img
