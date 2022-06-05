@@ -18,14 +18,11 @@ const ShoppingCart = (props) => {
   };
 
   const cartHandler = () => {
-    if (props.cartModal === 'closeTop-animation') props.handleCartModal('show');
+    if (props.cartModal === 'hidden') props.handleCartModal('show');
     else {
       props.handleCartModal('close');
       setTimeout(() => {
-        document.querySelector('.closeTop-animation').classList.add('hidden');
-        document
-          .querySelector('.closeTop-animation')
-          .classList.remove('closeTop-animation');
+        props.handleCartModal('hide');
       }, 750);
     }
   };

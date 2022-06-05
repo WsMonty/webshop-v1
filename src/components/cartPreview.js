@@ -53,10 +53,7 @@ const CartPreview = ({ props }) => {
   const closeCardHandler = () => {
     props.handleCartModal('close');
     setTimeout(() => {
-      document.querySelector('.closeTop-animation').classList.add('hidden');
-      document
-        .querySelector('.closeTop-animation')
-        .classList.remove('closeTop-animation');
+      props.handleCartModal('hide');
     }, 750);
   };
 

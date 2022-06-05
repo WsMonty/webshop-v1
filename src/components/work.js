@@ -4,6 +4,7 @@ import sortByDate from '../helpers/sortByDate.js';
 import { connect } from 'react-redux';
 import { addToCart, handleCartModal } from '../actions/index.js';
 import languages from '../languages/languages';
+import { SHIPPING_COST } from '../globalVariables';
 
 const Work = (props) => {
   const query = useStaticQuery(graphql`
@@ -77,6 +78,17 @@ const Work = (props) => {
     ).style.display = 'flex';
   };
 
+  const changePrice = (e) => {
+    const priceEl = e.target
+      .closest('.work_options')
+      .querySelector('.work_options_price');
+    const price = e.target.closest('.work_options').dataset.price;
+
+    e.target.value === 'Print'
+      ? (priceEl.textContent = +price + SHIPPING_COST + '€')
+      : (priceEl.textContent = price + '€');
+  };
+
   return (
     <div className="work_works">
       {sortedData.map((product, i) => {
@@ -132,6 +144,7 @@ const Work = (props) => {
               className="work_options"
               data-title={`${product.node.title}_work`}
               data-key={product.node.title}
+              data-price={product.node.price}
             >
               <button
                 className="work_options_leave-btn pill-btn-inverted"
@@ -152,13 +165,24 @@ const Work = (props) => {
                   value="Print"
                   name="options"
                   required
+                  onClick={changePrice}
                 />
                 <label htmlFor="print">Print</label>
                 <br />
-                <input type="radio" id="pdf" value="PDF" name="options" />
+                <input
+                  type="radio"
+                  id="pdf"
+                  value="PDF"
+                  name="options"
+                  onClick={changePrice}
+                />
                 <label htmlFor="print">PDF</label>
                 <br />
-                <button className="pill-btn-inverted" type="submit">
+                <p className="work_options_price">{product.node.price}€</p>
+                <button
+                  className="work_options_submit_btn pill-btn-inverted"
+                  type="submit"
+                >
                   {languages.addToCart[props.locale]}
                 </button>
               </form>
