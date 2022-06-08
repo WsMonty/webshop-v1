@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'gatsby';
 import { setLocale } from '../actions/index.js';
 import { connect } from 'react-redux';
-import { RiMenu5Fill } from 'react-icons/Ri';
+import { RiMenu5Fill } from 'react-icons/ri';
 
 const Navbar = (props) => {
   const localeChanger = (e) => {
