@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useStaticQuery, graphql, Link, navigate } from 'gatsby';
 import sortByDate from '../helpers/sortByDate.js';
+import createSearchCodes from '../helpers/createSearchCodes.js';
 import { connect } from 'react-redux';
 import { addToCart, handleCartModal } from '../actions/index.js';
 import languages from '../languages/languages';
@@ -28,6 +29,25 @@ const Work = (props) => {
   `);
   const data = query.allDatoCmsPost.edges;
   const sortedData = sortByDate(data);
+
+  const [works, setWorks] = useState(sortedData);
+
+  const searchBarHandler = (e) => {
+    e.preventDefault();
+
+    if (!Object.entries(sortedData)[0][1].node.searchCode)
+      createSearchCodes(sortedData);
+
+    const searchInput = document
+      .querySelector('.searchbar_input')
+      .value.toLowerCase();
+
+    const filteredWorks = sortedData.filter((work) =>
+      work.node.searchCode.includes(searchInput)
+    );
+
+    setWorks(filteredWorks);
+  };
 
   const composerClickHandler = (e) => {
     navigate(
@@ -91,7 +111,18 @@ const Work = (props) => {
 
   return (
     <div className="work_works">
-      {sortedData.map((product, i) => {
+      <div className="searchbar_container">
+        <form className="searchbar_form">
+          <input
+            className="searchbar_input"
+            type="text"
+            placeholder="🔍 Title, Composer,..."
+            required
+            onChange={(e) => searchBarHandler(e)}
+          />
+        </form>
+      </div>
+      {works.map((product, i) => {
         if (product.node.locale !== props.locale) return '';
         return (
           <div key={`work-${i}`} className="work_card_container">

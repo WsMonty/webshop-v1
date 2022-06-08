@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'gatsby';
 import { setLocale } from '../actions/index.js';
 import { connect } from 'react-redux';
+import { RiMenu5Fill } from 'react-icons/Ri';
 
 const Navbar = (props) => {
   const localeChanger = (e) => {
@@ -15,10 +16,27 @@ const Navbar = (props) => {
         link.firstChild.classList.remove('selected')
       );
     e.target.classList.add('selected');
+
+    if (
+      document.querySelector('.navbar').classList.contains('mobile_nav_active')
+    )
+      hamburgerHandler();
+  };
+
+  const hamburgerHandler = () => {
+    document.querySelector('.navbar').classList.toggle('mobile_nav_active');
+    setTimeout(() => {
+      document
+        .querySelector('.navbar_list')
+        .classList.toggle('mobile_list_active');
+    }, 600);
   };
 
   return (
     <div className="navbar">
+      <button className="navbar_hamburger_btn" onClick={hamburgerHandler}>
+        <RiMenu5Fill className="navbar_hamburger" />
+      </button>
       <ul className="navbar_list">
         {links.map((link, i) => {
           return (

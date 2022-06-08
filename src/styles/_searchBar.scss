@@ -1,0 +1,21 @@
+.searchbar {
+  &_container {
+    position: absolute;
+    top: 2em;
+    right: 12em;
+  }
+
+  &_input {
+    border-radius: 2em;
+    padding: 0.5em 1em;
+    border: none;
+    background-color: $accent-blue-very-light-color;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .searchbar_container {
+    right: 5em;
+    top: 1.25em;
+  }
+}
