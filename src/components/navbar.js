@@ -8,13 +8,26 @@ const Navbar = (props) => {
     props.setLocale(document.getElementById('nav_locales_select').value);
   };
 
+  const setSelected = (e) => {
+    e.target
+      .closest('.navbar_list')
+      .childNodes.forEach((link) =>
+        link.firstChild.classList.remove('selected')
+      );
+    e.target.classList.add('selected');
+  };
+
   return (
     <div className="navbar">
       <ul className="navbar_list">
         {links.map((link, i) => {
           return (
             <li className="link_list" key={`link_${i + 1}`}>
-              <Link className="link" to={`/${link.url}`}>
+              <Link
+                className="link"
+                to={`/${link.url}`}
+                onClick={(e) => setSelected(e)}
+              >
                 {link[`title-${props.locale}`]}
               </Link>
             </li>

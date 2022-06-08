@@ -1,26 +1,27 @@
 .cart {
   position: relative;
 
-  &-icon {
+  &_icon {
     font-size: 2em;
     color: $main-text-color;
 
-    &-container {
+    &_container {
       position: absolute;
       right: 0;
-      top: 1.75em;
+      top: 1em;
       padding: 1em;
     }
   }
 
-  &-btn {
+  &_btn {
     background: none;
     border: none;
     cursor: pointer;
   }
 
-  &-popup {
+  &_popup {
     min-height: 50vh;
+    height: fit-content;
     width: 40vw;
     background: white;
     border: 2px solid $main-text-color;
@@ -32,32 +33,36 @@
     z-index: 99;
   }
 
-  &-active {
+  &_active {
     display: block;
   }
 
-  &-number {
+  &_number {
     position: absolute;
     top: -10px;
     right: -12px;
     font-size: 1.5em;
     z-index: 2;
-    color: red;
+    color: $accent-blue-very-light-color;
   }
 }
 
-.cart-preview {
+.cart_preview {
   padding: 1em;
-  border-top: 2px solid $accent-text-color;
   display: flex;
   justify-content: space-between;
   position: relative;
 
-  &-content {
+  &_works {
+    max-height: 50vh;
+    overflow: auto;
+  }
+
+  &_content {
     line-height: 1.5em;
   }
 
-  &-title {
+  &_title {
     text-decoration: none;
     color: $main-text-color;
     font-size: 2em;
@@ -67,13 +72,13 @@
     }
   }
 
-  &-count-title {
+  &_count_title {
     display: flex;
     margin-bottom: 1em;
   }
 
-  &-footer {
-    border-top: 2px solid $accent-text-color;
+  &_footer {
+    // border-top: 2px solid $accent-text-color;
     display: flex;
     flex-direction: column;
 
@@ -81,11 +86,11 @@
       margin-top: 1em;
     }
   }
-  &-upper-title {
+  &_upper_title {
     margin-bottom: 1em;
   }
 
-  &-close-btn {
+  &_close_btn {
     background: transparent;
     color: $main-text-color;
     padding: 1em 2em;
@@ -103,7 +108,7 @@
     }
   }
 
-  &-payment-link {
+  &_payment_link {
     width: fit-content;
     text-decoration: none;
     align-self: center;
@@ -119,13 +124,20 @@
       border-color: $accent-text-color;
     }
   }
+
+  &_hr {
+    position: absolute;
+    width: 95%;
+    bottom: 0;
+    border: 1px solid $accent-text-color;
+  }
 }
 
-.expandTop-animation {
+.expandTop_animation {
   animation: expandTop 750ms ease-in-out forwards;
 }
 
-.closeTop-animation {
+.closeTop_animation {
   animation: closeTop 750ms ease-in-out forwards;
 }
 
@@ -136,7 +148,7 @@
     opacity: 0;
   }
   100% {
-    height: 100%;
+    height: fit-content;
     min-height: 50vh;
     opacity: 1;
   }
@@ -144,7 +156,7 @@
 
 @keyframes closeTop {
   0% {
-    height: 100%;
+    height: fit-content;
     min-height: 50vh;
     opacity: 1;
   }

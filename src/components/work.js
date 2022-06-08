@@ -61,7 +61,7 @@ const Work = (props) => {
     const options = document.querySelector(
       `[data-title="${e.target.closest('.work').dataset.title}_work"]`
     );
-    const expandEl = e.target.closest('.work_cards-container').childNodes[2];
+    const expandEl = e.target.closest('.work_card_container').childNodes[2];
 
     expandEl.classList.remove('hidden');
     setTimeout(() => {
@@ -94,7 +94,7 @@ const Work = (props) => {
       {sortedData.map((product, i) => {
         if (product.node.locale !== props.locale) return '';
         return (
-          <div key={`work-${i}`} className="work_cards-container">
+          <div key={`work-${i}`} className="work_card_container">
             <div
               key={`work_nr${i + 1}`}
               className="work"
@@ -132,7 +132,7 @@ const Work = (props) => {
                 <p className="work_price">{product.node.price}€</p>
 
                 <button
-                  className="addToCart-btn"
+                  className="addToCart_btn"
                   onClick={(e) => showOptionsHandler(e)}
                 >
                   {languages.addToCart[props.locale]}
@@ -147,7 +147,7 @@ const Work = (props) => {
               data-price={product.node.price}
             >
               <button
-                className="work_options_leave-btn pill-btn-inverted"
+                className="work_options_leave_btn pill_btn_inverted"
                 onClick={(e) => leaveOptionsHandler(e)}
               >
                 Go Back
@@ -180,7 +180,7 @@ const Work = (props) => {
                 <br />
                 <p className="work_options_price">{product.node.price}€</p>
                 <button
-                  className="work_options_submit_btn pill-btn-inverted"
+                  className="work_options_submit_btn pill_btn_inverted"
                   type="submit"
                 >
                   {languages.addToCart[props.locale]}

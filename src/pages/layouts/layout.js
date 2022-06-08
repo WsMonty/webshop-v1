@@ -25,7 +25,7 @@ const Layout = ({ children }) => {
       </Helmet>
       <div className="main">
         <Navbar />
-        <div className="cart-icon-container">
+        <div className="cart_icon_container">
           <ShoppingCart />
         </div>
         {children}

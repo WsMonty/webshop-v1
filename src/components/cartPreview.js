@@ -44,7 +44,7 @@ const CartPreview = ({ props }) => {
 
   const deleteFromCartHandler = (e) => {
     const work =
-      e.target.closest('.cart-preview').firstChild.firstChild.childNodes[1]
+      e.target.closest('.cart_preview').firstChild.firstChild.childNodes[1]
         .dataset.title;
 
     props.deleteFromCart(JSON.parse(work));
@@ -58,25 +58,26 @@ const CartPreview = ({ props }) => {
   };
 
   return (
-    <div className="cart-preview-container">
-      <div className="cart-preview-works">
-        <h2 className="cart-preview-upper-title">
-          {languages.shoppingCart[props.locale]}
-        </h2>
-        <button className="cart-preview-close-btn" onClick={closeCardHandler}>
-          {languages.close[props.locale]}
-        </button>
-        {Object.entries(props.cart).map((entry, i) => {
+    <div className="cart_preview_container">
+      <h2 className="cart_preview_upper_title">
+        {languages.shoppingCart[props.locale]}
+      </h2>
+      <button className="cart_preview_close_btn" onClick={closeCardHandler}>
+        {languages.close[props.locale]}
+      </button>
+      <hr />
+      <div className="cart_preview_works">
+        {Object.entries(props.cart).map((entry, i, arr) => {
           const work = entry[1];
           return (
-            <div key={i} className="cart-preview">
-              <div className="cart-preview-content">
-                <div className="cart-preview-count-title">
-                  <p className="payment_work-number">
+            <div key={i} className="cart_preview">
+              <div className="cart_preview_content">
+                <div className="cart_preview_count_title">
+                  <p className="payment_work_number">
                     {props.cart[entry[0]].counter + 'x'}
                   </p>
                   <Link
-                    className="cart-preview-title"
+                    className="cart_preview_title"
                     data-title={JSON.stringify(work)}
                     to={`/works/${work.title
                       .replaceAll(' ', '-')
@@ -86,7 +87,7 @@ const CartPreview = ({ props }) => {
                     {work.title}
                   </Link>
                 </div>
-                <p className="cart-preview-buy-option">
+                <p className="cart_preview_buy_option">
                   {props.cart[entry[0]].buyOption}
                 </p>
                 <p>
@@ -98,24 +99,26 @@ const CartPreview = ({ props }) => {
                 </p>
               </div>
               <button
-                className="cart-preview-close-work-btn pill-btn-accent"
+                className="cart_preview_close_work_btn pill_btn_accent"
                 onClick={(e) => deleteFromCartHandler(e)}
               >
                 {languages.deleteFromCart[props.locale]}
               </button>
+              {i !== arr.length - 1 ? <hr className="cart_preview_hr" /> : ''}
             </div>
           );
         })}
       </div>
-      <div className="cart-preview-footer">
-        <h3 className="cart-preview-footer-total">
+      {Object.entries(props.cart).length === 0 ? '' : <hr />}
+      <div className="cart_preview_footer">
+        <h3 className="cart_preview_footer_total">
           {Object.keys(props.cart).length > 0
             ? 'Total ' + getTotalPrice() + '€'
             : 'No items yet.'}
         </h3>
         {Object.keys(props.cart).length > 0 ? (
           <button
-            className="cart-preview-payment-link"
+            className="cart_preview_payment_link"
             onClick={toPaymentClickHandler}
           >
             {languages.proceedPayment[props.locale]}

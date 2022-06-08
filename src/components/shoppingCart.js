@@ -29,11 +29,11 @@ const ShoppingCart = (props) => {
 
   return (
     <div className="cart">
-      <button className="cart-btn" onClick={cartHandler}>
-        <FaShoppingCart className="cart-icon " />
+      <button className="cart_btn" onClick={cartHandler}>
+        <FaShoppingCart className="cart_icon " />
       </button>
-      <p className="cart-number">{cartLength()}</p>
-      <div className={`cart-popup ${props.cartModal}`}>
+      <p className="cart_number">{cartLength()}</p>
+      <div className={`cart_popup ${props.cartModal}`}>
         <CartPreview props={props} />
       </div>
     </div>

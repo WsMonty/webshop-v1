@@ -1,5 +1,5 @@
 .works {
-  margin: 1em;
+  margin: 2em 1.5em;
 }
 
 .work_works {
@@ -8,10 +8,10 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, 20em);
   justify-content: space-around;
+  align-content: start;
 }
 
-.work_container {
-  padding: 1em;
+.work_card_container {
   margin: 1em;
   width: 20rem;
   height: 20rem;
@@ -19,13 +19,11 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-
-  perspective: 600px;
 }
 
 .work {
-  width: 20rem * $product-size;
-  height: 20rem * $product-size;
+  width: 100%;
+  height: 100%;
 
   display: flex;
   flex-direction: column;
@@ -34,8 +32,7 @@
 
   transition: transform 200ms ease-out;
 
-  background-color: aliceblue;
-  margin: 0.2em;
+  background-color: $accent-blue-very-light-color;
   border-radius: 1em;
 
   &:hover {
@@ -46,8 +43,8 @@
   &_options {
     border-radius: 1em;
     display: none;
-    width: 20rem * $product-size;
-    height: 20rem * $product-size;
+    width: 100%;
+    height: 100%;
     background-color: $accent-text-color;
     justify-content: center;
     align-items: center;
@@ -61,7 +58,7 @@
     //   transition: transform 300ms ease-out;
     // }
 
-    &_leave-btn {
+    &_leave_btn {
       position: absolute;
       right: 1em;
       top: 1em;
@@ -72,8 +69,11 @@
     }
 
     &_submit_btn {
-      float: bottom;
-      width: 100%;
+      width: fit-content;
+      min-width: 50%;
+      position: absolute;
+      bottom: 1em;
+      right: 6em;
     }
   }
 
@@ -177,7 +177,7 @@
     padding: 2em;
   }
 
-  &_toCart-btn {
+  &_toCart_btn {
     margin-top: 2em;
     width: 10em;
   }
@@ -187,8 +187,9 @@
   font-size: 2em;
 }
 
-.addToCart-btn {
-  width: 50%;
+.addToCart_btn {
+  width: fit-content;
+  min-width: 50%;
   align-self: center;
   background-color: $accent-text-color;
   color: $main-text-color;

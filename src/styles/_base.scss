@@ -2,9 +2,10 @@ $product-size: 1;
 $main-text-color: rgb(58, 58, 58);
 // $accent-text-color: rgb(246, 189, 43);
 // $accent-text-color: #ff8d3d;
-$accent-blue-color: #007583;
-$accent-text-color: #51a9b8;
-$accent-blue-very-light-color: #befbff;
+$accent-blue-color: #1573cb;
+$accent-text-color: #d8a31a;
+$accent-blue-very-light-color: #a2daff;
+$white: #e2f1ff;
 
 * {
   margin: 0;
@@ -20,6 +21,8 @@ $accent-blue-very-light-color: #befbff;
 .main {
   height: 100%;
   width: 100%;
+
+  // background-color: $white;
 }
 
 body {

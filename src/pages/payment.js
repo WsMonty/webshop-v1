@@ -64,13 +64,13 @@ const Payment = (props) => {
           if (work !== 0)
             return (
               <div key={'work-nr' + i + 1} className="payment_work">
-                <div className="payment_work-content">
-                  <div className="payment_work-title">
-                    <p className="payment_work-number">
+                <div className="payment_work_content">
+                  <div className="payment_work_title">
+                    <p className="payment_work_number">
                       {props.cart[entry[0]].counter + 'x'}
                     </p>
                     <Link
-                      className="cart-preview-title"
+                      className="cart_preview_title"
                       data-title={JSON.stringify(work)}
                       to={`/works/${work.title
                         .replaceAll(' ', '-')
@@ -84,7 +84,7 @@ const Payment = (props) => {
                   <p>{findPrice(entry) * props.cart[entry[0]].counter + '€'}</p>
                 </div>
                 <button
-                  className="payment_work-delete-btn pill-btn-accent"
+                  className="payment_work_delete_btn pill_btn_accent"
                   onClick={(e) => deleteFromCartHandler(e)}
                 >
                   {languages.deleteFromCart[props.locale]}
@@ -93,7 +93,7 @@ const Payment = (props) => {
             );
           return '';
         })}
-        <h3 className="payment_total-price">
+        <h3 className="payment_total_price">
           {Object.keys(props.cart).length > 0
             ? 'Total: ' + getTotalPrice() + '€'
             : 'No items yet.'}
