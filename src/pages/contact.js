@@ -1,15 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import languages from '../languages/languages';
+import languages from '../languages/languages';
 
 const Contact = (props) => {
   return (
     <div className="contact_container">
-      <p className="contact_phrase">
-        If you have any questions or concerns that are not answered in the FAQs
-        <br />
-        please contact me directly. I'm happy to help!
-      </p>
+      <p className="contact_phrase">{languages.concerns[props.locale]}</p>
       <h1 className="contact_name">Gilles Grethen</h1>
       <a
         className="contact_information"

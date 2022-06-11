@@ -5,7 +5,7 @@ import createSearchCodes from '../helpers/createSearchCodes.js';
 import { connect } from 'react-redux';
 import { addToCart, handleCartModal } from '../actions/index.js';
 import languages from '../languages/languages';
-import { SHIPPING_COST } from '../globalVariables';
+// import { SHIPPING_COST } from '../globalVariables';
 
 const Work = (props) => {
   const query = useStaticQuery(graphql`
@@ -55,24 +55,61 @@ const Work = (props) => {
     );
   };
 
-  const addToCartClickHandler = (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const formValue = Object.fromEntries(formData).options;
-    const workTitle = e.target.closest('.work_options').dataset.title;
+  // const addToCartClickHandler = (e) => {
+  //   e.preventDefault();
+  //   const formData = new FormData(e.target);
+  //   const formValue = Object.fromEntries(formData).options;
+  //   const workTitle = e.target.closest('.work_options').dataset.title;
+  //   const work = {
+  //     title: workTitle.slice(0, workTitle.indexOf('_')),
+  //     options: formValue,
+  //   };
+
+  //   props.addToCart(work);
+  //   props.handleCartModal('show');
+  //   // e.target.closest('.addToCart_dialog').close();
+  //   e.target.closest('.work_options').style.display = 'none';
+
+  //   document.querySelector(
+  //     `[data-title="${workTitle.slice(0, workTitle.indexOf('_'))}"]`
+  //   ).style.display = 'flex';
+  // };
+
+  const addToCartClickHandlerNoShipping = (e) => {
+    const workOptionsEl = e.target.closest('.work_options');
+
+    const workTitle = workOptionsEl.dataset.key;
     const work = {
-      title: workTitle.slice(0, workTitle.indexOf('_')),
-      options: formValue,
+      title: workTitle,
     };
+    const currentWorkEl = document.querySelector(`[data-title="${workTitle}"]`);
 
-    props.addToCart(work);
-    props.handleCartModal('show');
-    // e.target.closest('.addToCart_dialog').close();
-    e.target.closest('.work_options').style.display = 'none';
+    if (Object.keys(props.cart).length === 0) {
+      props.addToCart(work);
+      props.handleCartModal('show');
+      workOptionsEl.style.display = 'none';
+      currentWorkEl.style.display = 'flex';
+    } else {
+      const checkIsAlreadyInCart = Object.keys(props.cart).some((work) =>
+        work.includes(workTitle)
+      );
 
-    document.querySelector(
-      `[data-title="${workTitle.slice(0, workTitle.indexOf('_'))}"]`
-    ).style.display = 'flex';
+      if (checkIsAlreadyInCart) {
+        const alreadyInCartEl =
+          e.target.closest('.work_options').nextSibling.nextSibling;
+        workOptionsEl.style.display = 'none';
+        alreadyInCartEl.style.display = 'flex';
+        setTimeout(() => {
+          alreadyInCartEl.style.display = 'none';
+          currentWorkEl.style.display = 'flex';
+        }, 1500);
+      } else {
+        props.addToCart(work);
+        props.handleCartModal('show');
+        workOptionsEl.style.display = 'none';
+        currentWorkEl.style.display = 'flex';
+      }
+    }
   };
 
   const showOptionsHandler = (e) => {
@@ -98,16 +135,16 @@ const Work = (props) => {
     ).style.display = 'flex';
   };
 
-  const changePrice = (e) => {
-    const priceEl = e.target
-      .closest('.work_options')
-      .querySelector('.work_options_price');
-    const price = e.target.closest('.work_options').dataset.price;
+  // const changePrice = (e) => {
+  //   const priceEl = e.target
+  //     .closest('.work_options')
+  //     .querySelector('.work_options_price');
+  //   const price = e.target.closest('.work_options').dataset.price;
 
-    e.target.value === 'Print'
-      ? (priceEl.textContent = +price + SHIPPING_COST + '€')
-      : (priceEl.textContent = price + '€');
-  };
+  //   e.target.value === 'Print'
+  //     ? (priceEl.textContent = +price + SHIPPING_COST + '€')
+  //     : (priceEl.textContent = price + '€');
+  // };
 
   return (
     <div className="work_works">
@@ -166,7 +203,7 @@ const Work = (props) => {
                   className="addToCart_btn"
                   onClick={(e) => showOptionsHandler(e)}
                 >
-                  {languages.addToCart[props.locale]}
+                  {languages.moreInformation[props.locale]}
                 </button>
               </div>
             </div>
@@ -181,9 +218,11 @@ const Work = (props) => {
                 className="work_options_leave_btn pill_btn_inverted"
                 onClick={(e) => leaveOptionsHandler(e)}
               >
-                Go Back
+                {languages.goBack[props.locale]}
               </button>
-              <form
+
+              {/* In Case of Shipping!!! */}
+              {/* <form
                 className="addToCart_dialog_form"
                 onSubmit={(e) => addToCartClickHandler(e)}
               >
@@ -216,9 +255,18 @@ const Work = (props) => {
                 >
                   {languages.addToCart[props.locale]}
                 </button>
-              </form>
+              </form> */}
+              <button
+                className="work_options_submit_btn pill_btn_inverted"
+                onClick={(e) => addToCartClickHandlerNoShipping(e)}
+              >
+                {languages.addToCart[props.locale]}
+              </button>
             </div>
             <div className="work_expand_animation hidden"></div>
+            <div className="work_alreadyInCart">
+              <p>This is already in your shopping cart 😀</p>
+            </div>
           </div>
         );
       })}

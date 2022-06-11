@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import languages from '../languages/languages';
+import FAQs from '../languages/FAQs';
 import { FaPlus } from 'react-icons/fa';
 
 const About = (props) => {
@@ -15,48 +15,36 @@ const About = (props) => {
       <h1>FAQs</h1>
       <section className="FAQ">
         <div className="FAQ_container">
-          <h2 className="FAQ_question">How long will the shipping take?</h2>
+          <h2 className="FAQ_question">{FAQs.Q1[props.locale]}</h2>
           <button
             className="FAQ_reveal_btn"
             onClick={(e) => revealAnswerHandler(e)}
           >
             <FaPlus />
           </button>
-          <p className="FAQ_answer hidden">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos
-            corrupti minus laudantium ex culpa delectus ut ratione libero error
-            a.
-          </p>
+          <p className="FAQ_answer hidden">{FAQs.A1[props.locale]}</p>
         </div>
         <hr className="FAQ_line"></hr>
         <div className="FAQ_container">
-          <h2 className="FAQ_question">How long will the shipping take?</h2>
+          <h2 className="FAQ_question">{FAQs.Q2[props.locale]}</h2>
           <button
             className="FAQ_reveal_btn"
             onClick={(e) => revealAnswerHandler(e)}
           >
             <FaPlus />
           </button>
-          <p className="FAQ_answer hidden">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos
-            corrupti minus laudantium ex culpa delectus ut ratione libero error
-            a.
-          </p>
+          <p className="FAQ_answer hidden">{FAQs.A2[props.locale]}</p>
         </div>
         <hr className="FAQ_line"></hr>
         <div className="FAQ_container">
-          <h2 className="FAQ_question">How long will the shipping take?</h2>
+          <h2 className="FAQ_question">{FAQs.Q3[props.locale]}</h2>
           <button
             className="FAQ_reveal_btn"
             onClick={(e) => revealAnswerHandler(e)}
           >
             <FaPlus />
           </button>
-          <p className="FAQ_answer hidden">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos
-            corrupti minus laudantium ex culpa delectus ut ratione libero error
-            a.
-          </p>
+          <p className="FAQ_answer hidden">{FAQs.A3[props.locale]}</p>
         </div>
         <hr className="FAQ_line"></hr>
       </section>

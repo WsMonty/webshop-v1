@@ -38,6 +38,13 @@
   &:hover {
     transform: scale(1.2);
     transition: transform 300ms ease-out;
+
+    .addToCart_btn {
+      opacity: 1;
+      pointer-events: all;
+
+      transition: 300ms ease-in-out;
+    }
   }
 
   &_options {
@@ -130,6 +137,18 @@
     flex-direction: column;
     margin: 0 1em 1em 1em;
   }
+
+  &_alreadyInCart {
+    border-radius: 1em;
+    width: 100%;
+    height: 100%;
+    background-color: $accent-text-color;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+  }
 }
 
 .work_page {
@@ -188,6 +207,11 @@
 }
 
 .addToCart_btn {
+  opacity: 0;
+  pointer-events: none;
+
+  transition: 300ms ease-in-out;
+
   width: fit-content;
   min-width: 50%;
   align-self: center;
