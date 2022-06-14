@@ -121,6 +121,22 @@
     span {
       font-size: 1.2em;
       color: $accent-text-color;
+
+      transition: 200ms ease-in-out;
+
+      &:hover {
+        color: $accent-blue-color;
+      }
+    }
+  }
+
+  &_composer_nolink {
+    margin-bottom: 1.5em;
+    font-size: 0.75em;
+
+    span {
+      font-size: 1.2em;
+      color: $accent-text-color;
     }
   }
 
@@ -215,8 +231,8 @@
   width: fit-content;
   min-width: 50%;
   align-self: center;
-  background-color: $accent-text-color;
-  color: $main-text-color;
+  background-color: $main-text-color;
+  color: $accent-text-color;
   border-radius: 2em;
   border: none;
   padding: 0.5em;
@@ -224,8 +240,8 @@
   cursor: pointer;
 
   &:hover {
-    background-color: $main-text-color;
-    color: $accent-text-color;
+    background-color: $accent-blue-color;
+    color: $main-text-color;
   }
 }
 
@@ -278,5 +294,21 @@
   }
   100% {
     width: 100%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .work_works {
+    height: 100%;
+    justify-content: space-between;
+  }
+
+  .work:hover {
+    transform: none;
+    transition: none;
+  }
+
+  .addToCart_btn {
+    opacity: 1;
   }
 }

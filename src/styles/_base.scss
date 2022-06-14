@@ -3,8 +3,10 @@ $main-text-color: rgb(58, 58, 58);
 // $accent-text-color: rgb(246, 189, 43);
 // $accent-text-color: #ff8d3d;
 $accent-blue-color: #1573cb;
-$accent-text-color: #d8a31a;
-$accent-blue-very-light-color: #a2daff;
+// $accent-text-color: #d8a31a;
+// $accent-text-color: #e97827;
+$accent-text-color: #fb7b04;
+$accent-blue-very-light-color: #e6f8ff;
 $white: #e2f1ff;
 
 * {
@@ -21,6 +23,8 @@ $white: #e2f1ff;
 .main {
   height: 100%;
   width: 100%;
+
+  overflow-x: hidden;
 
   // background-color: $white;
 }

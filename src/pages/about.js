@@ -5,6 +5,9 @@ import { FaPlus } from 'react-icons/fa';
 
 const About = (props) => {
   const revealAnswerHandler = (e) => {
+    document
+      .querySelectorAll('.FAQ_answer')
+      .forEach((answer) => answer.classList.add('hidden'));
     const answer = e.target.closest('.FAQ_container').childNodes[2];
 
     answer.classList.toggle('hidden');

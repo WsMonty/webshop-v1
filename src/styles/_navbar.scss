@@ -34,6 +34,10 @@
   color: $main-text-color;
 }
 
+.navbar_active {
+  height: 10em;
+}
+
 .locales_list {
   list-style: none;
   display: flex;

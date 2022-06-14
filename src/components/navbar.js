@@ -5,10 +5,12 @@ import { connect } from 'react-redux';
 import { RiMenu5Fill } from 'react-icons/ri';
 
 const Navbar = (props) => {
+  // Change language on site
   const localeChanger = (e) => {
     props.setLocale(document.getElementById('nav_locales_select').value);
   };
 
+  // Change color of selected link and start animation on mobile
   const setSelected = (e) => {
     e.target
       .closest('.navbar_list')
@@ -23,6 +25,7 @@ const Navbar = (props) => {
       hamburgerHandler();
   };
 
+  // Mobile navbar menu
   const hamburgerHandler = () => {
     document.querySelector('.navbar').classList.toggle('mobile_nav_active');
     setTimeout(() => {
@@ -72,6 +75,8 @@ const Navbar = (props) => {
           </option>
         </select>
       </div>
+
+      {/* List of flags in navbar instead of dropdown menu */}
       {/* <ul className="locales_list">
         {locales.map((l) => {
           return (
@@ -93,10 +98,10 @@ const Navbar = (props) => {
 
 const links = [
   {
-    'title-en': 'Works',
-    'title-de': 'Werke',
-    'title-de-LU': 'Wierker',
-    'title-fr': 'Oeuvres',
+    'title-en': 'All Works',
+    'title-de': 'Alle Werke',
+    'title-de-LU': 'All Wierker',
+    'title-fr': 'Toutes les oeuvres',
     url: 'works',
   },
   {
