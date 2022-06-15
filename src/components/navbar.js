@@ -1,4 +1,5 @@
 import React from 'react';
+import ShoppingCart from './shoppingCart.js';
 import { Link } from 'gatsby';
 import { setLocale } from '../actions/index.js';
 import { connect } from 'react-redux';
@@ -25,6 +26,14 @@ const Navbar = (props) => {
       hamburgerHandler();
   };
 
+  const deSelect = (e) => {
+    e.target
+      .closest('.navbar_list')
+      .childNodes.forEach((link) =>
+        link.firstChild.classList.remove('selected')
+      );
+  };
+
   // Mobile navbar menu
   const hamburgerHandler = () => {
     document.querySelector('.navbar').classList.toggle('mobile_nav_active');
@@ -35,12 +44,79 @@ const Navbar = (props) => {
     }, 600);
   };
 
+  // Handle Works Options (Categories, Composers...)
+  const showWorksOptions = (e) => {
+    setSelected(e);
+    document.querySelector('.navbar_works_options').style.height = '10em';
+    setTimeout(() => {
+      document
+        .querySelector('.navbar_works_options_list')
+        .classList.remove('hidden');
+    }, 350);
+  };
+
+  const closeWorksOptions = (e) => {
+    deSelect(e);
+    document.querySelector('.navbar_works_options').style.height = '0';
+
+    document
+      .querySelector('.navbar_works_options_list')
+      .classList.add('hidden');
+  };
+
   return (
     <div className="navbar">
       <button className="navbar_hamburger_btn" onClick={hamburgerHandler}>
         <RiMenu5Fill className="navbar_hamburger" />
       </button>
       <ul className="navbar_list">
+        <li className="link_list">
+          <button
+            className="link navbar_works_link"
+            onClick={(e) => {
+              document
+                .querySelector('.navbar_works_options_list')
+                .classList.contains('hidden')
+                ? showWorksOptions(e)
+                : closeWorksOptions(e);
+            }}
+          >
+            {allWorks[props.locale]}
+          </button>
+          <div className="navbar_works_options">
+            <ul className="navbar_works_options_list hidden">
+              <li className="navbar_works_options_link">
+                <Link
+                  className="navbar_works_options_link"
+                  to="/works"
+                  onClick={(e) => {
+                    closeWorksOptions(e);
+                  }}
+                >
+                  Show all Works
+                </Link>
+              </li>
+              <li className="navbar_works_options_link">
+                <Link
+                  className="navbar_works_options_link"
+                  to="/works/categories"
+                  onClick={(e) => closeWorksOptions(e)}
+                >
+                  Categories
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className="navbar_works_options_link"
+                  to="/composers"
+                  onClick={(e) => closeWorksOptions(e)}
+                >
+                  Composers
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </li>
         {links.map((link, i) => {
           return (
             <li className="link_list" key={`link_${i + 1}`}>
@@ -92,25 +168,21 @@ const Navbar = (props) => {
           );
         })}
       </ul> */}
+      <div className="cart_icon_container">
+        <ShoppingCart />
+      </div>
     </div>
   );
 };
 
 const links = [
-  {
-    'title-en': 'All Works',
-    'title-de': 'Alle Werke',
-    'title-de-LU': 'All Wierker',
-    'title-fr': 'Toutes les oeuvres',
-    url: 'works',
-  },
-  {
-    'title-en': 'Composers',
-    'title-de': 'Komponisten',
-    'title-de-LU': 'Komponisten',
-    'title-fr': 'Componistes',
-    url: 'composers',
-  },
+  // {
+  //   'title-en': 'Composers',
+  //   'title-de': 'Komponisten',
+  //   'title-de-LU': 'Komponisten',
+  //   'title-fr': 'Componistes',
+  //   url: 'composers',
+  // },
   {
     'title-en': 'About',
     'title-de': 'Über',
@@ -126,6 +198,14 @@ const links = [
     url: 'contact',
   },
 ];
+
+const allWorks = {
+  en: 'Works',
+  de: 'Werke',
+  'de-LU': 'Wierker',
+  fr: 'Oeuvres',
+  url: 'works',
+};
 
 const locales = [
   { text: '🇬🇧', loc: 'en' },

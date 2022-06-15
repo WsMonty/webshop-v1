@@ -1,6 +1,5 @@
 import React from 'react';
 import Navbar from '../../components/navbar.js';
-import ShoppingCart from '../../components/shoppingCart.js';
 import '../../styles/main.scss';
 import { Helmet } from 'react-helmet';
 import { graphql, useStaticQuery } from 'gatsby';
@@ -25,9 +24,6 @@ const Layout = ({ children }) => {
       </Helmet>
       <div className="main">
         <Navbar />
-        <div className="cart_icon_container">
-          <ShoppingCart />
-        </div>
         {children}
       </div>
     </div>

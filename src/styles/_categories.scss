@@ -1,0 +1,54 @@
+.categories {
+  margin-top: 2em;
+
+  &_title {
+    &_container {
+      margin-left: 1em;
+      display: flex;
+    }
+  }
+  &_container {
+    margin: 2em;
+    margin: 0 0 2em 1em;
+    position: relative;
+  }
+
+  &_works {
+    display: flex;
+    flex-wrap: wrap;
+
+    height: 0;
+    opacity: 0;
+    pointer-events: none;
+
+    &_active {
+      height: fit-content;
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    &_btn {
+      background: none;
+      padding: 0.4em 0.8em;
+      border: 1px $accent-text-color solid;
+      border-radius: 1em;
+      font-size: 1.2em;
+      margin-left: 2em;
+
+      transition: 150ms ease-in-out;
+
+      &:hover {
+        background: $main-text-color;
+        color: $accent-text-color;
+
+        transition: 150ms ease-in-out;
+      }
+    }
+  }
+
+  hr {
+    height: 0;
+    border: 1px solid $accent-text-color;
+    margin-top: 1.2em;
+  }
+}

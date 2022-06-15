@@ -20,6 +20,39 @@
   }
 }
 
+.navbar_works {
+  &_link {
+    border: none;
+    background: none;
+  }
+
+  &_options {
+    position: absolute;
+    left: 0;
+    top: 5em;
+    z-index: 99;
+
+    height: 0;
+    width: 100vw;
+    background-color: $accent-blue-color;
+    color: white;
+
+    transition: 500ms ease-in-out;
+
+    &_list {
+      list-style: none;
+      position: absolute;
+      left: 28em;
+      line-height: 2em;
+    }
+
+    &_link {
+      color: white;
+      text-decoration: none;
+    }
+  }
+}
+
 .link {
   text-decoration: none;
   font-size: 1.5em;
