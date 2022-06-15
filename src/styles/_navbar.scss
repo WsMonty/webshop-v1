@@ -115,6 +115,17 @@
       line-height: 3em;
       text-align: center;
     }
+
+    &_works {
+      &_options {
+        position: static;
+        width: 100%;
+
+        &_list {
+          position: static;
+        }
+      }
+    }
   }
 
   .link {
@@ -126,7 +137,7 @@
   }
 
   .mobile_nav_active {
-    height: 100%;
+    height: 110%;
 
     transition: 1s ease-in-out;
   }

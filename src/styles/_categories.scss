@@ -2,9 +2,14 @@
   margin-top: 2em;
 
   &_title {
+    padding: 1em;
     &_container {
-      margin-left: 1em;
       display: flex;
+      justify-content: flex-start;
+    }
+
+    &_arrow {
+      margin-left: 1em;
     }
   }
   &_container {
@@ -29,20 +34,8 @@
 
     &_btn {
       background: none;
-      padding: 0.4em 0.8em;
-      border: 1px $accent-text-color solid;
+      border: none;
       border-radius: 1em;
-      font-size: 1.2em;
-      margin-left: 2em;
-
-      transition: 150ms ease-in-out;
-
-      &:hover {
-        background: $main-text-color;
-        color: $accent-text-color;
-
-        transition: 150ms ease-in-out;
-      }
     }
   }
 

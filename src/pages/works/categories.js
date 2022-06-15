@@ -3,7 +3,7 @@ import { useStaticQuery, graphql } from 'gatsby';
 import SingleWork from '../../components/singleWork';
 import { addToCart, handleCartModal } from '../../actions';
 import { connect } from 'react-redux';
-import { FaPlus } from 'react-icons/fa';
+import { HiOutlineChevronDoubleDown } from 'react-icons/hi';
 
 const Categories = (props) => {
   const query = useStaticQuery(graphql`
@@ -43,12 +43,12 @@ const Categories = (props) => {
   ].sort();
 
   const showWorks = (e) => {
+    // Closing all the tabs
     document
       .querySelectorAll('.categories_works')
       .forEach((el) => el.classList.remove('categories_works_active'));
 
     const workEl = e.target.closest('.categories_title_container').nextSibling;
-
     if (workEl.dataset.active === 'true') {
       workEl.classList.remove('categories_works_active');
       workEl.dataset.active = 'false';
@@ -67,17 +67,24 @@ const Categories = (props) => {
         return (
           <div className="categories_container" key={`category${i}`}>
             <div className="categories_title_container">
-              <h1 className="categories_title" key={i}>
-                {cat}
-              </h1>
               <button
                 className="categories_works_btn"
                 onClick={(e) => showWorks(e)}
               >
-                <FaPlus />
+                <h1 className="categories_title" key={i}>
+                  {cat}
+                  <HiOutlineChevronDoubleDown className="categories_title_arrow" />
+                </h1>
               </button>
             </div>
-            <div className="categories_works" data-active="false">
+            <div
+              className={
+                i === 0
+                  ? 'categories_works categories_works_active'
+                  : 'categories_works'
+              }
+              data-active={i === 0 ? 'true' : 'false'}
+            >
               {data.map((work, i) => {
                 if (
                   work.node.descriptionTextShort === cat &&

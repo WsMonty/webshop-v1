@@ -21,7 +21,10 @@ const Navbar = (props) => {
     e.target.classList.add('selected');
 
     if (
-      document.querySelector('.navbar').classList.contains('mobile_nav_active')
+      document
+        .querySelector('.navbar')
+        .classList.contains('mobile_nav_active') &&
+      e.target.textContent !== 'Works'
     )
       hamburgerHandler();
   };
@@ -62,6 +65,7 @@ const Navbar = (props) => {
     document
       .querySelector('.navbar_works_options_list')
       .classList.add('hidden');
+    hamburgerHandler();
   };
 
   return (
@@ -100,7 +104,9 @@ const Navbar = (props) => {
                 <Link
                   className="navbar_works_options_link"
                   to="/works/categories"
-                  onClick={(e) => closeWorksOptions(e)}
+                  onClick={(e) => {
+                    closeWorksOptions(e);
+                  }}
                 >
                   Categories
                 </Link>
