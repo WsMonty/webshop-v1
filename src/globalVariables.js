@@ -1,1 +1,1 @@
-export const SHIPPING_COST = 20.85;
+export const SHIPPING_COST = 0;

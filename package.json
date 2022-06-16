@@ -17,6 +17,7 @@
   "dependencies": {
     "@paypal/react-paypal-js": "^7.6.0",
     "@reduxjs/toolkit": "^1.8.1",
+    "emailjs-com": "^3.2.0",
     "gatsby": "^4.10.3",
     "gatsby-image": "^3.11.0",
     "gatsby-link": "^4.10.1",
@@ -31,6 +32,7 @@
     "gatsby-react-router-scroll": "^5.10.0",
     "gatsby-source-datocms": "^3.0.17",
     "gatsby-transformer-sharp": "^4.10.0",
+    "graphql": "^15.8.0",
     "node-sass": "^7.0.1",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",

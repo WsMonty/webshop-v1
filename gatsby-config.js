@@ -13,12 +13,12 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-google-fonts',
       options: {
-        fonts: ['Roboto'],
+        fonts: ['Catamaran'],
       },
     },
     'gatsby-plugin-sass',
     'gatsby-plugin-image',
-    'gatsby-transformer-sharp',
+
     'gatsby-plugin-sharp',
     'gatsby-plugin-gatsby-cloud',
     'gatsby-plugin-react-helmet',

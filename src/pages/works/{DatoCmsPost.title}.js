@@ -20,30 +20,43 @@ const WorkPage = (props) => {
 
   const [data] = rightWork();
 
-  const showOptionsHandler = () => {
-    const dialog = document.querySelector('.work_page_dialog');
-    if (dialog.style.display === '') dialog.style.display = 'none';
-    dialog.style.display === 'none'
-      ? (dialog.style.display = 'block')
-      : (dialog.style.display = 'none');
+  const isInCart = () => {
+    const checkIfInCart = Object.keys(props.cart).some((work) =>
+      work.includes(data.title)
+    );
+
+    return checkIfInCart;
   };
 
-  const addToCartHandler = (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const formValue = Object.fromEntries(formData).options;
-    const workTitle = e.target.closest('.work_page_addToCart')
-      .previousElementSibling.firstChild.textContent;
-    const work = {
-      title: workTitle,
-      options: formValue,
-    };
-
+  const addToCartHandler = () => {
+    const work = { title: data.title };
     props.addToCart(work);
-    props.handleCartModal('show');
-    // e.target.closest('.addToCart_dialog').close();
-    e.target.closest('.work_page_dialog').style.display = 'none';
   };
+
+  // const showOptionsHandler = () => {
+  //   const dialog = document.querySelector('.work_page_dialog');
+  //   if (dialog.style.display === '') dialog.style.display = 'none';
+  //   dialog.style.display === 'none'
+  //     ? (dialog.style.display = 'block')
+  //     : (dialog.style.display = 'none');
+  // };
+
+  // const addToCartHandler = (e) => {
+  //   e.preventDefault();
+  //   const formData = new FormData(e.target);
+  //   const formValue = Object.fromEntries(formData).options;
+  //   const workTitle = e.target.closest('.work_page_addToCart')
+  //     .previousElementSibling.firstChild.textContent;
+  //   const work = {
+  //     title: workTitle,
+  //     options: formValue,
+  //   };
+
+  //   props.addToCart(work);
+  //   props.handleCartModal('show');
+  //   // e.target.closest('.addToCart_dialog').close();
+  //   e.target.closest('.work_page_dialog').style.display = 'none';
+  // };
 
   return (
     <div className="work_page">
@@ -62,14 +75,16 @@ const WorkPage = (props) => {
         </div>
 
         <div className="work_page_addToCart">
-          <button
-            className="addToCart-btn"
-            onClick={(e) => showOptionsHandler(e)}
-          >
-            {languages.addToCart[props.locale]}
-          </button>
+          {isInCart() ? (
+            <p className="work_page_isCartInfo">Is already in cart</p>
+          ) : (
+            <button className="addToCart_work_btn" onClick={addToCartHandler}>
+              {languages.addToCart[props.locale]}
+            </button>
+          )}
+
           <div className="work_page_dialog">
-            <form
+            {/* <form
               className="work_page_form"
               onSubmit={(e) => addToCartHandler(e)}
             >
@@ -91,7 +106,7 @@ const WorkPage = (props) => {
               >
                 {languages.addToCart[props.locale]}
               </button>
-            </form>
+            </form> */}
           </div>
         </div>
       </div>

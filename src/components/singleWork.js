@@ -5,9 +5,11 @@ import { Link, navigate } from 'gatsby';
 const SingleWork = ({ props, product, query, i }) => {
   // Go to composer's site
   const composerClickHandler = (e) => {
-    navigate(
-      `/composers/${e.target.textContent.toLowerCase().replace(' ', '-')}`
-    );
+    const composerUrl = e.target
+      .closest('.work_composer_moreInfo')
+      .dataset.composer.toLowerCase()
+      .replace(' ', '-');
+    navigate(`/composers/${composerUrl}`);
   };
 
   // Add work to cart when only PDFs are sold
@@ -73,6 +75,14 @@ const SingleWork = ({ props, product, query, i }) => {
     ).style.display = 'flex';
   };
 
+  const isInCart = () => {
+    const checkIfInCart = Object.keys(props.cart).some((work) =>
+      work.includes(product.node.title)
+    );
+
+    return checkIfInCart;
+  };
+
   ///////////// Only needed if printing and shipping scores as well
   // const addToCartClickHandler = (e) => {
   //   e.preventDefault();
@@ -129,33 +139,25 @@ const SingleWork = ({ props, product, query, i }) => {
         <div className="work_content_container">
           <h2 className="work_title">{product.node.title}</h2>
 
+          <p className="work_composer">
+            <span>{product.node.composer}</span>
+          </p>
           {query.allDatoCmsComposer.edges
             .map((comp) => comp.node.name)
             .indexOf(product.node.composer) >= 0 ? (
             <button
-              className="work_composer"
+              className="work_composer_moreInfo"
+              data-composer={product.node.composer}
               onClick={(e) => composerClickHandler(e)}
             >
               {' '}
-              <span>{product.node.composer}</span>{' '}
+              <span>more info on this composer</span>{' '}
             </button>
           ) : (
-            <p className="work_composer_nolink">
-              <span>{product.node.composer}</span>
-            </p>
+            ''
           )}
 
-          {/* <button
-                  className="work_composer"
-                  onClick={(e) => composerClickHandler(e)}
-                >
-                  <span>{product.node.composer}</span>
-                </button> */}
-          <button className="work_category">
-            <p className="work_description_short">
-              {product.node.descriptionTextShort}s
-            </p>
-          </button>
+          <p className="work_category">{product.node.descriptionTextShort}</p>
         </div>
         <div className="work_price_btn_container">
           <p className="work_price">{product.node.price}€</p>
@@ -223,12 +225,16 @@ const SingleWork = ({ props, product, query, i }) => {
                 </button>
               </form> */}
 
-        <button
-          className="work_options_submit_btn pill_btn_inverted"
-          onClick={(e) => addToCartClickHandlerNoShipping(e)}
-        >
-          {languages.addToCart[props.locale]}
-        </button>
+        {isInCart() ? (
+          <p className="work_options_isCartInfo">Is already in cart</p>
+        ) : (
+          <button
+            className="work_options_submit_btn pill_btn_inverted"
+            onClick={(e) => addToCartClickHandlerNoShipping(e)}
+          >
+            {languages.addToCart[props.locale]}
+          </button>
+        )}
       </div>
       <div className="work_expand_animation hidden"></div>
       <div className="work_alreadyInCart">

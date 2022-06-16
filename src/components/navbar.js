@@ -88,6 +88,7 @@ const Navbar = (props) => {
             {allWorks[props.locale]}
           </button>
           <div className="navbar_works_options">
+            <div></div>
             <ul className="navbar_works_options_list hidden">
               <li className="navbar_works_options_link">
                 <Link

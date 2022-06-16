@@ -12,6 +12,10 @@ export const addToCart = (work) => {
   };
 };
 
+export const emptyCart = () => {
+  return { type: 'emptyCart' };
+};
+
 export const addFromLocaleStorage = (localStorage) => {
   return {
     type: 'addFromLocaleStorage',

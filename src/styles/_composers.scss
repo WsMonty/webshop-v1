@@ -21,5 +21,15 @@
 }
 
 .composer_page {
-  display: flex;
+  margin: 1em 1em 1em 2em;
+  &_bio {
+    width: 50%;
+  }
+
+  &_website {
+    &_link {
+      color: $accent-text-color;
+      font-weight: 500;
+    }
+  }
 }
