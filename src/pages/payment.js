@@ -90,6 +90,26 @@ const Payment = (props) => {
       );
   };
 
+  const emailCheck = () => {
+    if (document.querySelector('.payment_form_email_input').value === '')
+      return 'no email';
+    else {
+      return validateEmail(
+        document.querySelector('.payment_form_email_input').value
+      )
+        ? 'validation'
+        : 'email false';
+    }
+  };
+
+  const validateEmail = (email) => {
+    return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+  };
+
   return (
     <div className="payment">
       <h1 className="payment_title">{languages.shoppingCart[props.locale]}</h1>
@@ -134,50 +154,64 @@ const Payment = (props) => {
             : 'No items yet.'}
         </h3>
       </div>
-      <form className="payment_form" onSubmit={(e) => emailFormSubmit(e)}>
-        <label htmlFor="email">Your email (to get your PDFs!</label>
-        <input
-          className="payment_form_email_input"
-          id="email"
-          name="email"
-          type="email"
-          placeholder="your email"
-          required
-        ></input>
-        <button type="submit">Submit</button>
-      </form>
+      <div className="payment_container">
+        <form className="payment_form" onSubmit={(e) => emailFormSubmit(e)}>
+          <label className="payment_form_email_input_label" htmlFor="email">
+            1. Your email to get your PDFs!
+          </label>
+          <br />
+          <input
+            className="payment_form_email_input"
+            id="email"
+            name="email"
+            type="email"
+            placeholder="your email"
+            required
+          ></input>
+          {/* <button type="submit">Submit</button> */}
+        </form>
 
-      <PayPalScriptProvider
-        options={{
-          'client-id':
-            'AZSSY3UljJBk9qQrc7QpMYmmLn2e2necjjf0580S4D8BKz0c9uVWLyRvrqYi4Lh8ga1ddtcbkNO69IZ7',
-          // 'AZuOJhphk2lqHP76TcBJzx9pernNN8M0ZphLh8u04xv8HCLCF-KzP-FKie_mLKYAdLf3N-59ZqRzgQWq',
-          currency: 'EUR',
-        }}
-      >
-        <PayPalButtons
-          className="paypal_btn hidden"
-          style={{ color: 'black' }}
-          createOrder={(_, actions) => {
-            return actions.order.create({
-              purchase_units: [
-                {
-                  amount: {
-                    value: getTotalPrice(),
-                  },
-                },
-              ],
-            });
+        <p className="paypal_btn_label">2. Choose your payment method!</p>
+        <PayPalScriptProvider
+          options={{
+            'client-id':
+              'AZSSY3UljJBk9qQrc7QpMYmmLn2e2necjjf0580S4D8BKz0c9uVWLyRvrqYi4Lh8ga1ddtcbkNO69IZ7',
+            // 'AZuOJhphk2lqHP76TcBJzx9pernNN8M0ZphLh8u04xv8HCLCF-KzP-FKie_mLKYAdLf3N-59ZqRzgQWq',
+            currency: 'EUR',
           }}
-          onApprove={(_, actions) => {
-            return actions.order.capture().then((details) => {
-              const name = details.payer.name.given_name;
-              props.emptyCart();
-              sentClientEmail(name);
-            });
-          }}
-        />
-      </PayPalScriptProvider>
+        >
+          <PayPalButtons
+            className="paypal_btn"
+            style={{ color: 'black' }}
+            createOrder={(_, actions) => {
+              if (emailCheck() === 'validation') {
+                return actions.order.create({
+                  purchase_units: [
+                    {
+                      amount: {
+                        value: getTotalPrice(),
+                      },
+                    },
+                  ],
+                });
+              }
+              if (emailCheck() === 'email false')
+                alert('The email you entered is not valid!');
+              if (emailCheck() === 'no email')
+                alert(
+                  'You have to enter your email in order to get your PDFs!'
+                );
+            }}
+            onApprove={(_, actions) => {
+              return actions.order.capture().then((details) => {
+                const name = details.payer.name.given_name;
+                props.emptyCart();
+                sentClientEmail(name);
+              });
+            }}
+          />
+        </PayPalScriptProvider>
+      </div>
     </div>
   );
 };

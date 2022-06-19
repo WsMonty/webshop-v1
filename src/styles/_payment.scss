@@ -27,4 +27,26 @@
     padding: 1em;
     font-size: 2em;
   }
+
+  &_form {
+    &_email_input {
+      font-size: 1.25em;
+      margin-bottom: 2em;
+      margin: 1em 1em 2em 1em;
+      &_label {
+        font-size: 1.5em;
+      }
+    }
+  }
+
+  &_container {
+    padding: 2em;
+  }
+}
+
+// Paypal Button styling
+.paypal_btn {
+  &_label {
+    font-size: 1.5em;
+  }
 }
