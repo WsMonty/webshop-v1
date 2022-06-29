@@ -1,11 +1,12 @@
-import { Link, useStaticQuery, graphql } from 'gatsby';
+import { Link, useStaticQuery, graphql, navigate } from 'gatsby';
 import React from 'react';
 import { connect } from 'react-redux';
-import { deleteFromCart, emptyCart } from '../actions';
+import { deleteFromCart, emptyCart, purchase } from '../actions';
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 import languages from '../languages/languages';
 import { SHIPPING_COST } from '../globalVariables';
 import emailjs from 'emailjs-com';
+import fileLinks from '../languages/fileLinks';
 
 const Payment = (props) => {
   const query = useStaticQuery(graphql`
@@ -66,13 +67,19 @@ const Payment = (props) => {
       '.payment_form_email_input'
     ).value;
 
+    const pdfs = props.purchased.map(
+      (work) => `<a href=${fileLinks[work]}>${fileLinks[work]}</a>`
+    );
+
     const templateParams = {
       to_name: name,
       to_mail: clientMail,
       from_name: 'Gilles',
       message: 'Check this TEST out!',
+      pdf: pdfs.join(),
     };
 
+    console.log(templateParams.pdf);
     emailjs
       .send(
         'service_cqlzhb7',
@@ -205,8 +212,14 @@ const Payment = (props) => {
             onApprove={(_, actions) => {
               return actions.order.capture().then((details) => {
                 const name = details.payer.name.given_name;
-                props.emptyCart();
+                const works = Object.keys(props.cart).map(
+                  (work) => props.cart[work].title
+                );
+                props.purchase(works);
                 sentClientEmail(name);
+
+                navigate(`/downloadPdf`);
+                // props.emptyCart();
               });
             }}
           />
@@ -220,6 +233,7 @@ const mapStateToProps = (state) => {
   return {
     cart: state.cart,
     locale: state.locale,
+    purchased: state.purchased,
   };
 };
 
@@ -227,6 +241,7 @@ const mapDispatchtoProps = (dispatch) => {
   return {
     deleteFromCart: (work) => dispatch(deleteFromCart(work)),
     emptyCart: () => dispatch(emptyCart()),
+    purchase: (works) => dispatch(purchase(works)),
   };
 };
 

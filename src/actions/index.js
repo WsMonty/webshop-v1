@@ -48,3 +48,16 @@ export const handleCartModal = (bool) => {
     type: bool,
   };
 };
+
+export const purchase = (works) => {
+  return {
+    type: 'purchase',
+    payload: works,
+  };
+};
+
+export const emptyPurchased = () => {
+  return {
+    type: emptyPurchased,
+  };
+};
