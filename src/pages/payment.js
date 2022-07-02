@@ -35,7 +35,7 @@ const Payment = (props) => {
     const purchasedWorks = Object.entries(props.cart).map((work) => {
       const title = work[1].title;
       const price = findPrice(work);
-      return JSON.stringify({ title: title, price: price });
+      return { title: title, price: price };
     });
 
     axios
