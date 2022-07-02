@@ -12,14 +12,12 @@
     "start": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
-    "clean": "gatsby clean",
-    "startAll": "concurrently \"gatsby build\" \"node ./server/index.js\""
+    "clean": "gatsby clean"
   },
   "dependencies": {
     "@paypal/react-paypal-js": "^7.6.0",
     "@reduxjs/toolkit": "^1.8.1",
     "axios": "^0.27.2",
-    "emailjs-com": "^3.2.0",
     "gatsby": "^4.10.3",
     "gatsby-image": "^3.11.0",
     "gatsby-link": "^4.10.1",
