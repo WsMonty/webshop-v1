@@ -39,7 +39,7 @@ const Payment = (props) => {
     });
 
     axios
-      .post('http://localhost:3000/test', {
+      .post('https://backend-webshop-v1.herokuapp.com/test', {
         works: purchasedWorks,
         userMail: e.target.childNodes[2].value,
       })
