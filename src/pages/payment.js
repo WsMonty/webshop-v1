@@ -1,12 +1,12 @@
 import { Link, useStaticQuery, graphql, navigate } from 'gatsby';
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { deleteFromCart, emptyCart, purchase } from '../actions';
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 import languages from '../languages/languages';
 import { SHIPPING_COST } from '../globalVariables';
-import emailjs from 'emailjs-com';
-import fileLinks from '../languages/fileLinks';
+// import fileLinks from '../languages/fileLinks';
+import axios from 'axios';
 
 const Payment = (props) => {
   const query = useStaticQuery(graphql`
@@ -26,10 +26,28 @@ const Payment = (props) => {
   `);
   const data = query.allDatoCmsPost.nodes;
 
-  // const findWork = (workTitle) => {
-  //   const work = data.find((entry) => entry.title === workTitle);
-  //   return work;
-  // };
+  const [sent, setSent] = useState(false);
+  const [text, setText] = useState('');
+
+  const handleSend = (e) => {
+    e.preventDefault();
+
+    const purchasedWorks = Object.entries(props.cart).map((work) => {
+      const title = work[1].title;
+      const price = findPrice(work);
+      return { title: title, price: price };
+    });
+
+    axios
+      .post('http://localhost:3000/test', {
+        works: purchasedWorks,
+        userMail: e.target.childNodes[2].value,
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  };
 
   const findPrice = (workTitle) => {
     const workPrice = data.find(
@@ -57,44 +75,15 @@ const Payment = (props) => {
     props.deleteFromCart(JSON.parse(work));
   };
 
-  const emailFormSubmit = (e) => {
-    e.preventDefault();
-    document.querySelector('.paypal_btn').classList.remove('hidden');
-  };
+  // const emailFormSubmit = (e) => {
+  //   e.preventDefault();
+  //   document.querySelector('.paypal_btn').classList.remove('hidden');
+  // };
 
   const sentClientEmail = (name) => {
     const clientMail = document.querySelector(
       '.payment_form_email_input'
     ).value;
-
-    const pdfs = props.purchased.map(
-      (work) => `<a href=${fileLinks[work]}>${fileLinks[work]}</a>`
-    );
-
-    const templateParams = {
-      to_name: name,
-      to_mail: clientMail,
-      from_name: 'Gilles',
-      message: 'Check this TEST out!',
-      pdf: pdfs.join(),
-    };
-
-    console.log(templateParams.pdf);
-    emailjs
-      .send(
-        'service_cqlzhb7',
-        'template_hgac8sj',
-        templateParams,
-        'EEpbrkq5HI3_e9mbo'
-      )
-      .then(
-        (response) => {
-          console.log('SUCCESS!', response.status, response.text);
-        },
-        (err) => {
-          console.log('FAILED...', err);
-        }
-      );
   };
 
   const emailCheck = () => {
@@ -162,7 +151,7 @@ const Payment = (props) => {
         </h3>
       </div>
       <div className="payment_container">
-        <form className="payment_form" onSubmit={(e) => emailFormSubmit(e)}>
+        <form className="payment_form" onSubmit={(e) => handleSend(e)}>
           <label className="payment_form_email_input_label" htmlFor="email">
             1. Your email to get your PDFs!
           </label>
@@ -171,12 +160,15 @@ const Payment = (props) => {
             className="payment_form_email_input"
             id="email"
             name="email"
-            type="email"
+            type="text"
             placeholder="your email"
             required
+            onChange={(e) => setText(e.target.value)}
           ></input>
-          {/* <button type="submit">Submit</button> */}
+          <button type="submit">Submit</button>
         </form>
+
+        {!sent ? '' : <h1>Email sent!</h1>}
 
         <p className="paypal_btn_label">2. Choose your payment method!</p>
         <PayPalScriptProvider
