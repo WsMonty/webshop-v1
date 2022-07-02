@@ -13,7 +13,7 @@
     "build": "gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "startAll": "concurrently \"gatsby develop\" \"node ./server/index.js\""
+    "startAll": "concurrently \"gatsby build\" \"node ./server/index.js\""
   },
   "dependencies": {
     "@paypal/react-paypal-js": "^7.6.0",
