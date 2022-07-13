@@ -5,13 +5,15 @@ import { connect } from 'react-redux';
 import languages from '../../languages/languages';
 
 const WorkPage = (props) => {
+  //Alisa destructuring saves you a lot of text. See line 16 and 26
+  const {cart, locale}=props
   const rightWork = () => {
     const result = [];
     props.data.allDatoCmsPost.edges.forEach((entry) => {
       if (props.pageContext.title === entry.node.title) result.push(entry.node);
     });
     return result.filter((entry) => {
-      if (entry.locale === props.locale) {
+      if (entry.locale === locale) {
         return entry;
       }
       return '';
@@ -21,7 +23,7 @@ const WorkPage = (props) => {
   const [data] = rightWork();
 
   const isInCart = () => {
-    const checkIfInCart = Object.keys(props.cart).some((work) =>
+    const checkIfInCart = Object.keys(cart).some((work) =>
       work.includes(data.title)
     );
 

@@ -1,3 +1,4 @@
+//Alisa isnt the state rather an empty array?
 const cartReducer = (state = {}, action) => {
   const payload = action.title;
   const buyOptions = action.options;

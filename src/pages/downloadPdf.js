@@ -31,7 +31,7 @@ const mapStateToProps = (state) => {
     purchased: state.purchased,
   };
 };
-
+//Alisa mapDispatchtoProps ist mostly written in camelCase mapDispatchToProps 
 const mapDispatchtoProps = (dispatch) => {
   return {
     emptyPurchased: () => dispatch(emptyPurchased()),

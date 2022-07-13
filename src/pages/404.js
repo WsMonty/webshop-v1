@@ -37,6 +37,7 @@ const NotFoundPage = () => {
         </span>{" "}
         we couldn’t find what you were looking for.
         <br />
+  {/* Alisa soooo you have an .env? */}
         {process.env.NODE_ENV === "development" ? (
           <>
             <br />

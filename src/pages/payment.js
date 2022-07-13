@@ -25,7 +25,7 @@ const Payment = (props) => {
     }
   `);
   const data = query.allDatoCmsPost.nodes;
-
+//Alisa non used values setSent, text and clientMail
   const [sent, setSent] = useState(false);
   const [text, setText] = useState('');
 

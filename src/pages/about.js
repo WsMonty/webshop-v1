@@ -56,6 +56,7 @@ const About = (props) => {
 };
 
 const mapStateToProps = (state) => {
+  //Alisa You do not need to import the state if you are not using it
   return {
     cart: state.cart,
     locale: state.locale,
