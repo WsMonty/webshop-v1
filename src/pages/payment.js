@@ -1,5 +1,5 @@
 import { Link, useStaticQuery, graphql, navigate } from 'gatsby';
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { deleteFromCart, emptyCart, purchase } from '../actions';
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
@@ -9,6 +9,8 @@ import { SHIPPING_COST } from '../globalVariables';
 import axios from 'axios';
 
 const Payment = (props) => {
+  const { cart, locale } = props;
+
   const query = useStaticQuery(graphql`
     query {
       allDatoCmsPost {
@@ -26,13 +28,10 @@ const Payment = (props) => {
   `);
   const data = query.allDatoCmsPost.nodes;
 
-  const [sent, setSent] = useState(false);
-  const [text, setText] = useState('');
-
   const handleSend = (e) => {
     e.preventDefault();
 
-    const purchasedWorks = Object.entries(props.cart).map((work) => {
+    const purchasedWorks = Object.entries(cart).map((work) => {
       const title = work[1].title;
       const price = findPrice(work);
       return { title: title, price: price };
@@ -44,7 +43,7 @@ const Payment = (props) => {
         userMail: e.target.childNodes[2].value,
       })
       .then((res) => {
-        console.log(res);
+        if (res.status === 200) return;
       })
       .catch((err) => console.log(err));
   };
@@ -59,9 +58,9 @@ const Payment = (props) => {
   const getTotalPrice = () => {
     let total = 0;
     let shipping = false;
-    Object.entries(props.cart).map((entry) => {
+    Object.entries(cart).map((entry) => {
       if (entry[1].buyOption === 'Print') shipping = true;
-      total += findPrice(entry) * props.cart[entry[0]].counter;
+      total += findPrice(entry) * cart[entry[0]].counter;
       return '';
     });
 
@@ -79,12 +78,6 @@ const Payment = (props) => {
   //   e.preventDefault();
   //   document.querySelector('.paypal_btn').classList.remove('hidden');
   // };
-
-  const sentClientEmail = (name) => {
-    const clientMail = document.querySelector(
-      '.payment_form_email_input'
-    ).value;
-  };
 
   const emailCheck = () => {
     if (document.querySelector('.payment_form_email_input').value === '')
@@ -108,9 +101,9 @@ const Payment = (props) => {
 
   return (
     <div className="payment">
-      <h1 className="payment_title">{languages.shoppingCart[props.locale]}</h1>
+      <h1 className="payment_title">{languages.shoppingCart[locale]}</h1>
       <div className="payment_content">
-        {Object.entries(props.cart).map((entry, i) => {
+        {Object.entries(cart).map((entry, i) => {
           const work = entry[1];
           if (work !== 0)
             return (
@@ -118,7 +111,7 @@ const Payment = (props) => {
                 <div className="payment_work_content">
                   <div className="payment_work_title">
                     <p className="payment_work_number">
-                      {props.cart[entry[0]].counter + 'x'}
+                      {cart[entry[0]].counter + 'x'}
                     </p>
                     <Link
                       className="cart_preview_title"
@@ -131,21 +124,21 @@ const Payment = (props) => {
                       {work.title}
                     </Link>
                   </div>
-                  <p>{props.cart[entry[0]].buyOption}</p>
-                  <p>{findPrice(entry) * props.cart[entry[0]].counter + '€'}</p>
+                  <p>{cart[entry[0]].buyOption}</p>
+                  <p>{findPrice(entry) * cart[entry[0]].counter + '€'}</p>
                 </div>
                 <button
                   className="payment_work_delete_btn pill_btn_accent"
                   onClick={(e) => deleteFromCartHandler(e)}
                 >
-                  {languages.deleteFromCart[props.locale]}
+                  {languages.deleteFromCart[locale]}
                 </button>
               </div>
             );
           return '';
         })}
         <h3 className="payment_total_price">
-          {Object.keys(props.cart).length > 0
+          {Object.keys(cart).length > 0
             ? 'Total: ' + getTotalPrice() + '€'
             : 'No items yet.'}
         </h3>
@@ -160,22 +153,18 @@ const Payment = (props) => {
             className="payment_form_email_input"
             id="email"
             name="email"
-            type="text"
+            type="email"
             placeholder="your email"
             required
-            onChange={(e) => setText(e.target.value)}
           ></input>
           <button type="submit">Submit</button>
         </form>
-
-        {!sent ? '' : <h1>Email sent!</h1>}
 
         <p className="paypal_btn_label">2. Choose your payment method!</p>
         <PayPalScriptProvider
           options={{
             'client-id':
               'AZSSY3UljJBk9qQrc7QpMYmmLn2e2necjjf0580S4D8BKz0c9uVWLyRvrqYi4Lh8ga1ddtcbkNO69IZ7',
-            // 'AZuOJhphk2lqHP76TcBJzx9pernNN8M0ZphLh8u04xv8HCLCF-KzP-FKie_mLKYAdLf3N-59ZqRzgQWq',
             currency: 'EUR',
           }}
         >
@@ -203,12 +192,9 @@ const Payment = (props) => {
             }}
             onApprove={(_, actions) => {
               return actions.order.capture().then((details) => {
-                const name = details.payer.name.given_name;
-                const works = Object.keys(props.cart).map(
-                  (work) => props.cart[work].title
-                );
-                props.purchase(works);
-                sentClientEmail(name);
+                // const name = details.payer.name.given_name;
+                const works = Object.keys(cart).map((work) => cart[work].title);
+                purchase(works);
 
                 navigate(`/downloadPdf`);
                 // props.emptyCart();

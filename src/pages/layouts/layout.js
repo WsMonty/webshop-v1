@@ -20,7 +20,7 @@ const Layout = ({ children }) => {
       <Helmet>
         <meta charSet="utf-8" />
         <title>{query.site.siteMetadata.title}</title>
-        <link rel="canonical" href="http://mysite.com/example" />
+        <link rel="canonical" href="https://webshop.example" />
       </Helmet>
       <div className="main">
         <Navbar />

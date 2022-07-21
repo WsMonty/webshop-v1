@@ -32,10 +32,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchtoProps = (dispatch) => {
+const mapDispatchToProps = (dispatch) => {
   return {
     emptyPurchased: () => dispatch(emptyPurchased()),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchtoProps)(downloadPdf);
+export default connect(mapStateToProps, mapDispatchToProps)(downloadPdf);
