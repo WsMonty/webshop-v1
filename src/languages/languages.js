@@ -60,6 +60,12 @@ const languages = {
       'Wann Dir Froen oder Bedenken hutt, meld Iech gäeren un folgend Mail Adress. Mir sin frou Iech ze hëllefen.',
     fr: "Si vous avez des questions ou des doutes, n'hésitez pas à nous contacter par email. Nous sommes heureux de vous aider!",
   },
+  download: {
+    en: 'Click on each link to get your PDFs!',
+    de: 'Öffnen Sie jeden Link, um ihre PDFs zu erhalten!',
+    'de-LU': 'Klickt op all Link fir Äer PDFen erof ze lueden!',
+    fr: 'Ouvrez chaque lien pour télécharger les PDFs!',
+  },
 };
 
 export default languages;

@@ -1,0 +1,29 @@
+.download {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &_title {
+    margin-bottom: 1em;
+  }
+
+  &_content {
+    width: fit-content;
+    height: fit-content;
+    padding: 5em;
+    border: 1px solid black;
+    background: rgb(196, 206, 251);
+    border-radius: 2em;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &_work {
+    padding: 1em;
+  }
+}

@@ -1,25 +1,42 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { emptyPurchased } from '../actions';
 import { connect } from 'react-redux';
-import fileLinks from '../languages/fileLinks';
+import languages from '../languages/languages';
 
-const downloadPdf = (props) => {
+import axios from 'axios';
+
+const DownloadPdf = (props) => {
+  const { purchased, locale } = props;
+
+  const [urls, setUrls] = useState([]);
+
+  const files = async () => {
+    return await axios
+      .post('http://localhost:3000/downloadPDF', purchased)
+      .then((res) => res)
+      .catch((err) => console.log(`My ${err}`));
+  };
+  files().then((res) => setUrls(res.data));
+
   return (
     <div className="download">
-      {props.purchased.map((work, i) => {
-        return (
-          <div key={`work_pdf${i}`} className="download_work">
-            <a
-              className="download_link"
-              target={'_blank'}
-              rel="noreferrer"
-              href={fileLinks[work]}
-            >
-              {work}
-            </a>
-          </div>
-        );
-      })}
+      <div className="download_content">
+        <h1 className="download_title">{languages.download[locale]}</h1>
+        {purchased.map((work, i) => {
+          return (
+            <div key={`work_pdf${i}`} className="download_work">
+              <a
+                className="download_link"
+                target={'_blank'}
+                rel="noreferrer"
+                href={urls[i]}
+              >
+                {work}
+              </a>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };
@@ -38,4 +55,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(downloadPdf);
+export default connect(mapStateToProps, mapDispatchToProps)(DownloadPdf);

@@ -9,7 +9,7 @@ import { SHIPPING_COST } from '../globalVariables';
 import axios from 'axios';
 
 const Payment = (props) => {
-  const { cart, locale } = props;
+  const { cart, locale, purchase } = props;
 
   const query = useStaticQuery(graphql`
     query {
@@ -28,9 +28,7 @@ const Payment = (props) => {
   `);
   const data = query.allDatoCmsPost.nodes;
 
-  const handleSend = (e) => {
-    e.preventDefault();
-
+  const handleSend = () => {
     const purchasedWorks = Object.entries(cart).map((work) => {
       const title = work[1].title;
       const price = findPrice(work);
@@ -40,12 +38,15 @@ const Payment = (props) => {
     axios
       .post('https://backend-webshop-v1.herokuapp.com/test', {
         works: purchasedWorks,
-        userMail: e.target.childNodes[2].value,
+        userMail: document.querySelector('.payment_form_email_input').value,
       })
       .then((res) => {
         if (res.status === 200) return;
       })
       .catch((err) => console.log(err));
+    const works = purchasedWorks.map((work) => work.title);
+    purchase(works);
+    navigate(`/downloadPdf`);
   };
 
   const findPrice = (workTitle) => {
@@ -157,7 +158,6 @@ const Payment = (props) => {
             placeholder="your email"
             required
           ></input>
-          <button type="submit">Submit</button>
         </form>
 
         <p className="paypal_btn_label">2. Choose your payment method!</p>
@@ -195,9 +195,7 @@ const Payment = (props) => {
                 // const name = details.payer.name.given_name;
                 const works = Object.keys(cart).map((work) => cart[work].title);
                 purchase(works);
-
-                navigate(`/downloadPdf`);
-                // props.emptyCart();
+                handleSend();
               });
             }}
           />
