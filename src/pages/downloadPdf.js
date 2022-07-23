@@ -12,7 +12,7 @@ const DownloadPdf = (props) => {
 
   const files = async () => {
     return await axios
-      .post('http://localhost:3000/downloadPDF', purchased)
+      .post(`${process.env.SERVER_URL}/downloadPDF`, purchased)
       .then((res) => res)
       .catch((err) => console.log(`My ${err}`));
   };
