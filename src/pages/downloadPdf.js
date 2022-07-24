@@ -12,7 +12,7 @@ const DownloadPdf = (props) => {
 
   const files = async () => {
     return await axios
-      .post(`${process.env.SERVER_URL}/downloadPDF`, purchased)
+      .post('https://backend-webshop-v1.herokuapp.com/downloadPDF', purchased)
       .then((res) => res)
       .catch((err) => console.log(`My ${err}`));
   };

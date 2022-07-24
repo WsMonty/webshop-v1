@@ -36,7 +36,7 @@ const Payment = (props) => {
     });
 
     axios
-      .post(`${process.env.SERVER_URL}/test`, {
+      .post('https://backend-webshop-v1.herokuapp.com/test', {
         works: purchasedWorks,
         userMail: document.querySelector('.payment_form_email_input').value,
       })
