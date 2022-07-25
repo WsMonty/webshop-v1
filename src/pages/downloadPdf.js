@@ -1,22 +1,23 @@
-import React, { useCallback, useState } from 'react';
+import React from 'react';
 import { emptyPurchased } from '../actions';
 import { connect } from 'react-redux';
 import languages from '../languages/languages';
-
-import axios from 'axios';
+import { useStaticQuery, graphql } from 'gatsby';
 
 const DownloadPdf = (props) => {
+  const query = useStaticQuery(graphql`
+    {
+      allDatoCmsFileLink(filter: { locale: { eq: "en" } }) {
+        nodes {
+          name
+          link
+        }
+      }
+    }
+  `);
   const { purchased, locale } = props;
 
-  const [urls, setUrls] = useState([]);
-
-  const files = async () => {
-    return await axios
-      .post('https://backend-webshop-v1.herokuapp.com/downloadPDF', purchased)
-      .then((res) => res)
-      .catch((err) => console.log(`My ${err}`));
-  };
-  files().then((res) => setUrls(res.data));
+  const files = query.allDatoCmsFileLink.nodes;
 
   return (
     <div className="download">
@@ -29,7 +30,7 @@ const DownloadPdf = (props) => {
                 className="download_link"
                 target={'_blank'}
                 rel="noreferrer"
-                href={urls[i]}
+                href={files.filter((file) => file.name === work)[0].link}
               >
                 {work}
               </a>

@@ -9,7 +9,7 @@ import { SHIPPING_COST } from '../globalVariables';
 import axios from 'axios';
 
 const Payment = (props) => {
-  const { cart, locale, purchase } = props;
+  const { cart, locale, purchase, emptyCart } = props;
 
   const query = useStaticQuery(graphql`
     query {
@@ -24,15 +24,24 @@ const Payment = (props) => {
           }
         }
       }
+      allDatoCmsFileLink(filter: { locale: { eq: "en" } }) {
+        nodes {
+          name
+          link
+        }
+      }
     }
   `);
   const data = query.allDatoCmsPost.nodes;
+  const fileLinks = query.allDatoCmsFileLink.nodes;
 
   const handleSend = () => {
+    emptyCart();
     const purchasedWorks = Object.entries(cart).map((work) => {
       const title = work[1].title;
       const price = findPrice(work);
-      return { title: title, price: price };
+      const link = fileLinks.filter((link) => link.name === title)[0].link;
+      return { title: title, price: price, link: link };
     });
 
     axios

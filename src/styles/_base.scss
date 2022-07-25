@@ -1,13 +1,9 @@
-$product-size: 1;
-$main-text-color: rgb(58, 58, 58);
-// $accent-text-color: rgb(246, 189, 43);
-// $accent-text-color: #ff8d3d;
-$accent-blue-color: #1573cb;
-// $accent-text-color: #d8a31a;
-// $accent-text-color: #e97827;
-$accent-text-color: #fb7b04;
-$accent-blue-very-light-color: #e6f8ff;
-$white: #e2f1ff;
+$clr-primary: rgb(244, 244, 244);
+$clr-secondary: rgb(236, 236, 236);
+$clr-black: rgb(10, 10, 10);
+$clr-accent: rgb(255, 204, 74);
+$clr-neutral-dark: rgb(32, 32, 32);
+$clr-neutral-light: rgb(105, 105, 105);
 
 * {
   margin: 0;
@@ -27,7 +23,7 @@ $white: #e2f1ff;
 
 body {
   font-family: 'Catamaran', sans-serif;
-  color: $main-text-color;
+  color: $clr-neutral-dark;
 }
 
 .hidden {

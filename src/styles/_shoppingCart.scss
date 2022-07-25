@@ -3,7 +3,7 @@
 
   &_icon {
     font-size: 2em;
-    color: $main-text-color;
+    color: $clr-secondary;
 
     &_container {
       position: absolute;
@@ -24,7 +24,7 @@
     height: fit-content;
     width: 40vw;
     background: white;
-    border: 2px solid $main-text-color;
+    border: 2px solid $clr-neutral-dark;
     border-radius: 20px;
     position: absolute;
     right: 0;
@@ -43,7 +43,7 @@
     right: -12px;
     font-size: 1.5em;
     z-index: 2;
-    color: $accent-blue-very-light-color;
+    color: $clr-accent;
   }
 }
 
@@ -64,11 +64,11 @@
 
   &_title {
     text-decoration: none;
-    color: $main-text-color;
+    color: $clr-neutral-dark;
     font-size: 2em;
 
     &:hover {
-      color: $accent-text-color;
+      color: $clr-neutral-light;
     }
   }
 
@@ -92,9 +92,9 @@
 
   &_close_btn {
     background: transparent;
-    color: $main-text-color;
+    color: $clr-neutral-light;
     padding: 1em 2em;
-    border: 1px solid $main-text-color;
+    border: 1px solid $clr-neutral-dark;
     position: absolute;
     top: 10px;
     right: 10px;
@@ -103,8 +103,8 @@
     cursor: pointer;
 
     &:hover {
-      color: $accent-text-color;
-      border-color: $accent-text-color;
+      color: $clr-neutral-dark;
+      border-color: $clr-neutral-dark;
     }
   }
 
@@ -113,15 +113,15 @@
     text-decoration: none;
     align-self: center;
     background-color: transparent;
-    color: $main-text-color;
-    border: 1px solid $main-text-color;
+    color: $clr-neutral-dark;
+    border: 1px solid $clr-neutral-dark;
     border-radius: 2em;
     padding: 0.5em 3em;
     cursor: pointer;
 
     &:hover {
-      color: $accent-text-color;
-      border-color: $accent-text-color;
+      color: $clr-neutral-dark;
+      border-color: $clr-neutral-dark;
     }
   }
 
@@ -129,7 +129,7 @@
     position: absolute;
     width: 95%;
     bottom: 0;
-    border: 1px solid $accent-text-color;
+    border: 1px solid $clr-neutral-light;
   }
 }
 

@@ -6,7 +6,7 @@
 
   padding: 2em;
 
-  background-color: $accent-blue-color;
+  background-color: $clr-black;
 
   &_list {
     list-style: none;
@@ -34,7 +34,7 @@
 
     height: 0;
     width: 100vw;
-    background-color: $accent-blue-color;
+    background-color: $clr-black;
     color: white;
 
     transition: 500ms ease-in-out;
@@ -56,7 +56,7 @@
       transition: 150ms ease-in-out;
 
       &:hover {
-        color: $main-text-color;
+        color: $clr-accent;
       }
     }
   }
@@ -70,12 +70,12 @@
   transition: 150ms ease-in-out;
 
   &:hover {
-    color: $main-text-color;
+    color: $clr-accent;
   }
 }
 
 .selected {
-  color: $main-text-color;
+  color: $clr-accent;
 }
 
 .navbar_active {
@@ -97,7 +97,7 @@
   padding: 0.2em 1em;
   margin-right: 2em;
 
-  background-color: $main-text-color;
+  background-color: $clr-secondary;
 }
 
 @media only screen and (max-width: 600px) {
@@ -115,6 +115,7 @@
       top: 0.5em;
       left: 0.75em;
       font-size: 2.5em;
+      color: $clr-accent;
 
       &_btn {
         display: block;

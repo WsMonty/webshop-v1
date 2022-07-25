@@ -8,7 +8,7 @@
   }
 
   &_name {
-    color: $accent-text-color;
+    color: $clr-neutral-light;
     text-decoration: none;
     padding: 1em;
     font-size: 2em;
@@ -28,7 +28,7 @@
 
   &_website {
     &_link {
-      color: $accent-text-color;
+      color: $clr-neutral-light;
       font-weight: 500;
     }
   }

@@ -3,7 +3,7 @@
   height: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 
   &_title {
     margin-bottom: 1em;
@@ -14,8 +14,9 @@
     height: fit-content;
     padding: 5em;
     border: 1px solid black;
-    background: rgb(196, 206, 251);
+    background: $clr-primary;
     border-radius: 2em;
+    margin: 5em 1em;
 
     display: flex;
     flex-direction: column;
@@ -25,5 +26,9 @@
 
   &_work {
     padding: 1em;
+  }
+
+  &_link {
+    color: $clr-accent;
   }
 }

@@ -13,7 +13,7 @@
   width: 50%;
   height: 100%;
 
-  color: $main-text-color;
+  color: $clr-neutral-dark;
 
   &_container {
     padding: 1em;
@@ -29,7 +29,7 @@
     cursor: pointer;
     font-size: 1.5em;
 
-    color: $accent-blue-color;
+    color: $clr-neutral-dark;
 
     position: absolute;
     right: 2em;
@@ -45,7 +45,7 @@
   &_line {
     border: none;
     height: 1px;
-    background-color: $accent-blue-color;
+    background-color: $clr-secondary;
   }
 }
 
