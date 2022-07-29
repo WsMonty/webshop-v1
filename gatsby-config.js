@@ -22,5 +22,6 @@ module.exports = {
     'gatsby-plugin-sharp',
     'gatsby-plugin-gatsby-cloud',
     'gatsby-plugin-react-helmet',
+    'gatsby-plugin-netlify',
   ],
 };
