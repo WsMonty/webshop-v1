@@ -34,7 +34,6 @@
     "gatsby-react-router-scroll": "^5.19.0",
     "gatsby-source-datocms": "^4.0.4",
     "gatsby-transformer-sharp": "^4.19.0",
-    "graphql": "^16.5.0",
     "node-sass": "^7.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
