@@ -3,6 +3,7 @@ import languages from '../languages/languages';
 import { Link, navigate } from 'gatsby';
 
 const SingleWork = ({ props, product, query, i }) => {
+  const { locale } = props;
   // Go to composer's site
   const composerClickHandler = (e) => {
     const composerUrl = e.target
@@ -166,7 +167,7 @@ const SingleWork = ({ props, product, query, i }) => {
             className="addToCart_btn"
             onClick={(e) => showOptionsHandler(e)}
           >
-            {languages.moreInformation[props.locale]}
+            {languages.moreInformation[locale]}
           </button>
         </div>
       </div>
@@ -181,12 +182,17 @@ const SingleWork = ({ props, product, query, i }) => {
         <p className="work_options_description_short">
           {product.node.descriptionTextShort}
         </p>
+        <p className="work_options_specification">
+          {product.node.descriptionTextShort === 'Lead Sheet'
+            ? languages.specifications_leadSheet[locale]
+            : languages.specifications_big[locale]}
+        </p>
         <p className="work_options_price">{product.node.price}€</p>
         <button
           className="work_options_leave_btn pill_btn_inverted"
           onClick={(e) => leaveOptionsHandler(e)}
         >
-          {languages.goBack[props.locale]}
+          {languages.goBack[locale]}
         </button>
 
         {/* In Case of printing and shipping!!! */}
@@ -221,7 +227,7 @@ const SingleWork = ({ props, product, query, i }) => {
                   className="work_options_submit_btn pill_btn_inverted"
                   type="submit"
                 >
-                  {languages.addToCart[props.locale]}
+                  {languages.addToCart[locale]}
                 </button>
               </form> */}
 
@@ -232,7 +238,7 @@ const SingleWork = ({ props, product, query, i }) => {
             className="work_options_submit_btn pill_btn_inverted"
             onClick={(e) => addToCartClickHandlerNoShipping(e)}
           >
-            {languages.addToCart[props.locale]}
+            {languages.addToCart[locale]}
           </button>
         )}
       </div>

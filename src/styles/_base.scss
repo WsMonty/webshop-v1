@@ -1,6 +1,7 @@
 $clr-primary: rgb(244, 244, 244);
-$clr-secondary: rgb(236, 236, 236);
-$clr-black: rgb(10, 10, 10);
+$clr-secondary: rgb(225, 225, 225);
+$clr-black: rgb(30, 30, 30);
+$clr-lightgrey: rgb(145, 145, 145);
 $clr-accent: rgb(255, 204, 74);
 $clr-neutral-dark: rgb(32, 32, 32);
 $clr-neutral-light: rgb(105, 105, 105);
@@ -24,6 +25,9 @@ $clr-neutral-light: rgb(105, 105, 105);
 body {
   font-family: 'Catamaran', sans-serif;
   color: $clr-neutral-dark;
+  background-color: $clr-primary;
+
+  overflow-x: hidden;
 }
 
 .hidden {

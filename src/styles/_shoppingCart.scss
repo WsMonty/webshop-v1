@@ -67,8 +67,10 @@
     color: $clr-neutral-dark;
     font-size: 2em;
 
+    transition: 200ms ease-in-out;
+
     &:hover {
-      color: $clr-neutral-light;
+      color: $clr-accent;
     }
   }
 
@@ -91,38 +93,23 @@
   }
 
   &_close_btn {
-    background: transparent;
-    color: $clr-neutral-light;
-    padding: 1em 2em;
-    border: 1px solid $clr-neutral-dark;
     position: absolute;
     top: 10px;
     right: 10px;
     border-radius: 2em;
     font-size: 0.75em;
     cursor: pointer;
-
-    &:hover {
-      color: $clr-neutral-dark;
-      border-color: $clr-neutral-dark;
-    }
+    border: none;
   }
 
   &_payment_link {
     width: fit-content;
     text-decoration: none;
     align-self: center;
-    background-color: transparent;
-    color: $clr-neutral-dark;
-    border: 1px solid $clr-neutral-dark;
-    border-radius: 2em;
     padding: 0.5em 3em;
     cursor: pointer;
-
-    &:hover {
-      color: $clr-neutral-dark;
-      border-color: $clr-neutral-dark;
-    }
+    background-color: $clr-accent;
+    border: none;
   }
 
   &_hr {
@@ -175,8 +162,8 @@
     }
 
     &_popup {
-      width: 90vw;
-      margin: 0;
+      width: 97vw;
+      right: -3em;
     }
   }
 }

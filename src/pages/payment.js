@@ -1,7 +1,12 @@
 import { Link, useStaticQuery, graphql, navigate } from 'gatsby';
 import React from 'react';
 import { connect } from 'react-redux';
-import { deleteFromCart, emptyCart, purchase } from '../actions';
+import {
+  deleteFromCart,
+  emptyCart,
+  purchase,
+  closeCartModal,
+} from '../actions';
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 import languages from '../languages/languages';
 import { SHIPPING_COST } from '../globalVariables';
@@ -9,7 +14,7 @@ import { SHIPPING_COST } from '../globalVariables';
 import axios from 'axios';
 
 const Payment = (props) => {
-  const { cart, locale, purchase, emptyCart } = props;
+  const { cart, locale, purchase, emptyCart, closeCartModal } = props;
 
   const query = useStaticQuery(graphql`
     query {
@@ -37,6 +42,8 @@ const Payment = (props) => {
 
   const handleSend = () => {
     emptyCart();
+    closeCartModal();
+
     const purchasedWorks = Object.entries(cart).map((work) => {
       const title = work[1].title;
       const price = findPrice(work);
@@ -79,7 +86,7 @@ const Payment = (props) => {
 
   const deleteFromCartHandler = (e) => {
     const work =
-      e.target.closest('.payment_work').firstChild.firstChild.childNodes[1]
+      e.target.closest('.payment_work').firstChild.firstChild.childNodes[0]
         .dataset.title;
     props.deleteFromCart(JSON.parse(work));
   };
@@ -120,9 +127,9 @@ const Payment = (props) => {
               <div key={'work-nr' + i + 1} className="payment_work">
                 <div className="payment_work_content">
                   <div className="payment_work_title">
-                    <p className="payment_work_number">
+                    {/* <p className="payment_work_number">
                       {cart[entry[0]].counter + 'x'}
-                    </p>
+                    </p> */}
                     <Link
                       className="cart_preview_title"
                       data-title={JSON.stringify(work)}
@@ -227,6 +234,7 @@ const mapDispatchtoProps = (dispatch) => {
     deleteFromCart: (work) => dispatch(deleteFromCart(work)),
     emptyCart: () => dispatch(emptyCart()),
     purchase: (works) => dispatch(purchase(works)),
+    closeCartModal: () => dispatch(closeCartModal()),
   };
 };
 

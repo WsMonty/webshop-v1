@@ -50,3 +50,12 @@
     font-size: 1.5em;
   }
 }
+
+@media only screen and (max-width: 600px) {
+  .payment {
+    &_content {
+      width: 100vw;
+      max-width: 100vw;
+    }
+  }
+}

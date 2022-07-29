@@ -4,11 +4,12 @@ import { Link } from 'gatsby';
 import { setLocale } from '../actions/index.js';
 import { connect } from 'react-redux';
 import { RiMenu5Fill } from 'react-icons/ri';
+import languages from '../languages/languages.js';
 
-const Navbar = (props) => {
+const Navbar = ({ setLocale, locale }) => {
   // Change language on site
   const localeChanger = (e) => {
-    props.setLocale(document.getElementById('nav_locales_select').value);
+    setLocale(document.getElementById('nav_locales_select').value);
   };
 
   // Change color of selected link and start animation on mobile
@@ -24,7 +25,7 @@ const Navbar = (props) => {
       document
         .querySelector('.navbar')
         .classList.contains('mobile_nav_active') &&
-      e.target.textContent !== 'Works'
+      e.target.dataset.name !== 'works'
     )
       hamburgerHandler();
   };
@@ -40,6 +41,7 @@ const Navbar = (props) => {
   // Mobile navbar menu
   const hamburgerHandler = () => {
     document.querySelector('.navbar').classList.toggle('mobile_nav_active');
+    closeWorksOptions();
     setTimeout(() => {
       document
         .querySelector('.navbar_list')
@@ -59,13 +61,12 @@ const Navbar = (props) => {
   };
 
   const closeWorksOptions = (e) => {
-    deSelect(e);
+    if (e) deSelect(e);
     document.querySelector('.navbar_works_options').style.height = '0';
 
     document
       .querySelector('.navbar_works_options_list')
       .classList.add('hidden');
-    hamburgerHandler();
   };
 
   return (
@@ -77,6 +78,7 @@ const Navbar = (props) => {
         <li className="link_list">
           <button
             className="link navbar_works_link"
+            data-name="works"
             onClick={(e) => {
               document
                 .querySelector('.navbar_works_options_list')
@@ -85,7 +87,7 @@ const Navbar = (props) => {
                 : closeWorksOptions(e);
             }}
           >
-            {allWorks[props.locale]}
+            {allWorks[locale]}
           </button>
           <div className="navbar_works_options">
             <div></div>
@@ -96,9 +98,10 @@ const Navbar = (props) => {
                   to="/works"
                   onClick={(e) => {
                     closeWorksOptions(e);
+                    hamburgerHandler();
                   }}
                 >
-                  Show all Works
+                  {languages.showAllWorks[locale]}
                 </Link>
               </li>
               <li className="navbar_works_options_link">
@@ -107,18 +110,22 @@ const Navbar = (props) => {
                   to="/works/categories"
                   onClick={(e) => {
                     closeWorksOptions(e);
+                    hamburgerHandler();
                   }}
                 >
-                  Categories
+                  {languages.categories[locale]}
                 </Link>
               </li>
               <li>
                 <Link
                   className="navbar_works_options_link"
                   to="/composers"
-                  onClick={(e) => closeWorksOptions(e)}
+                  onClick={(e) => {
+                    closeWorksOptions(e);
+                    hamburgerHandler();
+                  }}
                 >
-                  Composers
+                  {languages.composers[locale]}
                 </Link>
               </li>
             </ul>
@@ -132,7 +139,7 @@ const Navbar = (props) => {
                 to={`/${link.url}`}
                 onClick={(e) => setSelected(e)}
               >
-                {link[`title-${props.locale}`]}
+                {link[`title-${locale}`]}
               </Link>
             </li>
           );
@@ -142,7 +149,7 @@ const Navbar = (props) => {
         <select
           id="nav_locales_select"
           onChange={(e) => localeChanger(e)}
-          value={props.locale}
+          value={locale}
         >
           <option id="en" value={locales[0].loc}>
             {locales[0].text}

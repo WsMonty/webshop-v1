@@ -41,6 +41,8 @@
     transform: scale(1.2);
     transition: transform 300ms ease-out;
 
+    border: 1px solid $clr-accent;
+
     .addToCart_btn {
       opacity: 1;
       pointer-events: all;
@@ -167,6 +169,10 @@
       padding: 0.5em;
       border-radius: 2em;
     }
+
+    &_specification {
+      text-align: center;
+    }
   }
 }
 
@@ -175,8 +181,8 @@
   overflow: auto;
 
   &_image {
-    height: 80vh;
-    max-width: 50%;
+    height: 50vh;
+    object-fit: cover;
   }
 
   &_content {

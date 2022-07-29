@@ -12,6 +12,7 @@
     list-style: none;
     display: flex;
     justify-content: space-around;
+    align-items: center;
     width: 50%;
   }
 
@@ -128,15 +129,21 @@
       display: none;
       line-height: 3em;
       text-align: center;
+      width: 100%;
     }
 
     &_works {
       &_options {
         position: static;
-        width: 100%;
+        justify-content: center;
+        align-items: flex-start;
 
         &_list {
           position: static;
+        }
+
+        &_link {
+          margin-bottom: 0.5em;
         }
       }
     }
@@ -147,7 +154,8 @@
   }
 
   .locales_list {
-    display: none;
+    right: 15%;
+    top: 22px;
   }
 
   .mobile_nav_active {

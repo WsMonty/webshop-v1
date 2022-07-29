@@ -8,7 +8,7 @@
     padding: 2em;
     width: 25%;
     height: 100%;
-    background-color: #fb7b043b;
+    background-color: $clr-lightgrey;
 
     display: flex;
     flex-direction: column;
@@ -25,13 +25,40 @@
 
     cursor: pointer;
 
+    &:hover {
+      color: $clr-accent;
+    }
+
     &_active {
       font-size: 1.75em;
-      color: $clr-neutral-light;
+      color: $clr-accent;
     }
   }
 
   &_right_works {
     margin: 2em;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .categories {
+    flex-direction: column;
+    height: fit-content;
+
+    &_left_titles {
+      width: 100%;
+      padding: 1em;
+      align-items: flex-start;
+    }
+
+    &_title {
+      width: fit-content;
+      text-align: start;
+      margin-bottom: 1em;
+    }
+
+    &_right_works {
+      justify-items: center;
+    }
   }
 }

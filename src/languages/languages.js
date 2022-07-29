@@ -12,10 +12,10 @@ const languages = {
     fr: 'Fermer',
   },
   deleteFromCart: {
-    en: 'Delete from cart',
-    de: 'Aus dem Einkaufswagen entfernen',
-    'de-LU': 'Aus dem Weenchen huelen',
-    fr: 'Retirer du panier',
+    en: 'Delete',
+    de: 'Löschen',
+    'de-LU': 'Löschen',
+    fr: 'Retirer',
   },
   proceedPayment: {
     en: 'Proceed to payment',
@@ -65,6 +65,48 @@ const languages = {
     de: 'Öffnen Sie jeden Link, um ihre PDFs zu erhalten!',
     'de-LU': 'Klickt op all Link fir Äer PDFen erof ze lueden!',
     fr: 'Ouvrez chaque lien pour télécharger les PDFs!',
+  },
+  specifications_big: {
+    en: 'You get PDFs of the score and sheets for the different players.',
+    de: 'Sie bekommen PDFs von der Partitur und Einzelstimmen.',
+    'de-LU': 'Dir kritt PDFen vun der Partitur an den Eenzelstëmmen.',
+    fr: 'Vous recevrez des PDF de la partition et des parties individuelles.',
+  },
+  specifications_leadSheet: {
+    en: 'You get PDFs of the lead sheet in concert pitch, Bb and Eb.',
+    de: 'Sie bekommen PDFs vom Lead Sheet in den Stimmungen C, Bb und Eb.',
+    'de-LU': 'Dir kritt PDFen vum Lead Sheet an de Stëmmungen C, Bb an Eb.',
+    fr: 'Vous recevrez des PDF du lead sheet en C, Bb et Eb.',
+  },
+  isInCart: {
+    en: 'Is already in the cart',
+    de: 'Ist bereits im Einkaufswagen',
+    'de-LU': 'Ass schon am Weenchen',
+    fr: 'Est déjà dans le panier',
+  },
+  showAllWorks: {
+    en: 'All works',
+    de: 'Alle Werke',
+    'de-LU': "All d'Wierker",
+    fr: 'Toutes les oeuvres',
+  },
+  categories: {
+    en: 'Categories',
+    de: 'Kategorien',
+    'de-LU': 'Kategorien',
+    fr: 'Catégories',
+  },
+  composers: {
+    en: 'Composers',
+    de: 'Komponisten',
+    'de-LU': 'Komponisten',
+    fr: 'Componistes',
+  },
+  x: {
+    en: '',
+    de: '',
+    'de-LU': '',
+    fr: '',
   },
 };
 

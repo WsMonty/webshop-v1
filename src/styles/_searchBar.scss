@@ -9,7 +9,13 @@
     border-radius: 2em;
     padding: 0.5em 1em;
     border: none;
-    background-color: $clr-primary;
+    background-color: $clr-secondary;
+
+    &:focus {
+      outline: none;
+      border: 1.5px solid $clr-accent;
+      margin: -1.5px;
+    }
   }
 }
 
@@ -17,5 +23,8 @@
   .searchbar_container {
     right: 5em;
     top: -4.85em;
+  }
+  .searchbar_input {
+    width: 50vw;
   }
 }

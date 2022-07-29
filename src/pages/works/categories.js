@@ -60,7 +60,7 @@ const Categories = (props) => {
   return (
     <div className="categories">
       <div className="categories_left_titles">
-        {allCategories.map((cat, i, arr) => {
+        {allCategories.map((cat, i) => {
           return (
             <button
               key={`cat_title${i + 1}`}

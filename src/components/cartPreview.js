@@ -4,6 +4,8 @@ import languages from '../languages/languages';
 import { SHIPPING_COST } from '../globalVariables';
 
 const CartPreview = ({ props }) => {
+  const { cart, handleCartModal, deleteFromCart, locale } = props;
+
   const query = useStaticQuery(graphql`
     query {
       allDatoCmsPost {
@@ -28,9 +30,9 @@ const CartPreview = ({ props }) => {
   const getTotalPrice = () => {
     let total = 0;
     let shipping = false;
-    Object.entries(props.cart).map((entry) => {
+    Object.entries(cart).map((entry) => {
       if (entry[1].buyOption === 'Print') shipping = true;
-      total += findPrice(entry) * props.cart[entry[0]].counter;
+      total += findPrice(entry) * cart[entry[0]].counter;
       return '';
     });
 
@@ -38,44 +40,50 @@ const CartPreview = ({ props }) => {
   };
 
   const toPaymentClickHandler = () => {
+    handleCartModal('close');
+    setTimeout(() => {
+      handleCartModal('hide');
+    }, 750);
     navigate(`/payment`);
-    props.handleCartModal('close');
   };
 
   const deleteFromCartHandler = (e) => {
     const work =
-      e.target.closest('.cart_preview').firstChild.firstChild.childNodes[1]
+      e.target.closest('.cart_preview').firstChild.firstChild.childNodes[0]
         .dataset.title;
 
-    props.deleteFromCart(JSON.parse(work));
+    deleteFromCart(JSON.parse(work));
   };
 
   const closeCardHandler = () => {
-    props.handleCartModal('close');
+    handleCartModal('close');
     setTimeout(() => {
-      props.handleCartModal('hide');
+      handleCartModal('hide');
     }, 750);
   };
 
   return (
     <div className="cart_preview_container">
       <h2 className="cart_preview_upper_title">
-        {languages.shoppingCart[props.locale]}
+        {languages.shoppingCart[locale]}
       </h2>
-      <button className="cart_preview_close_btn" onClick={closeCardHandler}>
-        {languages.close[props.locale]}
+      <button
+        className="cart_preview_close_btn pill_btn_inverted"
+        onClick={closeCardHandler}
+      >
+        {languages.close[locale]}
       </button>
       <hr />
       <div className="cart_preview_works">
-        {Object.entries(props.cart).map((entry, i, arr) => {
+        {Object.entries(cart).map((entry, i, arr) => {
           const work = entry[1];
           return (
             <div key={i} className="cart_preview">
               <div className="cart_preview_content">
                 <div className="cart_preview_count_title">
-                  <p className="payment_work_number">
-                    {props.cart[entry[0]].counter + 'x'}
-                  </p>
+                  {/* <p className="payment_work_number">
+                    {cart[entry[0]].counter + 'x'}
+                  </p> */}
                   <Link
                     className="cart_preview_title"
                     data-title={JSON.stringify(work)}
@@ -88,13 +96,11 @@ const CartPreview = ({ props }) => {
                   </Link>
                 </div>
                 <p className="cart_preview_buy_option">
-                  {props.cart[entry[0]].buyOption}
+                  {cart[entry[0]].buyOption}
                 </p>
                 <p>
                   {'Price: ' +
-                    (findPrice(entry) * props.cart[entry[0]].counter).toFixed(
-                      2
-                    ) +
+                    (findPrice(entry) * cart[entry[0]].counter).toFixed(2) +
                     '€'}
                 </p>
               </div>
@@ -102,26 +108,26 @@ const CartPreview = ({ props }) => {
                 className="cart_preview_close_work_btn pill_btn_accent"
                 onClick={(e) => deleteFromCartHandler(e)}
               >
-                {languages.deleteFromCart[props.locale]}
+                {languages.deleteFromCart[locale]}
               </button>
               {i !== arr.length - 1 ? <hr className="cart_preview_hr" /> : ''}
             </div>
           );
         })}
       </div>
-      {Object.entries(props.cart).length === 0 ? '' : <hr />}
+      {Object.entries(cart).length === 0 ? '' : <hr />}
       <div className="cart_preview_footer">
         <h3 className="cart_preview_footer_total">
-          {Object.keys(props.cart).length > 0
+          {Object.keys(cart).length > 0
             ? 'Total ' + getTotalPrice() + '€'
             : 'No items yet.'}
         </h3>
-        {Object.keys(props.cart).length > 0 ? (
+        {Object.keys(cart).length > 0 ? (
           <button
-            className="cart_preview_payment_link"
+            className="cart_preview_payment_link pill_btn_inverted"
             onClick={toPaymentClickHandler}
           >
-            {languages.proceedPayment[props.locale]}
+            {languages.proceedPayment[locale]}
           </button>
         ) : (
           ''

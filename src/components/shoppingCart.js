@@ -9,20 +9,22 @@ import {
 } from '../actions';
 
 const ShoppingCart = (props) => {
+  const { cart, handleCartModal, cartModal } = props;
+
   const cartLength = () => {
     let allWorks = 0;
-    for (const key in props.cart) {
-      allWorks += props.cart[key].counter;
+    for (const key in cart) {
+      allWorks += cart[key].counter;
     }
     return allWorks;
   };
 
   const cartHandler = () => {
-    if (props.cartModal === 'hidden') props.handleCartModal('show');
+    if (cartModal === 'hidden') handleCartModal('show');
     else {
-      props.handleCartModal('close');
+      handleCartModal('close');
       setTimeout(() => {
-        props.handleCartModal('hide');
+        handleCartModal('hide');
       }, 750);
     }
   };
@@ -33,7 +35,7 @@ const ShoppingCart = (props) => {
         <FaShoppingCart className="cart_icon " />
       </button>
       <p className="cart_number">{cartLength()}</p>
-      <div className={`cart_popup ${props.cartModal}`}>
+      <div className={`cart_popup ${cartModal}`}>
         <CartPreview props={props} />
       </div>
     </div>

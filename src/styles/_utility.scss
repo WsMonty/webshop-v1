@@ -1,11 +1,13 @@
 .pill_btn_accent {
   height: 2.5em;
-  background-color: $clr-primary;
+  background-color: $clr-secondary;
   color: $clr-neutral-dark;
   cursor: pointer;
   border: none;
   padding: 0 1em;
   border-radius: 2em;
+
+  transition: 200ms ease-in-out;
 
   &:hover {
     background-color: $clr-neutral-dark;
@@ -22,6 +24,8 @@
   padding: 0 1em;
   border-radius: 2em;
 
+  transition: 200ms ease-in-out;
+
   &:hover {
     background-color: $clr-neutral-dark;
     color: $clr-accent;
@@ -30,4 +34,8 @@
 
 .hidden {
   display: none;
+}
+
+.url {
+  color: $clr-accent;
 }

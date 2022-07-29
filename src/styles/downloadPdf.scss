@@ -32,3 +32,12 @@
     color: $clr-accent;
   }
 }
+
+@media only screen and (max-width: 600px) {
+  .download {
+    &_content {
+      width: 100vw;
+      padding: 1em;
+    }
+  }
+}

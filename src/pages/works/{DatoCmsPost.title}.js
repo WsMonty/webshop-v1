@@ -4,33 +4,33 @@ import { addToCart, handleCartModal } from '../../actions';
 import { connect } from 'react-redux';
 import languages from '../../languages/languages';
 
-const WorkPage = (props) => {
+const WorkPage = ({ cart, addToCart, locale, data, pageContext }) => {
   const rightWork = () => {
     const result = [];
-    props.data.allDatoCmsPost.edges.forEach((entry) => {
-      if (props.pageContext.title === entry.node.title) result.push(entry.node);
+    data.allDatoCmsPost.edges.forEach((entry) => {
+      if (pageContext.title === entry.node.title) result.push(entry.node);
     });
     return result.filter((entry) => {
-      if (entry.locale === props.locale) {
+      if (entry.locale === locale) {
         return entry;
       }
       return '';
     });
   };
 
-  const [data] = rightWork();
+  const [workData] = rightWork();
 
   const isInCart = () => {
-    const checkIfInCart = Object.keys(props.cart).some((work) =>
-      work.includes(data.title)
+    const checkIfInCart = Object.keys(cart).some((work) =>
+      work.includes(workData.title)
     );
 
     return checkIfInCart;
   };
 
   const addToCartHandler = () => {
-    const work = { title: data.title };
-    props.addToCart(work);
+    const work = { title: workData.title };
+    addToCart(work);
   };
 
   // const showOptionsHandler = () => {
@@ -52,8 +52,8 @@ const WorkPage = (props) => {
   //     options: formValue,
   //   };
 
-  //   props.addToCart(work);
-  //   props.handleCartModal('show');
+  //   addToCart(work);
+  //   handleCartModal('show');
   //   // e.target.closest('.addToCart_dialog').close();
   //   e.target.closest('.work_page_dialog').style.display = 'none';
   // };
@@ -62,24 +62,24 @@ const WorkPage = (props) => {
     <div className="work_page">
       <img
         className="work_page_image"
-        src={data.previewImage.url}
-        alt={`Preview for ${data.title}`}
+        src={workData.previewImage.url}
+        alt={`Preview for ${workData.title}`}
       />
       <div className="work_page_content_container">
         <div className="work_page_content">
-          <h2 className="work_page_title">{data.title}</h2>
+          <h2 className="work_page_title">{workData.title}</h2>
           <p className="work_page_composer">
-            <span>{data.composer}</span>
+            <span>{workData.composer}</span>
           </p>
-          <p className="work_page_description">{data.descriptionText}</p>
+          <p className="work_page_description">{workData.descriptionText}</p>
         </div>
 
         <div className="work_page_addToCart">
           {isInCart() ? (
-            <p className="work_page_isCartInfo">Is already in cart</p>
+            <p className="work_page_isCartInfo">{languages.isInCart[locale]}</p>
           ) : (
             <button className="addToCart_work_btn" onClick={addToCartHandler}>
-              {languages.addToCart[props.locale]}
+              {languages.addToCart[locale]}
             </button>
           )}
 
@@ -104,7 +104,7 @@ const WorkPage = (props) => {
                 className="work_page_toCart-btn pill-btn-inverted"
                 type="submit"
               >
-                {languages.addToCart[props.locale]}
+                {languages.addToCart[locale]}
               </button>
             </form> */}
           </div>
