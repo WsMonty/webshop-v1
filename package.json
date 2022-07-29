@@ -45,5 +45,10 @@
     "react-scroll-to-top": "^3.0.0",
     "redux": "^4.2.0",
     "sass": "^1.54.0"
+  },
+  "devDependencies": {
+    "ansi-html": "^0.0.9",
+    "jpeg-js": "^0.4.4",
+    "parse-path": "^6.0.0"
   }
 }
