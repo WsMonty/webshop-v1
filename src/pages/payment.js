@@ -52,7 +52,7 @@ const Payment = (props) => {
     });
 
     axios
-      .post('https://backend-webshop-v1.herokuapp.com/test', {
+      .post('https://backend-webshop-v1.herokuapp.com/sendClientMail', {
         works: purchasedWorks,
         userMail: document.querySelector('.payment_form_email_input').value,
       })
