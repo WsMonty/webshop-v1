@@ -40,7 +40,8 @@ const Payment = (props) => {
   const data = query.allDatoCmsPost.nodes;
   const fileLinks = query.allDatoCmsFileLink.nodes;
 
-  const handleSend = () => {
+  const handleSend = (e) => {
+    e.preventDefault();
     emptyCart();
     closeCartModal();
 
@@ -52,12 +53,12 @@ const Payment = (props) => {
     });
 
     axios
-      .post('https://backend-webshop-v1.herokuapp.com/test', {
+      .post('https://backend-webshop-v1.herokuapp.com/sendClientMail', {
         works: purchasedWorks,
         userMail: document.querySelector('.payment_form_email_input').value,
       })
       .then((res) => {
-        if (res.status === 200) return;
+        if (res.status === 200) return console.log(res);
       })
       .catch((err) => console.log(err));
     const works = purchasedWorks.map((work) => work.title);
@@ -161,7 +162,7 @@ const Payment = (props) => {
         </h3>
       </div>
       <div className="payment_container">
-        <form className="payment_form" onSubmit={(e) => handleSend(e)}>
+        <form className="payment_form">
           <label className="payment_form_email_input_label" htmlFor="email">
             1. Your email to get your PDFs!
           </label>
