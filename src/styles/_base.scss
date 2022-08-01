@@ -33,3 +33,18 @@ body {
 .hidden {
   display: none;
 }
+
+.hidden_slow {
+  animation: hide 500ms ease-in-out forwards;
+}
+
+@keyframes hide {
+  0% {
+    opacity: 1;
+    display: block;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}

@@ -5,6 +5,7 @@ import { setLocale } from '../actions/index.js';
 import { connect } from 'react-redux';
 import { RiMenu5Fill } from 'react-icons/ri';
 import languages from '../languages/languages.js';
+import { StaticImage } from 'gatsby-plugin-image';
 
 const Navbar = ({ setLocale, locale }) => {
   // Change language on site
@@ -40,6 +41,20 @@ const Navbar = ({ setLocale, locale }) => {
 
   // Mobile navbar menu
   const hamburgerHandler = () => {
+    if (window.innerWidth > 600) return;
+    if (
+      !document.querySelector('.navbar').classList.contains('mobile_nav_active')
+    ) {
+      document.querySelector('.locales_list').classList.add('hidden_slow');
+      document.querySelector('.cart').classList.add('hidden_slow');
+      document.querySelector('.navbar_logo').classList.add('hidden_slow');
+    } else {
+      setTimeout(() => {
+        document.querySelector('.locales_list').classList.remove('hidden_slow');
+        document.querySelector('.cart').classList.remove('hidden_slow');
+        document.querySelector('.navbar_logo').classList.remove('hidden_slow');
+      }, 800);
+    }
     document.querySelector('.navbar').classList.toggle('mobile_nav_active');
     closeWorksOptions();
     setTimeout(() => {
@@ -74,6 +89,17 @@ const Navbar = ({ setLocale, locale }) => {
       <button className="navbar_hamburger_btn" onClick={hamburgerHandler}>
         <RiMenu5Fill className="navbar_hamburger" />
       </button>
+      <StaticImage
+        className="navbar_logo"
+        src="../images/logo_white.png"
+        alt="Logo for the Webshop"
+        placeholder="blurred"
+        layout="constrained"
+        width={75}
+        style={{
+          zIndex: '100',
+        }}
+      />
       <ul className="navbar_list">
         <li className="link_list">
           <button
@@ -145,45 +171,30 @@ const Navbar = ({ setLocale, locale }) => {
           );
         })}
       </ul>
-      <div className="locales_list">
-        <select
-          id="nav_locales_select"
-          onChange={(e) => localeChanger(e)}
-          value={locale}
-        >
-          <option id="en" value={locales[0].loc}>
-            {locales[0].text}
-          </option>
-          <option id="de" value={locales[1].loc}>
-            {locales[1].text}
-          </option>
-          <option id="de-LU" value={locales[2].loc}>
-            {locales[2].text}
-          </option>
-          <option id="fr" value={locales[3].loc}>
-            {locales[3].text}
-          </option>
-        </select>
-      </div>
-
-      {/* List of flags in navbar instead of dropdown menu */}
-      {/* <ul className="locales_list">
-        {locales.map((l) => {
-          return (
-            <li key={l.loc} className="link_list locale_link_list">
-              <Link
-                className="locale_link"
-                onClick={() => dispatch(setLocale(`${l.loc}`))}
-                to={''}
-              >
-                {l.text}
-              </Link>
-            </li>
-          );
-        })}
-      </ul> */}
-      <div className="cart_icon_container">
-        <ShoppingCart />
+      <div className="navbar_right_icons">
+        <div className="locales_list">
+          <select
+            id="nav_locales_select"
+            onChange={(e) => localeChanger(e)}
+            value={locale}
+          >
+            <option id="en" value={locales[0].loc}>
+              {locales[0].text}
+            </option>
+            <option id="de" value={locales[1].loc}>
+              {locales[1].text}
+            </option>
+            <option id="de-LU" value={locales[2].loc}>
+              {locales[2].text}
+            </option>
+            <option id="fr" value={locales[3].loc}>
+              {locales[3].text}
+            </option>
+          </select>
+        </div>
+        <div className="cart_icon_container">
+          <ShoppingCart />
+        </div>
       </div>
     </div>
   );

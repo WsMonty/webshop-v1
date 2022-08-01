@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `Webshop`,
+    title: `Grethen Edition`,
     siteUrl: `https://www.yourdomain.tld`,
   },
   plugins: [
@@ -14,6 +14,12 @@ module.exports = {
       resolve: 'gatsby-plugin-google-fonts',
       options: {
         fonts: ['Catamaran'],
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-manifest',
+      options: {
+        icon: './src/images/logo_yellow.png',
       },
     },
     'gatsby-plugin-sass',

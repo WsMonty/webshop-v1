@@ -6,7 +6,7 @@
     color: $clr-secondary;
 
     &_container {
-      position: absolute;
+      // position: absolute;
       right: 0;
       top: 1em;
       padding: 1em;
@@ -156,11 +156,6 @@
 
 @media only screen and (max-width: 600px) {
   .cart {
-    &_icon_container {
-      right: 1em;
-      top: 0.3em;
-    }
-
     &_popup {
       width: 97vw;
       right: -3em;
