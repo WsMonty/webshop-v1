@@ -102,6 +102,13 @@ const languages = {
     'de-LU': 'Komponisten',
     fr: 'Componistes',
   },
+  paymentLoading: {
+    en: 'Payment options are loading, this usually takes a few seconds.',
+    de: 'Bezahlmöglichkeiten werden geladen! Dies dauert normalerweise ein paar Sekunden.',
+    'de-LU':
+      "d'Bezuelméiglechkeeten gi gelueden! Dëst dauert normalerweis e puer Sekonne.",
+    fr: 'Les options de paiement seront disponibles en quelque secondes.',
+  },
   x: {
     en: '',
     de: '',

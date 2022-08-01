@@ -7,7 +7,11 @@ import {
   purchase,
   closeCartModal,
 } from '../actions';
-import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
+import {
+  PayPalScriptProvider,
+  PayPalButtons,
+  usePayPalScriptReducer,
+} from '@paypal/react-paypal-js';
 import languages from '../languages/languages';
 import { SHIPPING_COST } from '../globalVariables';
 // import fileLinks from '../languages/fileLinks';
@@ -70,6 +74,30 @@ const Payment = (props) => {
       (entry) => entry.title === workTitle[1].title
     ).price;
     return workPrice;
+  };
+
+  const ShowSpinner = () => {
+    const [{ isPending }] = usePayPalScriptReducer();
+
+    return (
+      <>
+        {isPending ? (
+          <div className="spinner_content">
+            <div class="lds-roller">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+            <p className="spinner_text">{languages.paymentLoading[locale]}</p>
+          </div>
+        ) : null}
+      </>
+    );
   };
 
   const getTotalPrice = () => {
@@ -184,6 +212,7 @@ const Payment = (props) => {
             currency: 'EUR',
           }}
         >
+          <ShowSpinner />
           <PayPalButtons
             className="paypal_btn"
             style={{ color: 'black' }}
