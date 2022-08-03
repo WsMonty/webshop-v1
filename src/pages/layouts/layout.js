@@ -3,6 +3,7 @@ import Navbar from '../../components/navbar.js';
 import '../../styles/main.scss';
 import { Helmet } from 'react-helmet';
 import { graphql, useStaticQuery } from 'gatsby';
+import CookieConsent from 'react-cookie-consent';
 
 const Layout = ({ children }) => {
   const query = useStaticQuery(graphql`
@@ -26,6 +27,13 @@ const Layout = ({ children }) => {
         <Navbar />
         {children}
       </div>
+      <CookieConsent
+        cookieName="Google Fonts"
+        buttonStyle={{ backgroundColor: '#FFCC4A', fontSize: '13px' }}
+        style={{ background: '#1E1E1E' }}
+      >
+        This website uses cookies to improve user experience!
+      </CookieConsent>
     </div>
   );
 };

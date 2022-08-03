@@ -3,6 +3,7 @@ import { graphql } from 'gatsby';
 import { addToCart, handleCartModal } from '../../actions';
 import { connect } from 'react-redux';
 import languages from '../../languages/languages';
+import { GatsbyImage } from 'gatsby-plugin-image';
 
 const WorkPage = ({ cart, addToCart, locale, data, pageContext }) => {
   const rightWork = () => {
@@ -60,10 +61,9 @@ const WorkPage = ({ cart, addToCart, locale, data, pageContext }) => {
 
   return (
     <div className="work_page">
-      <img
-        className="work_page_image"
-        src={workData.previewImage.url}
-        alt={`Preview for ${workData.title}`}
+      <GatsbyImage
+        image={workData.previewImage.gatsbyImageData}
+        alt={workData.title}
       />
       <div className="work_page_content_container">
         <div className="work_page_content">
@@ -143,6 +143,7 @@ export const query = graphql`
           composer
           previewImage {
             url
+            gatsbyImageData(placeholder: BLURRED, layout: CONSTRAINED)
           }
           locale
         }

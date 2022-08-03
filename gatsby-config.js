@@ -14,6 +14,7 @@ module.exports = {
       resolve: 'gatsby-plugin-google-fonts',
       options: {
         fonts: ['Catamaran'],
+        display: 'swap',
       },
     },
     {
@@ -22,6 +23,7 @@ module.exports = {
         icon: './src/images/logo_yellow.png',
       },
     },
+
     'gatsby-plugin-sass',
     'gatsby-plugin-image',
 

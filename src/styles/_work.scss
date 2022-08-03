@@ -345,4 +345,16 @@
   .addToCart_btn {
     opacity: 1;
   }
+
+  .work_page {
+    flex-direction: column;
+
+    &_title {
+      font-size: 3em;
+    }
+    &_composer {
+      font-size: 2em;
+      margin-bottom: 0.5em;
+    }
+  }
 }
