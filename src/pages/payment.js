@@ -208,7 +208,7 @@ const Payment = (props) => {
         <PayPalScriptProvider
           options={{
             'client-id':
-              'AZSSY3UljJBk9qQrc7QpMYmmLn2e2necjjf0580S4D8BKz0c9uVWLyRvrqYi4Lh8ga1ddtcbkNO69IZ7',
+              'AZuOJhphk2lqHP76TcBJzx9pernNN8M0ZphLh8u04xv8HCLCF-KzP-FKie_mLKYAdLf3N-59ZqRzgQWq',
             currency: 'EUR',
           }}
         >
