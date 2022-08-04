@@ -9,11 +9,11 @@ const Contact = (props) => {
       <h1 className="contact_name">Gilles Grethen</h1>
       <a
         className="contact_information url"
-        href="mailto:gilles@gillesgrethen.com"
+        href="mailto:info@grethen-edition.com"
         target="_blank"
         rel="noreferrer"
       >
-        gilles@gillesgrethen.com
+        info@grethen-edition.com
       </a>
     </div>
   );
