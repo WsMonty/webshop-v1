@@ -8,7 +8,7 @@ const Contact = (props) => {
       <p className="contact_phrase">{languages.concerns[props.locale]}</p>
       <h1 className="contact_name">Gilles Grethen</h1>
       <a
-        className="contact_information"
+        className="contact_information url"
         href="mailto:gilles@gillesgrethen.com"
         target="_blank"
         rel="noreferrer"

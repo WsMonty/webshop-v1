@@ -84,22 +84,32 @@ const Navbar = ({ setLocale, locale }) => {
       .classList.add('hidden');
   };
 
+  const deactivateNavbar = () => {
+    document
+      .querySelectorAll('.link')
+      .forEach((link) => link.classList.remove('selected'));
+
+    closeWorksOptions();
+  };
+
   return (
     <div className="navbar">
       <button className="navbar_hamburger_btn" onClick={hamburgerHandler}>
         <RiMenu5Fill className="navbar_hamburger" />
       </button>
-      <StaticImage
-        className="navbar_logo"
-        src="../images/logo_white.png"
-        alt="Logo for the Webshop"
-        placeholder="blurred"
-        layout="constrained"
-        width={75}
-        style={{
-          zIndex: '100',
-        }}
-      />
+      <Link to="/" onClick={deactivateNavbar}>
+        <StaticImage
+          className="navbar_logo"
+          src="../images/logo_white.png"
+          alt="Logo for the Webshop"
+          placeholder="blurred"
+          layout="constrained"
+          width={75}
+          style={{
+            zIndex: '100',
+          }}
+        />
+      </Link>
       <ul className="navbar_list">
         <li className="link_list">
           <button

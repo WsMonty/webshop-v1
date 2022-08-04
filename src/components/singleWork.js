@@ -84,37 +84,14 @@ const SingleWork = ({ props, product, query, i }) => {
     return checkIfInCart;
   };
 
-  ///////////// Only needed if printing and shipping scores as well
-  // const addToCartClickHandler = (e) => {
-  //   e.preventDefault();
-  //   const formData = new FormData(e.target);
-  //   const formValue = Object.fromEntries(formData).options;
-  //   const workTitle = e.target.closest('.work_options').dataset.title;
-  //   const work = {
-  //     title: workTitle.slice(0, workTitle.indexOf('_')),
-  //     options: formValue,
-  //   };
-
-  //   props.addToCart(work);
-  //   props.handleCartModal('show');
-  //   // e.target.closest('.addToCart_dialog').close();
-  //   e.target.closest('.work_options').style.display = 'none';
-
-  //   document.querySelector(
-  //     `[data-title="${workTitle.slice(0, workTitle.indexOf('_'))}"]`
-  //   ).style.display = 'flex';
-  // };
-
-  // const changePrice = (e) => {
-  //   const priceEl = e.target
-  //     .closest('.work_options')
-  //     .querySelector('.work_options_price');
-  //   const price = e.target.closest('.work_options').dataset.price;
-
-  //   e.target.value === 'Print'
-  //     ? (priceEl.textContent = +price + SHIPPING_COST + '€')
-  //     : (priceEl.textContent = price + '€');
-  // };
+  // Check if more composers and therefore too big for card
+  const checkLengthUnder20Char = (str) => {
+    return str.split('').length < 20 ? (
+      <span>{str}</span>
+    ) : (
+      <span style={{ fontSize: '1em' }}>{str}</span>
+    );
+  };
 
   return (
     <div key={`work-${i}`} className="work_card_container">
@@ -141,7 +118,7 @@ const SingleWork = ({ props, product, query, i }) => {
           <h2 className="work_title">{product.node.title}</h2>
 
           <p className="work_composer">
-            <span>{product.node.composer}</span>
+            {checkLengthUnder20Char(product.node.composer)}
           </p>
           {query.allDatoCmsComposer.edges
             .map((comp) => comp.node.name)
@@ -195,8 +172,62 @@ const SingleWork = ({ props, product, query, i }) => {
           {languages.goBack[locale]}
         </button>
 
-        {/* In Case of printing and shipping!!! */}
-        {/* <form
+        {isInCart() ? (
+          <p className="work_options_isCartInfo">Is already in cart</p>
+        ) : (
+          <button
+            className="work_options_submit_btn pill_btn_inverted"
+            onClick={(e) => addToCartClickHandlerNoShipping(e)}
+          >
+            {languages.addToCart[locale]}
+          </button>
+        )}
+      </div>
+      <div className="work_expand_animation hidden"></div>
+      <div className="work_alreadyInCart">
+        <p>This is already in your shopping cart 😀</p>
+      </div>
+    </div>
+  );
+};
+
+export default SingleWork;
+
+///////////// Only needed if printing and shipping scores as well
+// const addToCartClickHandler = (e) => {
+//   e.preventDefault();
+//   const formData = new FormData(e.target);
+//   const formValue = Object.fromEntries(formData).options;
+//   const workTitle = e.target.closest('.work_options').dataset.title;
+//   const work = {
+//     title: workTitle.slice(0, workTitle.indexOf('_')),
+//     options: formValue,
+//   };
+
+//   props.addToCart(work);
+//   props.handleCartModal('show');
+//   // e.target.closest('.addToCart_dialog').close();
+//   e.target.closest('.work_options').style.display = 'none';
+
+//   document.querySelector(
+//     `[data-title="${workTitle.slice(0, workTitle.indexOf('_'))}"]`
+//   ).style.display = 'flex';
+// };
+
+// const changePrice = (e) => {
+//   const priceEl = e.target
+//     .closest('.work_options')
+//     .querySelector('.work_options_price');
+//   const price = e.target.closest('.work_options').dataset.price;
+
+//   e.target.value === 'Print'
+//     ? (priceEl.textContent = +price + SHIPPING_COST + '€')
+//     : (priceEl.textContent = price + '€');
+// };
+
+/* In Case of printing and shipping!!! */
+
+/* <form
                 className="addToCart_dialog_form"
                 onSubmit={(e) => addToCartClickHandler(e)}
               >
@@ -229,25 +260,4 @@ const SingleWork = ({ props, product, query, i }) => {
                 >
                   {languages.addToCart[locale]}
                 </button>
-              </form> */}
-
-        {isInCart() ? (
-          <p className="work_options_isCartInfo">Is already in cart</p>
-        ) : (
-          <button
-            className="work_options_submit_btn pill_btn_inverted"
-            onClick={(e) => addToCartClickHandlerNoShipping(e)}
-          >
-            {languages.addToCart[locale]}
-          </button>
-        )}
-      </div>
-      <div className="work_expand_animation hidden"></div>
-      <div className="work_alreadyInCart">
-        <p>This is already in your shopping cart 😀</p>
-      </div>
-    </div>
-  );
-};
-
-export default SingleWork;
+              </form> */
