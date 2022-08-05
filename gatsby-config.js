@@ -30,5 +30,6 @@ module.exports = {
     'gatsby-plugin-gatsby-cloud',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-netlify',
+    'gatsby-plugin-next-seo',
   ],
 };
