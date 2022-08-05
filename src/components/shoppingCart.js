@@ -34,7 +34,7 @@ const ShoppingCart = (props) => {
       <button className="cart_btn" onClick={cartHandler}>
         <FaShoppingCart className="cart_icon " />
       </button>
-      <p className="cart_number">{cartLength()}</p>
+      {cartLength() === 0 ? '' : <p className="cart_number">{cartLength()}</p>}
       <div className={`cart_popup ${cartModal}`}>
         <CartPreview props={props} />
       </div>
