@@ -23,10 +23,9 @@ module.exports = {
         icon: './src/images/logo_yellow_square.png',
       },
     },
-
     'gatsby-plugin-sass',
     'gatsby-plugin-image',
-
+    'gatsby-plugin-smoothscroll',
     'gatsby-plugin-sharp',
     'gatsby-plugin-gatsby-cloud',
     'gatsby-plugin-react-helmet',

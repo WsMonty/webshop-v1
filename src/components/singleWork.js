@@ -1,6 +1,7 @@
 import React from 'react';
 import languages from '../languages/languages';
 import { Link, navigate } from 'gatsby';
+import scrollToTop from '../helpers/scrollToTop';
 
 const SingleWork = ({ props, product, query, i }) => {
   const { locale } = props;
@@ -49,6 +50,7 @@ const SingleWork = ({ props, product, query, i }) => {
         currentWorkEl.style.display = 'flex';
       }
     }
+    scrollToTop();
   };
 
   // show more information card

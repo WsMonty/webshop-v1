@@ -34,30 +34,9 @@ const WorkPage = ({ cart, addToCart, locale, data, pageContext }) => {
     addToCart(work);
   };
 
-  // const showOptionsHandler = () => {
-  //   const dialog = document.querySelector('.work_page_dialog');
-  //   if (dialog.style.display === '') dialog.style.display = 'none';
-  //   dialog.style.display === 'none'
-  //     ? (dialog.style.display = 'block')
-  //     : (dialog.style.display = 'none');
-  // };
-
-  // const addToCartHandler = (e) => {
-  //   e.preventDefault();
-  //   const formData = new FormData(e.target);
-  //   const formValue = Object.fromEntries(formData).options;
-  //   const workTitle = e.target.closest('.work_page_addToCart')
-  //     .previousElementSibling.firstChild.textContent;
-  //   const work = {
-  //     title: workTitle,
-  //     options: formValue,
-  //   };
-
-  //   addToCart(work);
-  //   handleCartModal('show');
-  //   // e.target.closest('.addToCart_dialog').close();
-  //   e.target.closest('.work_page_dialog').style.display = 'none';
-  // };
+  const transformUrl = (url) => {
+    return url.replace(/watch\?v=/, 'embed/');
+  };
 
   return (
     <div className="work_page">
@@ -83,32 +62,22 @@ const WorkPage = ({ cart, addToCart, locale, data, pageContext }) => {
             </button>
           )}
 
-          <div className="work_page_dialog">
-            {/* <form
-              className="work_page_form"
-              onSubmit={(e) => addToCartHandler(e)}
-            >
-              <input
-                type="radio"
-                id="print"
-                value="Print"
-                name="options"
-                required
-              />
-              <label htmlFor="print">Print</label>
-              <br />
-              <input type="radio" id="pdf" value="PDF" name="options" />
-              <label htmlFor="print">PDF</label>
-              <br />
-              <button
-                className="work_page_toCart-btn pill-btn-inverted"
-                type="submit"
-              >
-                {languages.addToCart[locale]}
-              </button>
-            </form> */}
-          </div>
+          <div className="work_page_dialog"></div>
         </div>
+        {workData.previewVideo ? (
+          <iframe
+            className="work_page_video"
+            width="560"
+            height="315"
+            src={transformUrl(workData.previewVideo.url)}
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+        ) : (
+          ''
+        )}
       </div>
     </div>
   );
@@ -146,8 +115,61 @@ export const query = graphql`
             gatsbyImageData(placeholder: BLURRED, layout: CONSTRAINED)
           }
           locale
+          previewVideo {
+            url
+          }
         }
       }
     }
   }
 `;
+
+////// In case of shipping
+
+// const showOptionsHandler = () => {
+//   const dialog = document.querySelector('.work_page_dialog');
+//   if (dialog.style.display === '') dialog.style.display = 'none';
+//   dialog.style.display === 'none'
+//     ? (dialog.style.display = 'block')
+//     : (dialog.style.display = 'none');
+// };
+
+// const addToCartHandler = (e) => {
+//   e.preventDefault();
+//   const formData = new FormData(e.target);
+//   const formValue = Object.fromEntries(formData).options;
+//   const workTitle = e.target.closest('.work_page_addToCart')
+//     .previousElementSibling.firstChild.textContent;
+//   const work = {
+//     title: workTitle,
+//     options: formValue,
+//   };
+
+//   addToCart(work);
+//   handleCartModal('show');
+//   // e.target.closest('.addToCart_dialog').close();
+//   e.target.closest('.work_page_dialog').style.display = 'none';
+// };
+/* <form
+              className="work_page_form"
+              onSubmit={(e) => addToCartHandler(e)}
+            >
+              <input
+                type="radio"
+                id="print"
+                value="Print"
+                name="options"
+                required
+              />
+              <label htmlFor="print">Print</label>
+              <br />
+              <input type="radio" id="pdf" value="PDF" name="options" />
+              <label htmlFor="print">PDF</label>
+              <br />
+              <button
+                className="work_page_toCart-btn pill-btn-inverted"
+                type="submit"
+              >
+                {languages.addToCart[locale]}
+              </button>
+            </form> */
