@@ -209,6 +209,7 @@
 
   &_video {
     margin: 2em;
+    width: 640px;
   }
 
   &_addToCart {
@@ -367,8 +368,8 @@
     }
 
     &_video {
-      width: 90%;
-      height: fit-content;
+      transform: scale(0.5);
+      transform-origin: top left;
       margin: 1em;
     }
   }

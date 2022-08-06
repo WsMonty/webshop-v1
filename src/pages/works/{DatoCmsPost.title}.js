@@ -4,6 +4,7 @@ import { addToCart, handleCartModal } from '../../actions';
 import { connect } from 'react-redux';
 import languages from '../../languages/languages';
 import { GatsbyImage } from 'gatsby-plugin-image';
+import YouTube from 'react-youtube';
 
 const WorkPage = ({ cart, addToCart, locale, data, pageContext }) => {
   const rightWork = () => {
@@ -35,7 +36,8 @@ const WorkPage = ({ cart, addToCart, locale, data, pageContext }) => {
   };
 
   const transformUrl = (url) => {
-    return url.replace(/watch\?v=/, 'embed/');
+    // return url.replace(/watch\?v=/, 'embed/');
+    return url.replace(/https:\/\/www.youtube.com\/watch\?v=/, '');
   };
 
   return (
@@ -65,17 +67,21 @@ const WorkPage = ({ cart, addToCart, locale, data, pageContext }) => {
           <div className="work_page_dialog"></div>
         </div>
         {workData.previewVideo ? (
-          <iframe
+          <YouTube
             className="work_page_video"
-            width="560"
-            height="315"
-            src={transformUrl(workData.previewVideo.url)}
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
+            videoId={transformUrl(workData.previewVideo.url)}
+          />
         ) : (
+          // <iframe
+          //   className="work_page_video"
+          //   width="560"
+          //   height="315"
+          //   src={transformUrl(workData.previewVideo.url)}
+          //   title="YouTube video player"
+          //   frameBorder="0"
+          //   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          //   allowFullScreen
+          // ></iframe>
           ''
         )}
       </div>
