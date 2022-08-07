@@ -3,6 +3,7 @@ import { useStaticQuery, graphql } from 'gatsby';
 import SingleWork from '../../components/singleWork';
 import { addToCart, handleCartModal } from '../../actions';
 import { connect } from 'react-redux';
+import { GatsbySeo } from 'gatsby-plugin-next-seo';
 
 const Categories = (props) => {
   const query = useStaticQuery(graphql`
@@ -59,6 +60,13 @@ const Categories = (props) => {
 
   return (
     <div className="categories">
+      <GatsbySeo
+        title="Grethen Edition | Categories"
+        description="All works on Grethen Edition sorted by categories."
+        language="en"
+        noindex={false}
+        nofollow={false}
+      />
       <div className="categories_left_titles">
         {allCategories.map((cat, i) => {
           return (

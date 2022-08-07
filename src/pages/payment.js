@@ -16,6 +16,7 @@ import languages from '../languages/languages';
 import { SHIPPING_COST } from '../globalVariables';
 // import fileLinks from '../languages/fileLinks';
 import axios from 'axios';
+import { GatsbySeo } from 'gatsby-plugin-next-seo';
 
 const Payment = (props) => {
   const { cart, locale, purchase, emptyCart, closeCartModal } = props;
@@ -146,6 +147,11 @@ const Payment = (props) => {
 
   return (
     <div className="payment">
+      <GatsbySeo
+        title="Grethen Edition | Payment"
+        language="en"
+        nofollow={true}
+      />
       <h1 className="payment_title">{languages.shoppingCart[locale]}</h1>
       <div className="payment_content">
         {Object.entries(cart).map((entry, i) => {

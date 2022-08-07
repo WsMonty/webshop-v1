@@ -1,6 +1,7 @@
 import { useStaticQuery, graphql, Link } from 'gatsby';
 import React from 'react';
 import { GatsbyImage } from 'gatsby-plugin-image';
+import { GatsbySeo } from 'gatsby-plugin-next-seo';
 
 const Composers = () => {
   const query = useStaticQuery(graphql`
@@ -31,6 +32,13 @@ const Composers = () => {
 
   return (
     <div className="composers">
+      <GatsbySeo
+        title="Grethen Edition | Composers"
+        description="All the composers represented by Grethen Edition."
+        language="en"
+        noindex={false}
+        nofollow={false}
+      />
       {uniqueData.map((comp, i) => {
         return (
           <div key={`composer-${i + 1}`} className="composer_list">

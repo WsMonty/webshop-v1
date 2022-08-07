@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import FAQs from '../languages/FAQs';
 import { FaPlus } from 'react-icons/fa';
+import { GatsbySeo } from 'gatsby-plugin-next-seo';
 
 const About = (props) => {
   const revealAnswerHandler = (e) => {
@@ -15,6 +16,13 @@ const About = (props) => {
 
   return (
     <div className="about_container">
+      <GatsbySeo
+        title="Grethen Edition | About"
+        description="About page for Grethen Edition with FAQs."
+        language="en"
+        noindex={false}
+        nofollow={false}
+      />
       <h1>FAQs</h1>
       <section className="FAQ">
         <div className="FAQ_container">

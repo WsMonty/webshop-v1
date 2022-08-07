@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import languages from '../../languages/languages';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import YouTube from 'react-youtube';
+import { GatsbySeo } from 'gatsby-plugin-next-seo';
 
 const WorkPage = ({ cart, addToCart, locale, data, pageContext }) => {
   const rightWork = () => {
@@ -42,6 +43,13 @@ const WorkPage = ({ cart, addToCart, locale, data, pageContext }) => {
 
   return (
     <div className="work_page">
+      <GatsbySeo
+        title={`Grethen Edition | ${workData.title}`}
+        description={`Product page for the work '${workData.title}'`}
+        language="en"
+        noindex={false}
+        nofollow={false}
+      />
       <GatsbyImage
         image={workData.previewImage.gatsbyImageData}
         alt={workData.title}

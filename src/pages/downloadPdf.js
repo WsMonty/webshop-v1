@@ -3,6 +3,7 @@ import { emptyPurchased } from '../actions';
 import { connect } from 'react-redux';
 import languages from '../languages/languages';
 import { useStaticQuery, graphql } from 'gatsby';
+import { GatsbySeo } from 'gatsby-plugin-next-seo';
 
 const DownloadPdf = (props) => {
   const query = useStaticQuery(graphql`
@@ -21,6 +22,11 @@ const DownloadPdf = (props) => {
 
   return (
     <div className="download">
+      <GatsbySeo
+        title="Grethen Edition | Download PDFs"
+        language="en"
+        nofollow={true}
+      />
       <div className="download_content">
         <h1 className="download_title">{languages.download[locale]}</h1>
         {purchased.map((work, i) => {
