@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `Grethen Edition`,
-    siteUrl: `https://www.yourdomain.tld`,
+    siteUrl: `https://grethen-edition.com`,
   },
   plugins: [
     {
@@ -55,5 +55,6 @@ module.exports = {
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-netlify',
     'gatsby-plugin-next-seo',
+    'gatsby-plugin-sitemap',
   ],
 };

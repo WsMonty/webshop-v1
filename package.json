@@ -34,6 +34,7 @@
     "gatsby-plugin-react-redux": "^1.1.0",
     "gatsby-plugin-sass": "^5.19.0",
     "gatsby-plugin-sharp": "^4.19.0",
+    "gatsby-plugin-sitemap": "^5.20.0",
     "gatsby-plugin-smoothscroll": "^1.2.0",
     "gatsby-react-router-scroll": "^5.19.0",
     "gatsby-source-datocms": "^4.0.4",
