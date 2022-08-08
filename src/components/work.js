@@ -5,7 +5,6 @@ import createSearchCodes from '../helpers/createSearchCodes.js';
 import { connect } from 'react-redux';
 import { addToCart, handleCartModal } from '../actions/index.js';
 import SingleWork from './singleWork.js';
-// import { SHIPPING_COST } from '../globalVariables';
 
 const Work = (props) => {
   const query = useStaticQuery(graphql`
@@ -18,6 +17,7 @@ const Work = (props) => {
             descriptionTextShort
             previewImage {
               url
+              gatsbyImageData(width: 400, placeholder: BLURRED)
             }
             locale
             date

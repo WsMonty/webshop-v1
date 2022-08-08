@@ -2,6 +2,7 @@ import React from 'react';
 import languages from '../languages/languages';
 import { Link, navigate } from 'gatsby';
 import scrollToTop from '../helpers/scrollToTop';
+import { GatsbyImage } from 'gatsby-plugin-image';
 
 const SingleWork = ({ props, product, query, i }) => {
   const { locale } = props;
@@ -110,11 +111,16 @@ const SingleWork = ({ props, product, query, i }) => {
             .replaceAll("'", '-')
             .toLowerCase()}`}
         >
-          <img
+          <GatsbyImage
+            className="work_image"
+            image={product.node.previewImage.gatsbyImageData}
+            alt={product.node.title}
+          />
+          {/* <img
             className="work_image"
             src={product.node.previewImage.url}
             alt={`Preview for ${product.node.title}`}
-          />
+          /> */}
         </Link>
         <div className="work_content_container">
           <h2 className="work_title">{product.node.title}</h2>

@@ -109,6 +109,12 @@ const languages = {
       "d'Bezuelméiglechkeeten gi gelueden! Dëst dauert normalerweis e puer Sekonne.",
     fr: 'Les options de paiement seront disponibles en quelque secondes.',
   },
+  allWorksfromComp: {
+    en: 'All works from this composer on Grethen Edition',
+    de: 'Alle Werke von diesem Komponisten auf Grethen Edition',
+    'de-LU': "All d'Wierker vun dësem Komponist op Grethen Edition",
+    fr: 'Toutes les oeuvres de ce componiste sur Grethen Edition',
+  },
   x: {
     en: '',
     de: '',

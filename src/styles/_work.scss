@@ -48,6 +48,8 @@
 
     border: 1px solid $clr-accent;
 
+    z-index: 90;
+
     .addToCart_btn {
       opacity: 1;
       pointer-events: all;
