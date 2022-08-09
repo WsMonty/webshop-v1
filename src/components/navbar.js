@@ -94,7 +94,11 @@ const Navbar = ({ setLocale, locale }) => {
 
   return (
     <div className="navbar">
-      <button className="navbar_hamburger_btn" onClick={hamburgerHandler}>
+      <button
+        className="navbar_hamburger_btn"
+        onClick={hamburgerHandler}
+        aria-label="Menu"
+      >
         <RiMenu5Fill className="navbar_hamburger" />
       </button>
       <Link to="/" onClick={deactivateNavbar}>

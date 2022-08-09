@@ -19,11 +19,11 @@ const FAQs = {
     fr: "J'ai supprimé mes PDfs par accident et je ne peux plus retrouver l'email. Que peux je faire?",
   },
   A2: {
-    en: 'Contact us here: insert mail and we will send you a new PDF right away!',
-    de: 'Kontaktieren Sie uns und wir schicken Ihnen ihre PDFs einfach noch einmal zu!',
+    en: 'Contact us here: info@grethen-edition.com and we will send you a new PDF right away!',
+    de: 'Kontaktieren Sie uns unter info@grethen-edition.com und wir schicken Ihnen ihre PDFs einfach noch einmal zu!',
     'de-LU':
-      'Schreift ons per Email an dann schecken mer Iech Äer PDFen einfach nach engkéier!',
-    fr: 'Contactez-nous par email et nous vous enverrons vos PDF encore une fois!',
+      'Schreift ons per Email op info@grethen-edition.com an dann schecken mer Iech Äer PDFen einfach nach engkéier!',
+    fr: 'Contactez-nous par email sur info@grethen-edition.com et nous vous enverrons vos PDF encore une fois!',
   },
   Q3: {
     en: 'Can I use the sheet music for a concert?',
