@@ -96,6 +96,14 @@ const SingleWork = ({ props, product, query, i }) => {
     );
   };
 
+  const checkLengthTitleUnder20Char = (str) => {
+    return str.split('').length > 30 ? (
+      <h2 style={{ margin: 0, fontSize: '1em' }}>{str}</h2>
+    ) : (
+      <h2 className="work_title">{str}</h2>
+    );
+  };
+
   return (
     <div key={`work-${i}`} className="work_card_container">
       <div
@@ -123,7 +131,7 @@ const SingleWork = ({ props, product, query, i }) => {
           /> */}
         </Link>
         <div className="work_content_container">
-          <h2 className="work_title">{product.node.title}</h2>
+          {checkLengthTitleUnder20Char(product.node.title)}
 
           <p className="work_composer">
             {checkLengthUnder20Char(product.node.composer)}

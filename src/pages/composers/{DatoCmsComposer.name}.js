@@ -35,8 +35,14 @@ const ComposerPage = (props) => {
           {data.website}
         </a>
       </p>
-      <p className="composer_page_bio">{data.bio}</p>
-      <GatsbyImage image={data.photo.gatsbyImageData} alt={data.name} />
+      <div className="composer_page_imgbio_container">
+        <GatsbyImage
+          className="composer_page_image"
+          image={data.photo.gatsbyImageData}
+          alt={data.name}
+        />
+        <p className="composer_page_bio">{data.bio}</p>
+      </div>
       <h1 className="composer_page_works_title">
         {languages.allWorksfromComp[locale]}
       </h1>

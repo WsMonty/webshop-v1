@@ -31,7 +31,11 @@ const ShoppingCart = (props) => {
 
   return (
     <div className="cart">
-      <button className="cart_btn" onClick={cartHandler}>
+      <button
+        className="cart_btn"
+        onClick={cartHandler}
+        aria-label="Shopping Cart"
+      >
         <FaShoppingCart className="cart_icon " />
       </button>
       {cartLength() === 0 ? '' : <p className="cart_number">{cartLength()}</p>}

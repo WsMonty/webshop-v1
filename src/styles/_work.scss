@@ -103,7 +103,7 @@
     &_moreInfo {
       font-size: 0.75em;
       margin-top: 0.25em;
-      color: $clr-lightgrey;
+      color: $clr-neutral-dark;
       text-decoration: underline;
     }
   }
@@ -352,6 +352,7 @@
   .work:hover {
     transform: none;
     transition: none;
+    border: none;
   }
 
   .addToCart_btn {

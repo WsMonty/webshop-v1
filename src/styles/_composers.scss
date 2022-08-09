@@ -22,8 +22,15 @@
 
 .composer_page {
   margin: 1em 1em 1em 2em;
+
   &_bio {
     width: 50%;
+    text-align: justify;
+    margin-left: 1em;
+  }
+
+  &_image {
+    margin: 1em;
   }
 
   &_website {
@@ -34,5 +41,28 @@
 
   &_works_title {
     margin: 2em;
+  }
+
+  &_imgbio_container {
+    display: flex;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .composer_page {
+    margin: 1.5em;
+
+    &_bio {
+      width: 100%;
+      margin: 0;
+    }
+
+    &_works_title {
+      margin: 2em 0 0 0;
+    }
+
+    &_imgbio_container {
+      display: block;
+    }
   }
 }

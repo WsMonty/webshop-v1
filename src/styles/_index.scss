@@ -1,0 +1,14 @@
+.index {
+  &_container {
+    padding: 2em;
+  }
+
+  &_title_link {
+    color: $clr-accent;
+    font-size: 0.75em;
+  }
+
+  &_welcome {
+    padding: 1em 0 0 1em;
+  }
+}

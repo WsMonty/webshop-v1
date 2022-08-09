@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import SingleWork from '../../components/singleWork';
 import { addToCart, handleCartModal } from '../../actions';
@@ -16,6 +16,7 @@ const Categories = (props) => {
             descriptionTextShort
             previewImage {
               url
+              gatsbyImageData
             }
             locale
             date
@@ -36,6 +37,9 @@ const Categories = (props) => {
 
   const [works, setWorks] = useState(data);
 
+  const { location } = props;
+  const catFromLink = location.state?.cat;
+
   const allCategories = [
     ...new Set(
       data.map((work) => {
@@ -44,19 +48,39 @@ const Categories = (props) => {
     ),
   ].sort();
 
-  const showCategoryHandler = (e) => {
-    document
-      .querySelectorAll('.categories_title')
-      .forEach((title) => title.classList.remove('categories_title_active'));
-    e.target.classList.add('categories_title_active');
+  const showCategoryHandler = useCallback(
+    (e, cat) => {
+      let category;
+      if (e !== null) {
+        category = e.target.dataset.category;
+      }
 
-    const category = e.target.dataset.category;
+      if (cat) {
+        category = cat;
+      }
 
-    const sortedWorks = data.filter(
-      (work) => work.node.descriptionTextShort === category
-    );
-    setWorks(sortedWorks);
-  };
+      document
+        .querySelectorAll('.categories_title')
+        .forEach((title) => title.classList.remove('categories_title_active'));
+
+      document
+        .querySelector(`[data-category='${category}']`)
+        .classList.add('categories_title_active');
+
+      const sortedWorks = data.filter(
+        (work) => work.node.descriptionTextShort === category
+      );
+      setWorks(sortedWorks);
+    },
+    [data]
+  );
+
+  const checkIfCategoryFromLink = useCallback(() => {
+    if (catFromLink) showCategoryHandler(null, catFromLink);
+    else showCategoryHandler(null, 'Big Band');
+  }, [catFromLink, showCategoryHandler]);
+
+  useEffect(() => checkIfCategoryFromLink(), [checkIfCategoryFromLink]);
 
   return (
     <div className="categories">

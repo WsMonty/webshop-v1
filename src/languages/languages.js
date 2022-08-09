@@ -115,6 +115,48 @@ const languages = {
     'de-LU': "All d'Wierker vun dësem Komponist op Grethen Edition",
     fr: 'Toutes les oeuvres de ce componiste sur Grethen Edition',
   },
+  newCompositions: {
+    en: 'Newest Compositions',
+    de: 'Neueste Kompositionen',
+    'de-LU': 'Neitste Kompositioune',
+    fr: 'Nouvelles compositions',
+  },
+  seeCompositions: {
+    en: 'See all compositions',
+    de: 'Alle Kompositionen sehen',
+    'de-LU': "Weis all d'Kompositioune",
+    fr: 'Montrez toutes les compositions',
+  },
+  newArrangements: {
+    en: 'Newest Arrangements',
+    de: 'Neueste Arrangements',
+    'de-LU': 'Neitsten Arrangementer',
+    fr: 'Nouvelles arrangements',
+  },
+  seeArrangements: {
+    en: 'See all arrangements',
+    de: 'Alle Arrangements sehen',
+    'de-LU': "Weis all d'Arrangementer",
+    fr: 'Montrez tous les arrangements',
+  },
+  newTranscriptions: {
+    en: 'Newest Transcriptions',
+    de: 'Neueste Transkiptionen',
+    'de-LU': 'Neitste Transkriptiounen',
+    fr: 'Nouvelles transcriptions',
+  },
+  seeTranscriptions: {
+    en: 'See all transcriptions',
+    de: 'Alle Transkriptionen sehen',
+    'de-LU': "Weis all d'Transkriptioune",
+    fr: 'Montrez tous les transcriptions',
+  },
+  welcome: {
+    en: 'Welcome to Grethen Edition!',
+    de: 'Willkommen auf Grethen Edition!',
+    'de-LU': 'Wëllkomm op Grethen Edition!',
+    fr: 'Bienvenue sur Grethen Edition!',
+  },
   x: {
     en: '',
     de: '',
