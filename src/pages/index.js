@@ -83,8 +83,8 @@ const IndexPage = (props) => {
     <div className="index">
       <h1 className="index_welcome">{languages.welcome[locale]}</h1>
       <div className="index_container index_originals">
-        <h2 className="index_title">
-          {languages.newCompositions[locale]}{' '}
+        <div className="index_title_container">
+          <h2 className="index_title">{languages.newCompositions[locale]} </h2>
           <Link
             className="index_title_link"
             to="/works/categories"
@@ -92,7 +92,7 @@ const IndexPage = (props) => {
           >
             {languages.seeCompositions[locale]}
           </Link>
-        </h2>
+        </div>
         <div className="work_works">
           {originals.map((work, i) => {
             if (work.node.locale !== locale) return '';
@@ -109,8 +109,8 @@ const IndexPage = (props) => {
         </div>
       </div>
       <div className="index_container index_jazzMessengers">
-        <h2 className="index_title">
-          {languages.newArrangements[locale]}{' '}
+        <div className="index_title_container">
+          <h2 className="index_title">{languages.newArrangements[locale]} </h2>
           <Link
             className="index_title_link"
             to="/works/categories"
@@ -118,7 +118,7 @@ const IndexPage = (props) => {
           >
             {languages.seeArrangements[locale]}
           </Link>
-        </h2>
+        </div>
         <div className="work_works">
           {jazzMessengers.map((work, i) => {
             if (work.node.locale !== locale) return '';
@@ -135,8 +135,10 @@ const IndexPage = (props) => {
         </div>
       </div>
       <div className="index_container index_transcriptions">
-        <h2 className="index_title">
-          {languages.newTranscriptions[locale]}{' '}
+        <div className="index_title_container">
+          <h2 className="index_title">
+            {languages.newTranscriptions[locale]}{' '}
+          </h2>
           <Link
             className="index_title_link"
             to="/works/categories"
@@ -144,7 +146,7 @@ const IndexPage = (props) => {
           >
             {languages.seeTranscriptions[locale]}
           </Link>
-        </h2>
+        </div>
         <div className="work_works">
           {transcriptions.map((work, i) => {
             if (work.node.locale !== locale) return '';

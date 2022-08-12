@@ -5,10 +5,23 @@
 
   &_title_link {
     color: $clr-accent;
-    font-size: 0.75em;
   }
 
   &_welcome {
     padding: 1em 0 0 1em;
+  }
+
+  &_title_container {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .index_title_container {
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 1em;
   }
 }
