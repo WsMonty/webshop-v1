@@ -61,6 +61,7 @@ const WorkPage = ({ cart, addToCart, locale, data, pageContext }) => {
             <span>{workData.composer}</span>
           </p>
           <p className="work_page_description">{workData.descriptionText}</p>
+          <p className="work_page_price">{`${workData.price}€`}</p>
         </div>
 
         <div className="work_page_addToCart">
@@ -114,6 +115,7 @@ export const query = graphql`
           descriptionText
           date
           composer
+          price
           previewImage {
             url
             gatsbyImageData(placeholder: BLURRED, layout: CONSTRAINED)

@@ -192,6 +192,12 @@
     object-fit: cover;
   }
 
+  &_price {
+    padding: 1em 1em 0 1em;
+    font-size: 1.5em;
+    text-align: right;
+  }
+
   &_content {
     padding: 2em;
   }

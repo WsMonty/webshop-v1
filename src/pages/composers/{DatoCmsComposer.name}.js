@@ -27,7 +27,7 @@ const ComposerPage = (props) => {
       <p className="composer_page_website">
         Website:{' '}
         <a
-          href={'https://' + data.website}
+          href={data.website}
           target="_blank"
           rel="noreferrer"
           className="composer_page_website_link url"
@@ -91,14 +91,13 @@ export const query = graphql`
         gatsbyImageData(width: 400, placeholder: BLURRED)
       }
     }
-    allDatoCmsPost(
-      filter: { composer: { eq: "Gilles Grethen" }, locale: { eq: "en" } }
-    ) {
+    allDatoCmsPost(filter: { composer: { eq: $name }, locale: { eq: "en" } }) {
       edges {
         node {
           descriptionTextShort
           composer
           title
+          price
           previewImage {
             gatsbyImageData(width: 400, placeholder: BLURRED)
           }
