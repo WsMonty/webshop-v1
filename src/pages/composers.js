@@ -43,16 +43,16 @@ const Composers = () => {
         return (
           <div key={`composer-${i + 1}`} className="composer_list">
             <Link
-              className="composer_name"
+              className="composer_link_container"
               to={`/composers/${comp.name.replaceAll(' ', '-').toLowerCase()}`}
             >
-              {comp.name}
+              <GatsbyImage
+                className="composer_image"
+                image={comp.photo.gatsbyImageData}
+                alt={comp.name}
+              />
+              <span className="composer_name">{comp.name}</span>
             </Link>
-            <GatsbyImage
-              className="composer_image"
-              image={comp.photo.gatsbyImageData}
-              alt={comp.name}
-            />
           </div>
         );
       })}

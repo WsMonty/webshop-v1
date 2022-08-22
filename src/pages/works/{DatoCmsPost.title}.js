@@ -1,5 +1,5 @@
 import React from 'react';
-import { graphql } from 'gatsby';
+import { graphql, Link } from 'gatsby';
 import { addToCart, handleCartModal } from '../../actions';
 import { connect } from 'react-redux';
 import languages from '../../languages/languages';
@@ -22,6 +22,8 @@ const WorkPage = ({ cart, addToCart, locale, data, pageContext }) => {
   };
 
   const [workData] = rightWork();
+
+  const composers = data.allDatoCmsComposer.edges.map((comp) => comp.node.name);
 
   const isInCart = () => {
     const checkIfInCart = Object.keys(cart).some((work) =>
@@ -58,7 +60,18 @@ const WorkPage = ({ cart, addToCart, locale, data, pageContext }) => {
         <div className="work_page_content">
           <h2 className="work_page_title">{workData.title}</h2>
           <p className="work_page_composer">
-            <span>{workData.composer}</span>
+            {composers.includes(workData.composer) ? (
+              <Link
+                to={`/composers/${workData.composer
+                  .toLowerCase()
+                  .replace(' ', '-')}`}
+                className="work_page_composer_link"
+              >
+                {workData.composer}
+              </Link>
+            ) : (
+              <span>{workData.composer}</span>
+            )}
           </p>
           <p className="work_page_description">{workData.descriptionText}</p>
           <p className="work_page_price">{`${workData.price}€`}</p>
@@ -124,6 +137,13 @@ export const query = graphql`
           previewVideo {
             url
           }
+        }
+      }
+    }
+    allDatoCmsComposer {
+      edges {
+        node {
+          name
         }
       }
     }

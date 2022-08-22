@@ -88,6 +88,10 @@
     margin-bottom: 0.25em;
     font-size: 1.25rem;
     color: $clr-black;
+
+    &_link {
+      text-decoration: none;
+    }
   }
 
   &_composer {
@@ -96,21 +100,24 @@
     span {
       font-size: 1.2em;
       color: $clr-neutral-dark;
-
-      transition: 200ms ease-in-out;
     }
 
-    &_moreInfo {
-      font-size: 0.75em;
-      margin-top: 0.25em;
-      color: $clr-neutral-dark;
-      text-decoration: underline;
+    &_link {
+      text-decoration-color: $clr-neutral-dark;
     }
   }
 
   &_category {
     font-size: 0.75em;
-    margin-top: 2em;
+
+    &_link {
+      margin-top: 1.8em;
+      padding: 0.2em 0;
+
+      z-index: 1;
+      color: $clr-neutral-dark-lighter;
+      text-decoration-color: $clr-neutral-dark-lighter;
+    }
   }
 
   &_price {
@@ -210,8 +217,9 @@
     font-size: 3em;
     margin-bottom: 1.5em;
 
-    span {
+    &_link {
       font-size: 1.2em;
+      color: $clr-accent;
     }
   }
 

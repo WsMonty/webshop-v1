@@ -1,5 +1,6 @@
 .composers {
   display: flex;
+  margin: 2em;
 }
 
 .composer {
@@ -7,16 +8,29 @@
     padding: 1em;
   }
 
-  &_name {
-    color: $clr-neutral-light;
+  &_link_container {
     text-decoration: none;
+    color: $clr-accent;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    border: 1px solid $clr-accent;
+    border-radius: 20px;
+    padding: 2em;
+  }
+
+  &_name {
     padding: 1em;
     font-size: 2em;
   }
 
   &_image {
-    width: 10em;
-    height: 10em;
+    width: 80%;
+    aspect-ratio: 1;
+    border-radius: 20px;
   }
 }
 
@@ -40,7 +54,7 @@
   }
 
   &_works_title {
-    margin: 2em;
+    margin: 2em 0 0.5em 0;
   }
 
   &_imgbio_container {
@@ -49,6 +63,14 @@
 }
 
 @media only screen and (max-width: 600px) {
+  .composers {
+    flex-direction: column;
+  }
+
+  .composer_name {
+    padding: 1em 0;
+  }
+
   .composer_page {
     margin: 1.5em;
 

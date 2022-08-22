@@ -1,19 +1,11 @@
 import React from 'react';
 import languages from '../languages/languages';
-import { Link, navigate } from 'gatsby';
+import { Link } from 'gatsby';
 import scrollToTop from '../helpers/scrollToTop';
 import { GatsbyImage } from 'gatsby-plugin-image';
 
 const SingleWork = ({ props, product, query, i }) => {
   const { locale } = props;
-  // Go to composer's site
-  const composerClickHandler = (e) => {
-    const composerUrl = e.target
-      .closest('.work_composer_moreInfo')
-      .dataset.composer.toLowerCase()
-      .replace(' ', '-');
-    navigate(`/composers/${composerUrl}`);
-  };
 
   // Add work to cart when only PDFs are sold
   const addToCartClickHandlerNoShipping = (e) => {
@@ -98,7 +90,9 @@ const SingleWork = ({ props, product, query, i }) => {
 
   const checkLengthTitleUnder20Char = (str) => {
     return str.split('').length > 30 ? (
-      <h2 style={{ margin: 0, fontSize: '1em' }}>{str}</h2>
+      <h2 className="work_title" style={{ margin: 0, fontSize: '1em' }}>
+        {str}
+      </h2>
     ) : (
       <h2 className="work_title">{str}</h2>
     );
@@ -124,34 +118,42 @@ const SingleWork = ({ props, product, query, i }) => {
             image={product.node.previewImage.gatsbyImageData}
             alt={product.node.title}
           />
-          {/* <img
-            className="work_image"
-            src={product.node.previewImage.url}
-            alt={`Preview for ${product.node.title}`}
-          /> */}
         </Link>
         <div className="work_content_container">
-          {checkLengthTitleUnder20Char(product.node.title)}
+          <Link
+            to={`/works/${product.node.title
+              .toLowerCase()
+              .replaceAll(' ', '-')
+              .replaceAll("'", '-')}`}
+            className="work_title_link"
+          >
+            {checkLengthTitleUnder20Char(product.node.title)}
+          </Link>
 
-          <p className="work_composer">
-            {checkLengthUnder20Char(product.node.composer)}
-          </p>
           {query.allDatoCmsComposer.edges
             .map((comp) => comp.node.name)
             .indexOf(product.node.composer) >= 0 ? (
-            <button
-              className="work_composer_moreInfo"
-              data-composer={product.node.composer}
-              onClick={(e) => composerClickHandler(e)}
+            <Link
+              to={`/composers/${product.node.composer
+                .toLowerCase()
+                .replace(' ', '-')}`}
+              className="work_composer work_composer_link"
             >
-              {' '}
-              <span>more info on this composer</span>{' '}
-            </button>
+              {checkLengthUnder20Char(product.node.composer)}
+            </Link>
           ) : (
-            ''
+            <p className="work_composer">
+              {checkLengthUnder20Char(product.node.composer)}
+            </p>
           )}
 
-          <p className="work_category">{product.node.descriptionTextShort}</p>
+          <Link
+            to={`/works/categories`}
+            state={{ cat: product.node.descriptionTextShort }}
+            className="work_category_link"
+          >
+            <p className="work_category">{product.node.descriptionTextShort}</p>
+          </Link>
         </div>
         <div className="work_price_btn_container">
           <p className="work_price">{product.node.price}€</p>

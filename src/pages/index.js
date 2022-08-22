@@ -88,7 +88,7 @@ const IndexPage = (props) => {
           <Link
             className="index_title_link"
             to="/works/categories"
-            state={{ cat: 'Big Band' }}
+            state={{ cat: 'Original Compositions' }}
           >
             {languages.seeCompositions[locale]}
           </Link>

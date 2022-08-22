@@ -41,6 +41,7 @@ const Categories = (props) => {
   const catFromLink = location.state?.cat;
 
   const allCategories = [
+    'Original Compositions',
     ...new Set(
       data.map((work) => {
         return work.node.descriptionTextShort;
@@ -67,12 +68,24 @@ const Categories = (props) => {
         .querySelector(`[data-category='${category}']`)
         .classList.add('categories_title_active');
 
+      if (category === 'Original Compositions') {
+        const composers = query.allDatoCmsComposer.edges.map(
+          (comp) => comp.node.name
+        );
+        const compositions = data
+          .filter((work) => composers.includes(work.node.composer))
+          .sort((a, b) => new Date(b.node.date) - new Date(a.node.date));
+
+        setWorks(compositions);
+        return;
+      }
+
       const sortedWorks = data.filter(
         (work) => work.node.descriptionTextShort === category
       );
       setWorks(sortedWorks);
     },
-    [data]
+    [data, query.allDatoCmsComposer.edges]
   );
 
   const checkIfCategoryFromLink = useCallback(() => {
