@@ -157,6 +157,12 @@ const languages = {
     'de-LU': 'Wëllkomm op Grethen Edition!',
     fr: 'Bienvenue sur Grethen Edition!',
   },
+  follow: {
+    en: 'Follow us on social media!',
+    de: 'Folge uns auf sozialen Medien!',
+    'de-LU': 'Folleg eis op soziale Medien!',
+    fr: 'Suivez-nous sur les réseaux sociaux!',
+  },
   x: {
     en: '',
     de: '',

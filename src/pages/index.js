@@ -7,6 +7,7 @@ import sortByDate from '../helpers/sortByDate.js';
 import SingleWork from '../components/singleWork';
 import { Link } from 'gatsby';
 import languages from '../languages/languages';
+import { StaticImage } from 'gatsby-plugin-image';
 
 const IndexPage = (props) => {
   const query = useStaticQuery(graphql`
@@ -82,6 +83,35 @@ const IndexPage = (props) => {
   return (
     <div className="index">
       <h1 className="index_welcome">{languages.welcome[locale]}</h1>
+      <div className="index_socials_container">
+        <h2 className="index_socials_title">{languages.follow[locale]}</h2>
+        <div>
+          <a
+            href="https://www.facebook.com/grethenedition"
+            target={'_blank'}
+            rel="noreferrer"
+            className="index_socials_link"
+          >
+            <StaticImage
+              className="index_socials_logo"
+              src="../images/fb-logo.png"
+              alt="Facebook Logo"
+            />
+          </a>
+          <a
+            href="https://www.instagram.com/grethen_edition/"
+            target={'_blank'}
+            rel="noreferrer"
+            className="index_socials_link"
+          >
+            <StaticImage
+              className="index_socials_logo"
+              src="../images/insta-logo.png"
+              alt="Instagram Logo"
+            />
+          </a>
+        </div>
+      </div>
       <div className="index_container index_originals">
         <div className="index_title_container">
           <h2 className="index_title">{languages.newCompositions[locale]} </h2>
