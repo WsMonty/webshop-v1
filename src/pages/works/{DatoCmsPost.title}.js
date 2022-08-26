@@ -55,6 +55,7 @@ const WorkPage = ({ cart, addToCart, locale, data, pageContext }) => {
       <GatsbyImage
         image={workData.previewImage.gatsbyImageData}
         alt={workData.title}
+        className="work_page_previewImage"
       />
       <div className="work_page_content_container">
         <div className="work_page_content">

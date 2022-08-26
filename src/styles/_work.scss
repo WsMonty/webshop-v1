@@ -194,9 +194,8 @@
   display: flex;
   overflow: auto;
 
-  &_image {
-    height: 50vh;
-    object-fit: cover;
+  &_previewImage {
+    max-width: 60%;
   }
 
   &_price {
@@ -207,6 +206,10 @@
 
   &_content {
     padding: 2em;
+
+    &_container {
+      margin-bottom: 2em;
+    }
   }
 
   &_title {
@@ -388,6 +391,10 @@
       transform: scale(0.5);
       transform-origin: top left;
       margin: 1em;
+    }
+
+    &_previewImage {
+      max-width: 100%;
     }
   }
 }
