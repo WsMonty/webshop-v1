@@ -1,12 +1,6 @@
 import { Link, useStaticQuery, graphql, navigate } from 'gatsby';
 import React from 'react';
-import { connect } from 'react-redux';
-import {
-  deleteFromCart,
-  emptyCart,
-  purchase,
-  closeCartModal,
-} from '../actions';
+import { useSelector } from 'react-redux';
 import {
   PayPalScriptProvider,
   PayPalButtons,
@@ -14,12 +8,16 @@ import {
 } from '@paypal/react-paypal-js';
 import languages from '../languages/languages';
 import { SHIPPING_COST } from '../globalVariables';
-// import fileLinks from '../languages/fileLinks';
 import axios from 'axios';
 import { GatsbySeo } from 'gatsby-plugin-next-seo';
+import { selectCart, selectLocale, store } from '../store.js';
+import { emptyCart, deleteFromCart } from '../reducers/cart';
+import { closeCartModal } from '../reducers/cartModal';
+import { purchase } from '../reducers/purchased';
 
-const Payment = (props) => {
-  const { cart, locale, purchase, emptyCart, closeCartModal } = props;
+const Payment = () => {
+  const locale = useSelector(selectLocale).locale;
+  const cart = useSelector(selectCart).cart;
 
   const query = useStaticQuery(graphql`
     query {
@@ -46,8 +44,8 @@ const Payment = (props) => {
   const fileLinks = query.allDatoCmsFileLink.nodes;
 
   const handleSend = () => {
-    emptyCart();
-    closeCartModal();
+    store.dispatch(emptyCart());
+    store.dispatch(closeCartModal());
 
     const purchasedWorks = Object.entries(cart).map((work) => {
       const title = work[1].title;
@@ -66,7 +64,7 @@ const Payment = (props) => {
       })
       .catch((err) => console.log(err));
     const works = purchasedWorks.map((work) => work.title);
-    purchase(works);
+    store.dispatch(purchase(works));
     navigate(`/downloadPdf`);
   };
 
@@ -117,7 +115,7 @@ const Payment = (props) => {
     const work =
       e.target.closest('.payment_work').firstChild.firstChild.childNodes[0]
         .dataset.title;
-    props.deleteFromCart(JSON.parse(work));
+    store.dispatch(deleteFromCart(JSON.parse(work)));
   };
 
   // const emailFormSubmit = (e) => {
@@ -256,21 +254,4 @@ const Payment = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    cart: state.cart,
-    locale: state.locale,
-    purchased: state.purchased,
-  };
-};
-
-const mapDispatchtoProps = (dispatch) => {
-  return {
-    deleteFromCart: (work) => dispatch(deleteFromCart(work)),
-    emptyCart: () => dispatch(emptyCart()),
-    purchase: (works) => dispatch(purchase(works)),
-    closeCartModal: () => dispatch(closeCartModal()),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchtoProps)(Payment);
+export default Payment;

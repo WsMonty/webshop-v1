@@ -2,9 +2,11 @@ import React from 'react';
 import { graphql, useStaticQuery, Link, navigate } from 'gatsby';
 import languages from '../languages/languages';
 import { SHIPPING_COST } from '../globalVariables';
+import { store } from '../store';
+import { hideCartModal } from '../reducers/cartModal';
 
 const CartPreview = ({ props }) => {
-  const { cart, handleCartModal, deleteFromCart, locale } = props;
+  const { cart, closeCartModal, deleteFromCart, locale } = props;
 
   const query = useStaticQuery(graphql`
     query {
@@ -40,9 +42,9 @@ const CartPreview = ({ props }) => {
   };
 
   const toPaymentClickHandler = () => {
-    handleCartModal('close');
+    store.dispatch(closeCartModal());
     setTimeout(() => {
-      handleCartModal('hide');
+      store.dispatch(hideCartModal());
     }, 750);
     navigate(`/payment`);
   };
@@ -52,13 +54,13 @@ const CartPreview = ({ props }) => {
       e.target.closest('.cart_preview').firstChild.firstChild.childNodes[0]
         .dataset.title;
 
-    deleteFromCart(JSON.parse(work));
+    store.dispatch(deleteFromCart(JSON.parse(work)));
   };
 
   const closeCardHandler = () => {
-    handleCartModal('close');
+    store.dispatch(closeCartModal());
     setTimeout(() => {
-      handleCartModal('hide');
+      store.dispatch(hideCartModal());
     }, 750);
   };
 

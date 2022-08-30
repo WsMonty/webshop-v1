@@ -1,12 +1,22 @@
-const purchasedReducer = (state = [], action) => {
-  switch (action.type) {
-    case 'purchase':
-      return (state = action.payload);
-    case 'emptyPurchased':
-      return (state = []);
-    default:
-      return state;
-  }
+import { createSlice } from '@reduxjs/toolkit';
+
+const initialState = {
+  purchased: [],
 };
 
-export default purchasedReducer;
+const purchasedReducer = createSlice({
+  name: 'purchased',
+  initialState,
+  reducers: {
+    purchase: (state, action) => {
+      state.purchased = action.payload;
+    },
+    emptyPurchased: (state) => {
+      state.purchased = [];
+    },
+  },
+});
+
+export const { purchase, emptyPurchased } = purchasedReducer.actions;
+
+export default purchasedReducer.reducer;

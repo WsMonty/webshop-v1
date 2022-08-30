@@ -1,10 +1,13 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import languages from '../languages/languages';
 import { StaticImage } from 'gatsby-plugin-image';
 import { GatsbySeo } from 'gatsby-plugin-next-seo';
+import { selectLocale } from '../store.js';
 
-const Contact = (props) => {
+const Contact = () => {
+  const locale = useSelector(selectLocale).locale;
+
   return (
     <div className="contact_container">
       <GatsbySeo
@@ -14,7 +17,7 @@ const Contact = (props) => {
         noindex={false}
         nofollow={false}
       />
-      <p className="contact_phrase">{languages.concerns[props.locale]}</p>
+      <p className="contact_phrase">{languages.concerns[locale]}</p>
       <h1 className="contact_name">Gilles Grethen</h1>
       <a
         className="contact_information url"
@@ -54,12 +57,4 @@ const Contact = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    cart: state.cart,
-    locale: state.locale,
-    cartModal: state.cartModal,
-  };
-};
-
-export default connect(mapStateToProps)(Contact);
+export default Contact;

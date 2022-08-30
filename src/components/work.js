@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import sortByDate from '../helpers/sortByDate.js';
 import createSearchCodes from '../helpers/createSearchCodes.js';
-import { connect } from 'react-redux';
-import { addToCart, handleCartModal } from '../actions/index.js';
+import { useSelector } from 'react-redux';
 import SingleWork from './singleWork.js';
+import { selectLocale } from '../store.js';
 
 const Work = (props) => {
+  const locale = useSelector(selectLocale).locale;
+
   const query = useStaticQuery(graphql`
     {
       allDatoCmsPost {
@@ -72,11 +74,10 @@ const Work = (props) => {
       </div>
       <div className="work_works">
         {works.map((product, i) => {
-          if (product.node.locale !== props.locale) return '';
+          if (product.node.locale !== locale) return '';
           return (
             <SingleWork
               key={`work-${i}`}
-              props={props}
               product={product}
               query={query}
               i={i}
@@ -88,19 +89,4 @@ const Work = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    cart: state.cart,
-    locale: state.locale,
-    cartModal: state.cartModal,
-  };
-};
-
-const mapDispatchtoProps = (dispatch) => {
-  return {
-    addToCart: (work) => dispatch(addToCart(work)),
-    handleCartModal: (bool) => dispatch(handleCartModal(bool)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchtoProps)(Work);
+export default Work;

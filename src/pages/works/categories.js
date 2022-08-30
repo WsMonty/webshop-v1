@@ -1,8 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import SingleWork from '../../components/singleWork';
-import { addToCart, handleCartModal } from '../../actions';
-import { connect } from 'react-redux';
 import { GatsbySeo } from 'gatsby-plugin-next-seo';
 
 const Categories = (props) => {
@@ -121,13 +119,7 @@ const Categories = (props) => {
       <div className="categories_right_works work_works">
         {works.map((work, i) => {
           return (
-            <SingleWork
-              key={`work-${i}`}
-              props={props}
-              product={work}
-              query={query}
-              i={i}
-            />
+            <SingleWork key={`work-${i}`} product={work} query={query} i={i} />
           );
         })}
       </div>
@@ -136,19 +128,4 @@ const Categories = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    cart: state.cart,
-    locale: state.locale,
-    cartModal: state.cartModal,
-  };
-};
-
-const mapDispatchtoProps = (dispatch) => {
-  return {
-    addToCart: (work) => dispatch(addToCart(work)),
-    handleCartModal: (bool) => dispatch(handleCartModal(bool)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchtoProps)(Categories);
+export default Categories;

@@ -1,13 +1,17 @@
 import React from 'react';
 import { graphql, Link } from 'gatsby';
-import { addToCart, handleCartModal } from '../../actions';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import languages from '../../languages/languages';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import YouTube from 'react-youtube';
 import { GatsbySeo } from 'gatsby-plugin-next-seo';
+import { addToCart } from '../../reducers/cart';
+import { selectCart, selectLocale, store } from '../../store.js';
 
-const WorkPage = ({ cart, addToCart, locale, data, pageContext }) => {
+const WorkPage = ({ data, pageContext }) => {
+  const cart = useSelector(selectCart).cart;
+  const locale = useSelector(selectLocale).locale;
+
   const rightWork = () => {
     const result = [];
     data.allDatoCmsPost.edges.forEach((entry) => {
@@ -35,7 +39,7 @@ const WorkPage = ({ cart, addToCart, locale, data, pageContext }) => {
 
   const addToCartHandler = () => {
     const work = { title: workData.title };
-    addToCart(work);
+    store.dispatch(addToCart(work));
   };
 
   const transformUrl = (url) => {
@@ -102,22 +106,7 @@ const WorkPage = ({ cart, addToCart, locale, data, pageContext }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    cart: state.cart,
-    locale: state.locale,
-    cartModal: state.cartModal,
-  };
-};
-
-const mapDispatchtoProps = (dispatch) => {
-  return {
-    addToCart: (work) => dispatch(addToCart(work)),
-    handleCartModal: (bool) => dispatch(handleCartModal(bool)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchtoProps)(WorkPage);
+export default WorkPage;
 
 export const query = graphql`
   query {

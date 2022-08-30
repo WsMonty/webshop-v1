@@ -1,14 +1,24 @@
-const cartModalReducer = (state = 'hidden', action) => {
-  switch (action.type) {
-    case 'close':
-      return (state = 'closeTop_animation');
-    case 'hide':
-      return (state = 'hidden');
-    case 'show':
-      return (state = 'cart_active expandTop_animation');
-    default:
-      return state;
-  }
-};
+import { createSlice } from '@reduxjs/toolkit';
 
-export default cartModalReducer;
+const initialState = { value: 'hidden' };
+
+const cartModalReducer = createSlice({
+  name: 'cartModal',
+  initialState,
+  reducers: {
+    closeCartModal: (state) => {
+      state.value = 'closeTop_animation';
+    },
+    hideCartModal: (state) => {
+      state.value = 'hidden';
+    },
+    showCartModal: (state) => {
+      state.value = 'cart_active expandTop_animation';
+    },
+  },
+});
+
+export const { closeCartModal, hideCartModal, showCartModal } =
+  cartModalReducer.actions;
+
+export default cartModalReducer.reducer;

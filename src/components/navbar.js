@@ -1,16 +1,20 @@
 import React from 'react';
 import ShoppingCart from './shoppingCart.js';
 import { Link } from 'gatsby';
-import { setLocale } from '../actions/index.js';
-import { connect } from 'react-redux';
+import { selectLocale, store } from '../store.js';
+import { useSelector } from 'react-redux';
 import { RiMenu5Fill } from 'react-icons/ri';
 import languages from '../languages/languages.js';
 import { StaticImage } from 'gatsby-plugin-image';
+import { setLocale } from '../reducers/locale.js';
 
-const Navbar = ({ setLocale, locale }) => {
+const Navbar = () => {
+  const locale = useSelector(selectLocale).locale;
   // Change language on site
   const localeChanger = (e) => {
-    setLocale(document.getElementById('nav_locales_select').value);
+    store.dispatch(
+      setLocale(document.getElementById('nav_locales_select').value)
+    );
   };
 
   // Change color of selected link and start animation on mobile
@@ -253,18 +257,4 @@ const locales = [
   { text: '🇫🇷', loc: 'fr' },
 ];
 
-const mapStateToProps = (state) => {
-  return {
-    cart: state.cart,
-    locale: state.locale,
-    cartModal: state.cartModal,
-  };
-};
-
-const mapDispatchtoProps = (dispatch) => {
-  return {
-    setLocale: (locale) => dispatch(setLocale(locale)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchtoProps)(Navbar);
+export default Navbar;

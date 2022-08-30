@@ -3,10 +3,14 @@ import languages from '../languages/languages';
 import { Link } from 'gatsby';
 import scrollToTop from '../helpers/scrollToTop';
 import { GatsbyImage } from 'gatsby-plugin-image';
+import { addToCart } from '../reducers/cart';
+import { showCartModal } from '../reducers/cartModal';
+import { useSelector } from 'react-redux';
+import { selectCart, selectLocale, store } from '../store';
 
-const SingleWork = ({ props, product, query, i }) => {
-  const { locale } = props;
-
+const SingleWork = ({ product, query, i }) => {
+  const cart = useSelector(selectCart).cart;
+  const locale = useSelector(selectLocale).locale;
   // Add work to cart when only PDFs are sold
   const addToCartClickHandlerNoShipping = (e) => {
     const workOptionsEl = e.target.closest('.work_options');
@@ -17,13 +21,13 @@ const SingleWork = ({ props, product, query, i }) => {
     };
     const currentWorkEl = document.querySelector(`[data-title="${workTitle}"]`);
 
-    if (Object.keys(props.cart).length === 0) {
-      props.addToCart(work);
-      props.handleCartModal('show');
+    if (Object.keys(cart).length === 0) {
+      store.dispatch(addToCart(work));
+      store.dispatch(showCartModal());
       workOptionsEl.style.display = 'none';
       currentWorkEl.style.display = 'flex';
     } else {
-      const checkIsAlreadyInCart = Object.keys(props.cart).some((work) =>
+      const checkIsAlreadyInCart = Object.keys(cart).some((work) =>
         work.includes(workTitle)
       );
 
@@ -37,8 +41,8 @@ const SingleWork = ({ props, product, query, i }) => {
           currentWorkEl.style.display = 'flex';
         }, 1500);
       } else {
-        props.addToCart(work);
-        props.handleCartModal('show');
+        store.dispatch(addToCart(work));
+        store.dispatch(showCartModal());
         workOptionsEl.style.display = 'none';
         currentWorkEl.style.display = 'flex';
       }
@@ -72,7 +76,7 @@ const SingleWork = ({ props, product, query, i }) => {
   };
 
   const isInCart = () => {
-    const checkIfInCart = Object.keys(props.cart).some((work) =>
+    const checkIfInCart = Object.keys(cart).some((work) =>
       work.includes(product.node.title)
     );
 

@@ -1,39 +1,50 @@
-const cartReducer = (state = {}, action) => {
-  const payload = action.title;
-  const buyOptions = action.options;
-  const keyName = `${payload}_${buyOptions}`;
-  switch (action.type) {
-    case 'addToCart':
-      if (!state[keyName]) {
-        state[keyName] = {
+import { createSlice } from '@reduxjs/toolkit';
+
+const initialState = {
+  cart: {},
+};
+
+const cartReducer = createSlice({
+  name: 'cart',
+  initialState,
+  reducers: {
+    addToCart: (state, action) => {
+      const payload = action.payload.title;
+      const buyOptions = action.payload.options;
+      const keyName = `${payload}_${buyOptions}`;
+      if (!state.cart[keyName]) {
+        state.cart[keyName] = {
           title: payload,
           counter: 1,
           buyOption: buyOptions,
         };
-        return { ...state };
+        return;
       }
-      if (state[keyName]) {
-        state[keyName].counter += 1;
-        state[keyName].buyOption = buyOptions;
-        return { ...state };
+      if (state.cart[keyName]) {
+        state.cart[keyName].counter += 1;
+        state.cart[keyName].buyOption = buyOptions;
+        return;
       }
+    },
+    deleteFromCart: (state, action) => {
+      const payload = action.payload.title;
+      const buyOptions = action.payload.options;
+      const keyName = `${payload}_${buyOptions}`;
+      if (state.cart[keyName].counter > 1) {
+        state.cart[keyName].counter -= 1;
+        return;
+      }
+      if (state.cart[keyName].counter === 1) {
+        delete state.cart[keyName];
+        return;
+      }
+    },
+    emptyCart: (state) => {
+      state.cart = {};
+    },
+  },
+});
 
-      break;
-    case 'deleteFromCart':
-      if (state[keyName].counter > 1) {
-        state[keyName].counter -= 1;
-        return { ...state };
-      }
-      if (state[keyName].counter === 1) {
-        delete state[keyName];
-        return { ...state };
-      }
-      break;
-    case 'emptyCart':
-      return (state = {});
-    default:
-      return state;
-  }
-};
+export const { addToCart, deleteFromCart, emptyCart } = cartReducer.actions;
 
-export default cartReducer;
+export default cartReducer.reducer;

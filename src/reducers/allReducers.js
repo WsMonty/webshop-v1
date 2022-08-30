@@ -3,7 +3,7 @@ import localeReducer from './locale';
 import purchasedReducer from './purchased';
 import cartModalReducer from './cartModal';
 
-import { combineReducers } from 'redux';
+import { combineReducers } from '@reduxjs/toolkit';
 
 const allReducers = combineReducers({
   cart: cartReducer,

@@ -1,15 +1,17 @@
 import { graphql, useStaticQuery } from 'gatsby';
 import * as React from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import '../styles/main.scss';
-import { addToCart, handleCartModal } from '../actions/index.js';
 import sortByDate from '../helpers/sortByDate.js';
 import SingleWork from '../components/singleWork';
 import { Link } from 'gatsby';
 import languages from '../languages/languages';
 import { StaticImage } from 'gatsby-plugin-image';
+import { selectLocale } from '../store';
 
-const IndexPage = (props) => {
+const IndexPage = () => {
+  const locale = useSelector(selectLocale).locale;
+
   const query = useStaticQuery(graphql`
     {
       allDatoCmsPost {
@@ -37,9 +39,6 @@ const IndexPage = (props) => {
       }
     }
   `);
-
-  const { locale } = props;
-
   const data = query.allDatoCmsPost.edges;
   const sortedData = sortByDate(data);
 
@@ -129,7 +128,6 @@ const IndexPage = (props) => {
             return (
               <SingleWork
                 key={`work-${i}`}
-                props={props}
                 product={work}
                 query={query}
                 i={i}
@@ -155,7 +153,6 @@ const IndexPage = (props) => {
             return (
               <SingleWork
                 key={`work-${i}`}
-                props={props}
                 product={work}
                 query={query}
                 i={i}
@@ -183,7 +180,6 @@ const IndexPage = (props) => {
             return (
               <SingleWork
                 key={`work-${i}`}
-                props={props}
                 product={work}
                 query={query}
                 i={i}
@@ -196,19 +192,4 @@ const IndexPage = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    cart: state.cart,
-    locale: state.locale,
-    cartModal: state.cartModal,
-  };
-};
-
-const mapDispatchtoProps = (dispatch) => {
-  return {
-    addToCart: (work) => dispatch(addToCart(work)),
-    handleCartModal: (bool) => dispatch(handleCartModal(bool)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchtoProps)(IndexPage);
+export default IndexPage;

@@ -3,16 +3,16 @@ import { graphql } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import { GatsbySeo } from 'gatsby-plugin-next-seo';
 import SingleWork from '../../components/singleWork';
-import { connect } from 'react-redux';
-import { addToCart, handleCartModal } from '../../actions';
+import { useSelector } from 'react-redux';
 import languages from '../../languages/languages';
+import { selectLocale } from '../../store.js';
 
 const ComposerPage = (props) => {
   const data = props.data.datoCmsComposer;
 
   const works = props.data.allDatoCmsPost.edges;
 
-  const { locale } = props;
+  const locale = useSelector(selectLocale).locale;
 
   return (
     <div className="composer_page">
@@ -51,7 +51,6 @@ const ComposerPage = (props) => {
           return (
             <SingleWork
               key={`work-${i}`}
-              props={props}
               product={work}
               query={props.data}
               i={i}
@@ -63,22 +62,7 @@ const ComposerPage = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    cart: state.cart,
-    locale: state.locale,
-    cartModal: state.cartModal,
-  };
-};
-
-const mapDispatchtoProps = (dispatch) => {
-  return {
-    addToCart: (work) => dispatch(addToCart(work)),
-    handleCartModal: (bool) => dispatch(handleCartModal(bool)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchtoProps)(ComposerPage);
+export default ComposerPage;
 
 export const query = graphql`
   query ($name: String) {

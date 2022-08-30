@@ -1,12 +1,16 @@
 import React from 'react';
-import Layout from './src/pages/layouts/layout.js';
-import { Provider } from 'react-redux';
-import store from './src/store.js';
 
-export const wrapPageElement = ({ element, props }) => {
-  return <Layout {...props}>{element}</Layout>;
-};
+import './src/styles/main.scss';
+import { store, persistor } from './src/store.js';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/lib/integration/react';
 
 export const wrapRootElement = ({ element }) => {
-  return <Provider store={store}>{element}</Provider>;
+  return (
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        {element}
+      </PersistGate>
+    </Provider>
+  );
 };

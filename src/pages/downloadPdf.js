@@ -1,11 +1,11 @@
 import React from 'react';
-import { emptyPurchased } from '../actions';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import languages from '../languages/languages';
 import { useStaticQuery, graphql } from 'gatsby';
 import { GatsbySeo } from 'gatsby-plugin-next-seo';
+import { selectLocale, selectPurchased } from '../store';
 
-const DownloadPdf = (props) => {
+const DownloadPdf = () => {
   const query = useStaticQuery(graphql`
     {
       allDatoCmsFileLink(filter: { locale: { eq: "en" } }) {
@@ -16,7 +16,8 @@ const DownloadPdf = (props) => {
       }
     }
   `);
-  const { purchased, locale } = props;
+  const purchased = useSelector(selectPurchased).purchased;
+  const locale = useSelector(selectLocale).locale;
 
   const files = query.allDatoCmsFileLink.nodes;
 
@@ -48,18 +49,4 @@ const DownloadPdf = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    cart: state.cart,
-    locale: state.locale,
-    purchased: state.purchased,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    emptyPurchased: () => dispatch(emptyPurchased()),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(DownloadPdf);
+export default DownloadPdf;

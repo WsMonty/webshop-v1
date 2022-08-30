@@ -1,30 +1,26 @@
 import React from 'react';
 import { FaShoppingCart } from 'react-icons/fa';
 import CartPreview from './cartPreview';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {
-  handleCartModal,
-  deleteFromCart,
-  addFromLocaleStorage,
-} from '../actions';
+  showCartModal,
+  closeCartModal,
+  hideCartModal,
+} from '../reducers/cartModal';
+import { deleteFromCart } from '../reducers/cart';
+import { selectCart, selectCartModal, selectLocale, store } from '../store';
 
-const ShoppingCart = (props) => {
-  const { cart, handleCartModal, cartModal } = props;
-
-  const cartLength = () => {
-    let allWorks = 0;
-    for (const key in cart) {
-      allWorks += cart[key].counter;
-    }
-    return allWorks;
-  };
+const ShoppingCart = () => {
+  const cart = useSelector(selectCart).cart;
+  const locale = useSelector(selectLocale).locale;
+  const cartModal = useSelector(selectCartModal).value;
 
   const cartHandler = () => {
-    if (cartModal === 'hidden') handleCartModal('show');
+    if (cartModal === 'hidden') store.dispatch(showCartModal());
     else {
-      handleCartModal('close');
+      store.dispatch(closeCartModal());
       setTimeout(() => {
-        handleCartModal('hide');
+        store.dispatch(hideCartModal());
       }, 750);
     }
   };
@@ -38,28 +34,23 @@ const ShoppingCart = (props) => {
       >
         <FaShoppingCart className="cart_icon " />
       </button>
-      {cartLength() === 0 ? '' : <p className="cart_number">{cartLength()}</p>}
+      {Object.keys(cart).length === 0 ? (
+        ''
+      ) : (
+        <p className="cart_number">{Object.keys(cart).length}</p>
+      )}
       <div className={`cart_popup ${cartModal}`}>
-        <CartPreview props={props} />
+        <CartPreview
+          props={{
+            closeCartModal,
+            cart,
+            deleteFromCart,
+            locale,
+          }}
+        />
       </div>
     </div>
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    cart: state.cart,
-    locale: state.locale,
-    cartModal: state.cartModal,
-  };
-};
-
-const mapDispatchtoProps = (dispatch) => {
-  return {
-    handleCartModal: (bool) => dispatch(handleCartModal(bool)),
-    deleteFromCart: (work) => dispatch(deleteFromCart(work)),
-    addFromLocaleStorage: (work) => dispatch(addFromLocaleStorage(work)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchtoProps)(ShoppingCart);
+export default ShoppingCart;

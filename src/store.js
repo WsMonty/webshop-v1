@@ -1,32 +1,26 @@
-import { createStore } from 'redux';
-import allReducers from './reducers/index.js';
+import { configureStore } from '@reduxjs/toolkit';
+// import storage from 'redux-persist/lib/storage';
+import storage from './storage.js';
+import { persistReducer, persistStore } from 'redux-persist';
+import thunk from 'redux-thunk';
+import allReducers from './reducers/allReducers.js';
 
-function saveToLocalStorage(state) {
-  try {
-    const serialisedState = JSON.stringify(state);
-    localStorage.setItem('persistantState', serialisedState);
-  } catch (e) {
-    console.warn(e);
-  }
-}
+const persistConfig = {
+  key: 'root',
+  storage,
+};
 
-function loadFromLocalStorage() {
-  try {
-    const serialisedState = localStorage.getItem('persistantState');
-    if (serialisedState === null) return undefined;
-    return JSON.parse(serialisedState);
-  } catch (e) {
-    console.warn(e);
-    return undefined;
-  }
-}
+const persistedReducer = persistReducer(persistConfig, allReducers);
 
-const store = createStore(
-  allReducers,
-  loadFromLocalStorage()
-  // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+export const store = configureStore({
+  reducer: persistedReducer,
+  devTools: process.env.NODE_ENV !== 'production',
+  middleware: [thunk],
+});
 
-store.subscribe(() => saveToLocalStorage(store.getState()));
+export const selectLocale = (state) => state.locale;
+export const selectCart = (state) => state.cart;
+export const selectCartModal = (state) => state.cartModal;
+export const selectPurchased = (state) => state.purchased;
 
-export default store;
+export const persistor = persistStore(store);
