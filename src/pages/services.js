@@ -30,6 +30,7 @@ const Services = () => {
         document
           .querySelector('.services_contactform_success')
           .classList.remove('hidden');
+        document.querySelector('.services_form').classList.add('hidden');
         return;
       })
       .catch((err) => {
@@ -44,6 +45,7 @@ const Services = () => {
     document
       .querySelector('.services_contactform_success')
       .classList.add('hidden');
+    document.querySelector('.services_form').classList.remove('hidden');
   };
 
   return (
@@ -61,38 +63,42 @@ const Services = () => {
         <p>{languages.composition_description[locale]}</p>
       </section>
       <div className="services_contactform">
-        <form onSubmit={(e) => contactFormHandler(e)}>
-          <h1>{languages.contactus[locale]}</h1>
-          <select className="services_select">
-            <option value="engraving">{languages.engraving[locale]}</option>
-            <option value="arrangement">Arrangement</option>
-            <option value="composition">{languages.composition[locale]}</option>
-          </select>
-          <input
-            className="services_input_mail"
-            type="email"
-            placeholder="Email"
-            required
-          />
-          <textarea
-            className="services_input_description"
-            name="user_input_description"
-            placeholder={languages.describe[locale]}
-            required
-          ></textarea>
-          <button className="pill_btn_accent" type="submit">
-            {languages.submit[locale]}
+        <div className="services_form">
+          <form onSubmit={(e) => contactFormHandler(e)}>
+            <h1>{languages.contactus[locale]}</h1>
+            <select className="services_select">
+              <option value="engraving">{languages.engraving[locale]}</option>
+              <option value="arrangement">Arrangement</option>
+              <option value="composition">
+                {languages.composition[locale]}
+              </option>
+            </select>
+            <input
+              className="services_input_mail"
+              type="email"
+              placeholder="Email"
+              required
+            />
+            <textarea
+              className="services_input_description"
+              name="user_input_description"
+              placeholder={languages.describe[locale]}
+              required
+            ></textarea>
+            <button className="pill_btn_accent" type="submit">
+              {languages.submit[locale]}
+            </button>
+          </form>
+        </div>
+        <div className="services_contactform_success services_contactform hidden">
+          <button
+            className="services_contactform_success_closeBtn"
+            onClick={closeSuccessHandler}
+          >
+            <IoClose />
           </button>
-        </form>
-      </div>
-      <div className="services_contactform_success hidden">
-        <button
-          className="services_contactform_success_closeBtn"
-          onClick={closeSuccessHandler}
-        >
-          <IoClose />
-        </button>
-        <h1>{languages.alertcontactform[locale]}</h1>
+          <h1>{languages.alertcontactform[locale]}</h1>
+        </div>
       </div>
     </div>
   );
