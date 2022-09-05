@@ -163,11 +163,65 @@ const languages = {
     'de-LU': 'Folleg eis op soziale Medien!',
     fr: 'Suivez-nous sur les réseaux sociaux!',
   },
-  x: {
-    en: '',
-    de: '',
-    'de-LU': '',
-    fr: '',
+  engraving: {
+    en: 'Engraving',
+    de: 'Notensatz (Layout)',
+    'de-LU': 'Noutesaz (Layout)',
+    fr: 'Gravure musicale',
+  },
+  engraving_description: {
+    en: 'I can beautifully engrave your handwritten or pdf sheet music into ready to play and publish scores and parts! Hit me up with your project, so I can give you your custom offer!',
+    de: 'Ich kann das Layout deiner handgeschriebenen oder digitalen Noten übernehmen. Die fertigen Partituren und Stimmen sind dann bereit zum verlegen oder um davon zu spielen! Schreibe mir eine Nachricht, um ein Angebot zu erhalten.',
+    'de-LU':
+      'Ech kann de Layout vun dengen handgeschriwwenen oder digitale Nouten iwwerhuelen. Déi fäerdeg Partituren a Stëmmen sin dann bereet fir de Verlag oder fir dovun zu spillen! Schreif mer eng Noriicht fir en Devis ze kréien.',
+    fr: 'Je peux faire une gravure musicale de vos partitions digitales ou écrites par main. Les partitions finales seront prêtes pour être éditées ou pour jouer en concert. Ecris-moi un mail pour recevoir un devis.',
+  },
+  arrangement_description: {
+    en: 'Hit me up if you want me to arrange your music for any ensemble you want! (e.g. jazz combo with horn section, (Little) Big Band, Orchestra, string section )',
+    de: 'Kontaktiere mich wenn du deine Musik für ein bestimmtes Ensemble arrangiert haben willst! (z.B. Jazz Combo mit Bläser Section, (Little) Big Band, Orchester, Streicher)',
+    'de-LU':
+      'Kontaktéier mech wann s du deng Musek fir e bestëmmten Ensemble wëlls arrangéiert hun! (z.B. Jazz Combo mat Bléiser Section, (Little) Big Band, Orchester, Sträicher)',
+    fr: "Contactes-moi si tu avez besoin d'un arrangement pour un ensemble spécifique! (p.ex. combo jazz, (Little) Big Band, orchestre, ensemble à chordes)",
+  },
+  composition: {
+    en: 'Composition commission',
+    de: 'Auftragskomposition',
+    'de-LU': 'Kompositiounsoptrag',
+    fr: 'Composition commandée',
+  },
+
+  composition_description: {
+    en: 'We take composition commissions for any ensemble! Hit me up if you want a specific composer on the site to write music for your ensemble.',
+    de: 'Wir nehmen Auftragskompositionen an! Kontiere uns wenn du willst, dass ein bestimmter Komponist unseres Verlags Musik für dein Ensemble schreibt.',
+    'de-LU':
+      'Mir huelen Kompositiounsopträg un! Kontaktéier eis wanns du interesséiert bass, dass e bestëmmte Komponist e Wierk fir däin Ensemble schreift.',
+    fr: "Nous acceptons des commandes de compositions! Contactes-nous si tu est interessé qu'un componiste de l'édition écrit une oeuvre pour ton ensemble.",
+  },
+  contactus: {
+    en: 'Get in touch with us to get your offer!',
+    de: 'Kontakiere uns um dein Angebot zu bekommen!',
+    'de-LU': 'Kontaktéier eis fir däin Devis ze kréien!',
+    fr: 'Contactes-nous pour recevoir ton devis!',
+  },
+  describe: {
+    en: 'Briefly describe what you need. (e.g. duration of the piece, instrumentation,...)',
+    de: 'Beschreibe kurz was du brauchst. (z.B. Dauer vom Stück, Instrumentation,...)',
+    'de-LU':
+      'Beschreif kuerz de Projet. (z.B. Dauer vum Steck, Instrumentatioun,...)',
+    fr: 'Une petite description du projet. (p.ex. durée du morceau, instrumentation,...)',
+  },
+  submit: {
+    en: 'Submit',
+    de: 'Abschicken',
+    'de-LU': 'Schécken',
+    fr: 'Envoyer',
+  },
+  alertcontactform: {
+    en: "Thank you for contacting us! We'll get back to you as soon as possible.",
+    de: 'Danke dass du uns kontaktiert hast! Wir melden uns so schnell wie möglich zurück.',
+    'de-LU':
+      'Merci dass du eis kontaktéiert hues! Mir mellen eis esou schnell wéi méiglech zeréck.',
+    fr: 'Merci de nous avoir contacté! Nous te répondrons le plus vite possible.',
   },
 };
 

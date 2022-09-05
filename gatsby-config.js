@@ -36,7 +36,6 @@ module.exports = {
     'gatsby-plugin-smoothscroll',
     'gatsby-plugin-sharp',
     'gatsby-plugin-gatsby-cloud',
-    'gatsby-plugin-react-helmet',
     'gatsby-plugin-netlify',
     'gatsby-plugin-next-seo',
     'gatsby-plugin-sitemap',

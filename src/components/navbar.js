@@ -240,6 +240,13 @@ const links = [
     'title-fr': 'Contact',
     url: 'contact',
   },
+  {
+    'title-en': 'Services',
+    'title-de': 'Dienste',
+    'title-de-LU': 'Service',
+    'title-fr': 'Service',
+    url: 'services',
+  },
 ];
 
 const allWorks = {
