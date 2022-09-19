@@ -31,6 +31,20 @@ module.exports = {
         icon: './src/images/logo_yellow_square.png',
       },
     },
+    {
+      resolve: 'gatsby-transformer-remark',
+      options: {
+        plugins: [
+          {
+            resolve: 'gatsby-remark-embed-youtube',
+            options: {
+              width: 800,
+              height: 400,
+            },
+          },
+        ],
+      },
+    },
     'gatsby-plugin-sass',
     'gatsby-plugin-image',
     'gatsby-plugin-smoothscroll',

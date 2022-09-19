@@ -3,10 +3,10 @@ import { graphql, Link } from 'gatsby';
 import { useSelector } from 'react-redux';
 import languages from '../../languages/languages';
 import { GatsbyImage } from 'gatsby-plugin-image';
-import YouTube from 'react-youtube';
 import { GatsbySeo } from 'gatsby-plugin-next-seo';
 import { addToCart } from '../../reducers/cart';
 import { selectCart, selectLocale, store } from '../../store.js';
+import Youtube from '../../components/youtube';
 
 const WorkPage = ({ data, pageContext }) => {
   const cart = useSelector(selectCart).cart;
@@ -42,11 +42,6 @@ const WorkPage = ({ data, pageContext }) => {
     store.dispatch(addToCart(work));
   };
 
-  const transformUrl = (url) => {
-    // return url.replace(/watch\?v=/, 'embed/');
-    return url.replace(/https:\/\/www.youtube.com\/watch\?v=/, '');
-  };
-
   return (
     <div className="work_page">
       <GatsbySeo
@@ -60,6 +55,7 @@ const WorkPage = ({ data, pageContext }) => {
         image={workData.previewImage.gatsbyImageData}
         alt={workData.title}
         className="work_page_previewImage"
+        objectFit="contain"
       />
       <div className="work_page_content_container">
         <div className="work_page_content">
@@ -81,7 +77,6 @@ const WorkPage = ({ data, pageContext }) => {
           <p className="work_page_description">{workData.descriptionText}</p>
           <p className="work_page_price">{`${workData.price}€`}</p>
         </div>
-
         <div className="work_page_addToCart">
           {isInCart() ? (
             <p className="work_page_isCartInfo">{languages.isInCart[locale]}</p>
@@ -93,11 +88,9 @@ const WorkPage = ({ data, pageContext }) => {
 
           <div className="work_page_dialog"></div>
         </div>
+
         {workData.previewVideo ? (
-          <YouTube
-            className="work_page_video"
-            videoId={transformUrl(workData.previewVideo.url)}
-          />
+          <Youtube url={workData.previewVideo.url} />
         ) : (
           ''
         )}
@@ -121,7 +114,7 @@ export const query = graphql`
           price
           previewImage {
             url
-            gatsbyImageData(placeholder: BLURRED, layout: CONSTRAINED)
+            gatsbyImageData(placeholder: BLURRED)
           }
           locale
           previewVideo {
