@@ -45,12 +45,17 @@ module.exports = {
         ],
       },
     },
+    {
+      resolve: 'gatsby-plugin-netlify',
+      options: {
+        mergeSecurityHeaders: false,
+      },
+    },
     'gatsby-plugin-sass',
     'gatsby-plugin-image',
     'gatsby-plugin-smoothscroll',
     'gatsby-plugin-sharp',
     'gatsby-plugin-gatsby-cloud',
-    'gatsby-plugin-netlify',
     'gatsby-plugin-next-seo',
     'gatsby-plugin-sitemap',
   ],
