@@ -223,6 +223,18 @@ const languages = {
       'Merci dass du eis kontaktéiert hues! Mir mellen eis esou schnell wéi méiglech zeréck.',
     fr: 'Merci de nous avoir contacté! Nous te répondrons le plus vite possible.',
   },
+  priceVAT: {
+    en: '(VAT incl.)',
+    de: '(inkl. Mwst.)',
+    'de-LU': '(inkl. TVA)',
+    fr: '(TVA incl.)',
+  },
+  x: {
+    en: '',
+    de: '',
+    'de-LU': '',
+    fr: '',
+  },
 };
 
 export default languages;

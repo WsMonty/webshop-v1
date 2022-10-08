@@ -108,7 +108,9 @@ const Payment = () => {
       return '';
     });
 
-    return shipping ? (total + SHIPPING_COST).toFixed(2) : total.toFixed(2);
+    return shipping
+      ? (total + SHIPPING_COST).toFixed(2).replaceAll('.', ',')
+      : total.toFixed(2).replaceAll('.', ',');
   };
 
   const deleteFromCartHandler = (e) => {
@@ -174,7 +176,11 @@ const Payment = () => {
                     </Link>
                   </div>
                   <p>{cart[entry[0]].buyOption}</p>
-                  <p>{findPrice(entry) * cart[entry[0]].counter + '€'}</p>
+                  <p>
+                    {(findPrice(entry) * cart[entry[0]].counter)
+                      .toFixed(2)
+                      .replaceAll('.', ',') + '€'}
+                  </p>
                 </div>
                 <button
                   className="payment_work_delete_btn pill_btn_accent"
@@ -187,9 +193,15 @@ const Payment = () => {
           return '';
         })}
         <h3 className="payment_total_price">
-          {Object.keys(cart).length > 0
-            ? 'Total: ' + getTotalPrice() + '€'
-            : 'No items yet.'}
+          {Object.keys(cart).length > 0 ? (
+            <>
+              {'Total ' + getTotalPrice() + '€'}
+              <br />
+              <span>{languages.priceVAT[locale]}</span>
+            </>
+          ) : (
+            'No items yet.'
+          )}
         </h3>
       </div>
       <div className="payment_container">

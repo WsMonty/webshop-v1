@@ -22,10 +22,14 @@
     }
   }
 
-  &_total-price {
+  &_total_price {
     text-align: right;
     padding: 1em;
     font-size: 2em;
+
+    span {
+      font-size: 0.65em;
+    }
   }
 
   &_form {

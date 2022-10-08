@@ -160,7 +160,11 @@ const SingleWork = ({ product, query, i }) => {
           </Link>
         </div>
         <div className="work_price_btn_container">
-          <p className="work_price">{product.node.price}€</p>
+          <p className="work_price">
+            {product.node.price.toFixed(2).replaceAll('.', ',')}€
+            <br />
+            <span>{languages.priceVAT[locale]}</span>
+          </p>
 
           <button
             className="addToCart_btn"

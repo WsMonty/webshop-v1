@@ -75,19 +75,21 @@ const WorkPage = ({ data, pageContext }) => {
             )}
           </p>
           <p className="work_page_description">{workData.descriptionText}</p>
-          <p className="work_page_price">{`${workData.price}€`}</p>
-        </div>
-        <div className="work_page_addToCart">
-          {isInCart() ? (
-            <p className="work_page_isCartInfo">{languages.isInCart[locale]}</p>
-          ) : (
-            <button className="addToCart_work_btn" onClick={addToCartHandler}>
-              {languages.addToCart[locale]}
-            </button>
-          )}
+          <p className="work_page_price">
+            {`${workData.price.toFixed(2).replaceAll('.', ',')}€`}
 
-          <div className="work_page_dialog"></div>
+            <br />
+            <span>{languages.priceVAT[locale]}</span>
+          </p>
         </div>
+
+        {isInCart() ? (
+          <p className="work_page_isCartInfo">{languages.isInCart[locale]}</p>
+        ) : (
+          <button className="addToCart_work_btn" onClick={addToCartHandler}>
+            {languages.addToCart[locale]}
+          </button>
+        )}
 
         {workData.previewVideo ? (
           <Youtube url={workData.previewVideo.url} />

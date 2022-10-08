@@ -120,9 +120,15 @@ const CartPreview = ({ props }) => {
       {Object.entries(cart).length === 0 ? '' : <hr />}
       <div className="cart_preview_footer">
         <h3 className="cart_preview_footer_total">
-          {Object.keys(cart).length > 0
-            ? 'Total ' + getTotalPrice() + '€'
-            : 'No items yet.'}
+          {Object.keys(cart).length > 0 ? (
+            <>
+              {'Total ' + getTotalPrice() + '€'}
+              <br />
+              <span>{languages.priceVAT[locale]}</span>
+            </>
+          ) : (
+            'No items yet.'
+          )}
         </h3>
         {Object.keys(cart).length > 0 ? (
           <button
