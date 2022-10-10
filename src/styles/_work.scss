@@ -196,11 +196,47 @@
 }
 
 .work_page {
-  display: flex;
+  display: grid;
+  grid-template-columns: 60% 40%;
+  grid-template-rows: 100%;
   overflow: auto;
+  align-items: start;
+
+  width: 100%;
 
   &_previewImage {
-    max-width: 60%;
+    width: 100%;
+  }
+
+  &_gallery {
+    width: 100%;
+    height: fit-content;
+
+    padding: 0 2em;
+
+    position: relative;
+
+    &_image_wrapper {
+      height: 100%;
+    }
+
+    &_btn {
+      position: absolute;
+      top: 50%;
+
+      background: none;
+      border: none;
+      font-size: 2em;
+
+      cursor: pointer;
+
+      &--left {
+        left: 0;
+      }
+      &--right {
+        right: 0;
+      }
+    }
   }
 
   &_price {
@@ -259,8 +295,10 @@
 
   &_isCartInfo {
     border: 1px solid $clr-neutral-light;
-    padding: 0.5em;
+    padding: 1em 2em;
     border-radius: 2em;
+    width: fit-content;
+    margin-left: 2em;
   }
 }
 
@@ -387,7 +425,7 @@
   }
 
   .work_page {
-    flex-direction: column;
+    display: block;
 
     &_title {
       font-size: 3em;

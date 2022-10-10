@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { graphql, Link } from 'gatsby';
 import { useSelector } from 'react-redux';
 import languages from '../../languages/languages';
@@ -7,10 +7,13 @@ import { GatsbySeo } from 'gatsby-plugin-next-seo';
 import { addToCart } from '../../reducers/cart';
 import { selectCart, selectLocale, store } from '../../store.js';
 import Youtube from '../../components/youtube';
+import { TbArrowNarrowLeft, TbArrowNarrowRight } from 'react-icons/tb';
 
 const WorkPage = ({ data, pageContext }) => {
   const cart = useSelector(selectCart).cart;
   const locale = useSelector(selectLocale).locale;
+
+  const [galleryImageShown, setGalleryImageShown] = useState(1);
 
   const rightWork = () => {
     const result = [];
@@ -42,6 +45,41 @@ const WorkPage = ({ data, pageContext }) => {
     store.dispatch(addToCart(work));
   };
 
+  useEffect(() => {
+    document
+      .querySelectorAll('.work_page_gallery_image_wrapper')
+      .forEach((img) => {
+        +img.dataset.imagenumber === galleryImageShown
+          ? img.classList.remove('hidden')
+          : img.classList.add('hidden');
+      });
+
+    // document
+    //   .querySelector(`[data-imagenumber="image${galleryImageShown}"]`)
+    //   .closest('.work_page_gallery_image')
+    //   .classList.remove('hidden');
+  }, [galleryImageShown]);
+
+  const galleryBtnHandler = (e) => {
+    const buttonDirection = e.target.closest('.work_page_gallery_btn').dataset
+      .direction;
+    switch (buttonDirection) {
+      case 'left':
+        if (galleryImageShown === 1) return;
+        setGalleryImageShown(galleryImageShown - 1);
+        break;
+      case 'right':
+        if (galleryImageShown === workData.previewGallery.length) {
+          setGalleryImageShown(1);
+          return;
+        }
+        setGalleryImageShown(galleryImageShown + 1);
+        break;
+      default:
+        return;
+    }
+  };
+
   return (
     <div className="work_page">
       <GatsbySeo
@@ -51,12 +89,48 @@ const WorkPage = ({ data, pageContext }) => {
         noindex={false}
         nofollow={false}
       />
-      <GatsbyImage
-        image={workData.previewImage.gatsbyImageData}
-        alt={workData.title}
-        className="work_page_previewImage"
-        objectFit="contain"
-      />
+      {workData.previewGallery.length > 1 ? (
+        <div className="work_page_gallery">
+          {workData.previewGallery.map((img, i) => {
+            return (
+              <div
+                className="work_page_gallery_image_wrapper hidden"
+                data-imagenumber={`${i + 1}`}
+                key={i + 1}
+              >
+                <GatsbyImage
+                  image={img.gatsbyImageData}
+                  alt={workData.title}
+                  className="work_page_gallery_image"
+                  objectFit="contain"
+                />
+              </div>
+            );
+          })}
+          <button
+            onClick={(e) => galleryBtnHandler(e)}
+            className="work_page_gallery_btn work_page_gallery_btn--left"
+            data-direction="left"
+          >
+            <TbArrowNarrowLeft />
+          </button>
+          <button
+            onClick={(e) => galleryBtnHandler(e)}
+            className="work_page_gallery_btn work_page_gallery_btn--right"
+            data-direction="right"
+          >
+            <TbArrowNarrowRight />
+          </button>
+        </div>
+      ) : (
+        <GatsbyImage
+          image={workData.previewImage.gatsbyImageData}
+          alt={workData.title}
+          className="work_page_previewImage"
+          objectFit="contain"
+        />
+      )}
+
       <div className="work_page_content_container">
         <div className="work_page_content">
           <h2 className="work_page_title">{workData.title}</h2>
@@ -117,6 +191,9 @@ export const query = graphql`
           previewImage {
             url
             gatsbyImageData(placeholder: BLURRED)
+          }
+          previewGallery {
+            gatsbyImageData
           }
           locale
           previewVideo {
