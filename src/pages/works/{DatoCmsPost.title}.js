@@ -89,7 +89,7 @@ const WorkPage = ({ data, pageContext }) => {
         noindex={false}
         nofollow={false}
       />
-      {workData.previewGallery.length > 1 ? (
+      {workData.previewGallery?.length > 1 ? (
         <div className="work_page_gallery">
           {workData.previewGallery.map((img, i) => {
             return (
