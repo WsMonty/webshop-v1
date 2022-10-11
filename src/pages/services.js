@@ -12,7 +12,9 @@ const Services = () => {
   const contactFormHandler = (e) => {
     e.preventDefault();
 
-    const subject = document.querySelector('.services_select').value;
+    const subject = document.querySelector(
+      '.services_contactform_select'
+    ).textContent;
     const userMail = document.querySelector('.services_input_mail').value;
     const userProject = JSON.stringify(
       document.querySelector('.services_input_description').value
