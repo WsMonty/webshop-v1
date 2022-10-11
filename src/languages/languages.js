@@ -229,6 +229,12 @@ const languages = {
     'de-LU': '(inkl. TVA)',
     fr: '(TVA incl.)',
   },
+  selectCategory: {
+    en: 'Select your category',
+    de: 'Wähle deine Kategorie',
+    'de-LU': 'Wiel deng Kategorie',
+    fr: 'Choisis la catégorie',
+  },
   x: {
     en: '',
     de: '',

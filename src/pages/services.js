@@ -4,6 +4,7 @@ import languages from '../languages/languages';
 import { selectLocale } from '../store';
 import axios from 'axios';
 import { IoClose } from 'react-icons/io5';
+import Select from 'react-select';
 
 const Services = () => {
   const locale = useSelector(selectLocale).locale;
@@ -48,6 +49,30 @@ const Services = () => {
     document.querySelector('.services_form').classList.remove('hidden');
   };
 
+  const customStylesSelect = {
+    control: (provided, state) => ({
+      ...provided,
+      borderRadius: '2em',
+      paddingLeft: '1em',
+      border: '1px solid black',
+      background: 'transparent',
+      cursor: 'pointer',
+    }),
+    menu: (provided, state) => ({
+      ...provided,
+    }),
+  };
+
+  const customThemeSelect = (theme) => ({
+    ...theme,
+    colors: {
+      ...theme.colors,
+      primary: '#FFCC4A',
+      primary25: '#CCCCCC',
+      primary50: '#B3B3B3',
+    },
+  });
+
   return (
     <div className="services">
       <section>
@@ -66,13 +91,28 @@ const Services = () => {
         <div className="services_form">
           <form onSubmit={(e) => contactFormHandler(e)}>
             <h1>{languages.contactus[locale]}</h1>
-            <select className="services_select">
+            <Select
+              className="services_contactform_select"
+              options={[
+                { value: 'engraving', label: languages.engraving[locale] },
+                { value: 'arrangement', label: 'Arrangement' },
+                { value: 'composition', label: languages.composition[locale] },
+              ]}
+              styles={customStylesSelect}
+              theme={customThemeSelect}
+              isClearable
+              placeholder={languages.selectCategory[locale]}
+            />
+            {/* <select className="services_select">
+              <option value={''} default disabled selected hidden>
+                <IoCaretDown />
+              </option>
               <option value="engraving">{languages.engraving[locale]}</option>
               <option value="arrangement">Arrangement</option>
               <option value="composition">
                 {languages.composition[locale]}
               </option>
-            </select>
+            </select> */}
             <input
               className="services_input_mail"
               type="email"
