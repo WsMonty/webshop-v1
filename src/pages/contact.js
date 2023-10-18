@@ -21,11 +21,11 @@ const Contact = () => {
       <h1 className="contact_name">Gilles Grethen</h1>
       <a
         className="contact_information url"
-        href="mailto:info@grethen-edition.com"
+        href="mailto:gilles@gillesgrethen.com"
         target="_blank"
         rel="noreferrer"
       >
-        info@grethen-edition.com
+        gilles@gillesgrethen.com
       </a>
       <div className="contact_socials">
         <a

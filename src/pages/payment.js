@@ -1,19 +1,19 @@
-import { Link, useStaticQuery, graphql, navigate } from 'gatsby';
+import { Link, useStaticQuery, graphql } from 'gatsby';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import {
-  PayPalScriptProvider,
-  PayPalButtons,
-  usePayPalScriptReducer,
-} from '@paypal/react-paypal-js';
+// import {
+//   PayPalScriptProvider,
+//   PayPalButtons,
+//   usePayPalScriptReducer,
+// } from '@paypal/react-paypal-js';
 import languages from '../languages/languages';
 import { SHIPPING_COST } from '../globalVariables';
-import axios from 'axios';
+// import axios from 'axios';
 import { GatsbySeo } from 'gatsby-plugin-next-seo';
 import { selectCart, selectLocale, store } from '../store.js';
-import { emptyCart, deleteFromCart } from '../reducers/cart';
-import { closeCartModal } from '../reducers/cartModal';
-import { purchase } from '../reducers/purchased';
+import { deleteFromCart } from '../reducers/cart';
+// import { closeCartModal } from '../reducers/cartModal';
+// import { purchase } from '../reducers/purchased';
 
 const Payment = () => {
   const locale = useSelector(selectLocale).locale;
@@ -41,32 +41,32 @@ const Payment = () => {
     }
   `);
   const data = query.allDatoCmsPost.nodes;
-  const fileLinks = query.allDatoCmsFileLink.nodes;
+  // const fileLinks = query.allDatoCmsFileLink.nodes;
 
-  const handleSend = () => {
-    store.dispatch(emptyCart());
-    store.dispatch(closeCartModal());
+  // const handleSend = () => {
+  //   store.dispatch(emptyCart());
+  //   store.dispatch(closeCartModal());
 
-    const purchasedWorks = Object.entries(cart).map((work) => {
-      const title = work[1].title;
-      const price = findPrice(work);
-      const link = fileLinks.filter((link) => link.name === title)[0].link;
-      return { title: title, price: price, link: link };
-    });
+  //   const purchasedWorks = Object.entries(cart).map((work) => {
+  //     const title = work[1].title;
+  //     const price = findPrice(work);
+  //     const link = fileLinks.filter((link) => link.name === title)[0].link;
+  //     return { title: title, price: price, link: link };
+  //   });
 
-    axios
-      .post('https://backend-webshop-v1.herokuapp.com/sendClientMail', {
-        works: purchasedWorks,
-        userMail: document.querySelector('.payment_form_email_input').value,
-      })
-      .then((res) => {
-        if (res.status === 200) return;
-      })
-      .catch((err) => console.log(err));
-    const works = purchasedWorks.map((work) => work.title);
-    store.dispatch(purchase(works));
-    navigate(`/downloadPdf`);
-  };
+  //   axios
+  //     .post('https://backend-webshop-v1.herokuapp.com/sendClientMail', {
+  //       works: purchasedWorks,
+  //       userMail: document.querySelector('.payment_form_email_input').value,
+  //     })
+  //     .then((res) => {
+  //       if (res.status === 200) return;
+  //     })
+  //     .catch((err) => console.log(err));
+  //   const works = purchasedWorks.map((work) => work.title);
+  //   store.dispatch(purchase(works));
+  //   navigate(`/downloadPdf`);
+  // };
 
   const findPrice = (workTitle) => {
     const workPrice = data.find(
@@ -75,29 +75,29 @@ const Payment = () => {
     return workPrice;
   };
 
-  const ShowSpinner = () => {
-    const [{ isPending }] = usePayPalScriptReducer();
+  // const ShowSpinner = () => {
+  //   const [{ isPending }] = usePayPalScriptReducer();
 
-    return (
-      <>
-        {isPending ? (
-          <div className="spinner_content">
-            <div className="lds-roller">
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-            </div>
-            <p className="spinner_text">{languages.paymentLoading[locale]}</p>
-          </div>
-        ) : null}
-      </>
-    );
-  };
+  //   return (
+  //     <>
+  //       {isPending ? (
+  //         <div className="spinner_content">
+  //           <div className="lds-roller">
+  //             <div></div>
+  //             <div></div>
+  //             <div></div>
+  //             <div></div>
+  //             <div></div>
+  //             <div></div>
+  //             <div></div>
+  //             <div></div>
+  //           </div>
+  //           <p className="spinner_text">{languages.paymentLoading[locale]}</p>
+  //         </div>
+  //       ) : null}
+  //     </>
+  //   );
+  // };
 
   const getTotalPrice = () => {
     let total = 0;
@@ -120,30 +120,30 @@ const Payment = () => {
     store.dispatch(deleteFromCart(JSON.parse(work)));
   };
 
-  // const emailFormSubmit = (e) => {
-  //   e.preventDefault();
-  //   document.querySelector('.paypal_btn').classList.remove('hidden');
+  // // const emailFormSubmit = (e) => {
+  // //   e.preventDefault();
+  // //   document.querySelector('.paypal_btn').classList.remove('hidden');
+  // // };
+
+  // const emailCheck = () => {
+  //   if (document.querySelector('.payment_form_email_input').value === '')
+  //     return 'no email';
+  //   else {
+  //     return validateEmail(
+  //       document.querySelector('.payment_form_email_input').value
+  //     )
+  //       ? 'validation'
+  //       : 'email false';
+  //   }
   // };
 
-  const emailCheck = () => {
-    if (document.querySelector('.payment_form_email_input').value === '')
-      return 'no email';
-    else {
-      return validateEmail(
-        document.querySelector('.payment_form_email_input').value
-      )
-        ? 'validation'
-        : 'email false';
-    }
-  };
-
-  const validateEmail = (email) => {
-    return String(email)
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
-  };
+  // const validateEmail = (email) => {
+  //   return String(email)
+  //     .toLowerCase()
+  //     .match(
+  //       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  //     );
+  // };
 
   return (
     <div className="payment">
@@ -204,7 +204,30 @@ const Payment = () => {
           )}
         </h3>
       </div>
-      <div className="payment_container">
+
+      <h2 className="payment_message">
+        We are very sorry, the payment system is down! Please send a mail with
+        your order to{' '}
+        <a href="mailto:gilles@gillesgrethen.com">gilles@gillesgrethen.com</a>!
+        Or get in touch via social media:
+      </h2>
+      <div className="payment_socials">
+        <a
+          href="https://instagram.com/gilles_grethen_"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Instagram
+        </a>
+        <a
+          href="https://facebook.com/gillesgrethen"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Facebook
+        </a>
+      </div>
+      {/* <div className="payment_container">
         <form className="payment_form" onSubmit={(e) => handleSend(e)}>
           <label className="payment_form_email_input_label" htmlFor="email">
             1. Your email to get your PDFs!
@@ -261,7 +284,7 @@ const Payment = () => {
             }}
           />
         </PayPalScriptProvider>
-      </div>
+      </div> */}
     </div>
   );
 };

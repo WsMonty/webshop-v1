@@ -86,7 +86,7 @@ const IndexPage = () => {
         <h2 className="index_socials_title">{languages.follow[locale]}</h2>
         <div>
           <a
-            href="https://www.facebook.com/grethenedition"
+            href="https://www.facebook.com/gilles.grethen"
             target={'_blank'}
             rel="noreferrer"
             className="index_socials_link"
@@ -98,7 +98,7 @@ const IndexPage = () => {
             />
           </a>
           <a
-            href="https://www.instagram.com/grethen_edition/"
+            href="https://www.instagram.com/gilles_grethen_"
             target={'_blank'}
             rel="noreferrer"
             className="index_socials_link"

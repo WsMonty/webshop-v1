@@ -2,47 +2,47 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import languages from '../languages/languages';
 import { selectLocale } from '../store';
-import axios from 'axios';
+// import axios from 'axios';
 import { IoClose } from 'react-icons/io5';
-import Select from 'react-select';
+// import Select from 'react-select';
 
 const Services = () => {
   const locale = useSelector(selectLocale).locale;
 
-  const contactFormHandler = (e) => {
-    e.preventDefault();
+  // const contactFormHandler = (e) => {
+  //   e.preventDefault();
 
-    const subject = document.querySelector(
-      '.services_contactform_select'
-    ).textContent;
-    const userMail = document.querySelector('.services_input_mail').value;
-    const userProject = JSON.stringify(
-      document.querySelector('.services_input_description').value
-    );
+  //   const subject = document.querySelector(
+  //     '.services_contactform_select'
+  //   ).textContent;
+  //   const userMail = document.querySelector('.services_input_mail').value;
+  //   const userProject = JSON.stringify(
+  //     document.querySelector('.services_input_description').value
+  //   );
 
-    axios
-      .post('https://backend-webshop-v1.herokuapp.com/contactform', {
-        subject,
-        userMail,
-        userProject,
-      })
-      .then((res) => {
-        if (res.status === 200)
-          document.querySelector('.services_input_mail').value = '';
-        document.querySelector('.services_input_description').value = '';
-        document
-          .querySelector('.services_contactform_success')
-          .classList.remove('hidden');
-        document.querySelector('.services_form').classList.add('hidden');
-        return;
-      })
-      .catch((err) => {
-        alert(
-          'Sorry! Something went wrong, please try again or contact info@grethen-edition.com directly.'
-        );
-        console.error('GG', err);
-      });
-  };
+  //   axios
+  //     .post('https://backend-webshop-v1.herokuapp.com/contactform', {
+  //       subject,
+  //       userMail,
+  //       userProject,
+  //     })
+  //     .then((res) => {
+  //       if (res.status === 200)
+  //         document.querySelector('.services_input_mail').value = '';
+  //       document.querySelector('.services_input_description').value = '';
+  //       document
+  //         .querySelector('.services_contactform_success')
+  //         .classList.remove('hidden');
+  //       document.querySelector('.services_form').classList.add('hidden');
+  //       return;
+  //     })
+  //     .catch((err) => {
+  //       alert(
+  //         'Sorry! Something went wrong, please try again or contact info@grethen-edition.com directly.'
+  //       );
+  //       console.error('GG', err);
+  //     });
+  // };
 
   const closeSuccessHandler = () => {
     document
@@ -51,29 +51,29 @@ const Services = () => {
     document.querySelector('.services_form').classList.remove('hidden');
   };
 
-  const customStylesSelect = {
-    control: (provided, state) => ({
-      ...provided,
-      borderRadius: '2em',
-      paddingLeft: '1em',
-      border: '1px solid black',
-      background: 'transparent',
-      cursor: 'pointer',
-    }),
-    menu: (provided, state) => ({
-      ...provided,
-    }),
-  };
+  // const customStylesSelect = {
+  //   control: (provided, state) => ({
+  //     ...provided,
+  //     borderRadius: '2em',
+  //     paddingLeft: '1em',
+  //     border: '1px solid black',
+  //     background: 'transparent',
+  //     cursor: 'pointer',
+  //   }),
+  //   menu: (provided, state) => ({
+  //     ...provided,
+  //   }),
+  // };
 
-  const customThemeSelect = (theme) => ({
-    ...theme,
-    colors: {
-      ...theme.colors,
-      primary: '#FFCC4A',
-      primary25: '#CCCCCC',
-      primary50: '#B3B3B3',
-    },
-  });
+  // const customThemeSelect = (theme) => ({
+  //   ...theme,
+  //   colors: {
+  //     ...theme.colors,
+  //     primary: '#FFCC4A',
+  //     primary25: '#CCCCCC',
+  //     primary50: '#B3B3B3',
+  //   },
+  // });
 
   return (
     <div className="services">
@@ -91,7 +91,14 @@ const Services = () => {
       </section>
       <div className="services_contactform">
         <div className="services_form">
-          <form onSubmit={(e) => contactFormHandler(e)}>
+          <h2>
+            <a href="/contact" className="services_contactLink">
+              Contact me
+            </a>{' '}
+            if you need any of these services! I am looking forward to hearing
+            from you.
+          </h2>
+          {/* <form onSubmit={(e) => contactFormHandler(e)}>
             <h1>{languages.contactus[locale]}</h1>
             <Select
               className="services_contactform_select"
@@ -114,7 +121,7 @@ const Services = () => {
               <option value="composition">
                 {languages.composition[locale]}
               </option>
-            </select> */}
+            </select> 
             <input
               className="services_input_mail"
               type="email"
@@ -130,7 +137,7 @@ const Services = () => {
             <button className="pill_btn_accent" type="submit">
               {languages.submit[locale]}
             </button>
-          </form>
+          </form> */}
         </div>
         <div className="services_contactform_success services_contactform hidden">
           <button
